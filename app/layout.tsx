@@ -4,6 +4,7 @@ import '@/styles/globals.css'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { Ticker } from '@/components/layout/Ticker'
+import { CookieBanner } from '@/components/ui/CookieBanner'
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   )
