@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferrari F40 — DNA #047 — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #0A0C10;
+  --sur:   #111620;
+  --sur2:  #181F2E;
+  --bdr:   rgba(255,255,255,0.07);
+  --gold:  #C9A227;
+  --gold2: #E8C547;
+  --red:   #C8281E;
+  --text:  #EAE8E0;
+  --text2: #8B95A8;
+  --text3: #3E4A58;
+  --cond:  'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans:  'DM Sans', -apple-system, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;gap:0;}
+.nav-logo{display:flex;flex-direction:column;margin-right:36px;flex-shrink:0;text-decoration:none;}
+.nav-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.nav-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.nav-text span{color:var(--gold);}
+.nav-sub{font-family:var(--cond);font-size:7px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);}
+.nav-links a.on{background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nav-lb{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;transition:all .15s;}
+.nav-lb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* ── HERO ── */
+.hero{position:relative;height:92vh;min-height:620px;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=2000&q=90') center 40%/cover no-repeat;filter:brightness(.45) saturate(1.1);}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,12,16,1) 0%,rgba(10,12,16,.6) 40%,rgba(10,12,16,.1) 100%);}
+.hero-grad2{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,12,16,.8) 0%,transparent 55%);}
+.hero-content{position:relative;z-index:2;padding:0 0 64px;max-width:1280px;margin:0 auto;width:100%;padding-left:32px;padding-right:32px;}
+.h-breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+.h-bc-item{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);}
+.h-bc-sep{color:var(--text3);font-size:10px;}
+.h-bc-item.cur{color:var(--gold);}
+.h-series{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;}
+.h-series-dot{width:6px;height:6px;background:var(--red);border-radius:50%;}
+.h-series-txt{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);}
+.h-num{font-family:var(--cond);font-size:11px;font-weight:400;letter-spacing:.15em;color:var(--text3);}
+h1{font-family:var(--serif);font-size:clamp(52px,7vw,96px);font-style:italic;line-height:.95;letter-spacing:-.02em;color:var(--text);margin-bottom:12px;}
+h1 span{display:block;color:var(--gold);}
+.h-deck{font-size:17px;color:var(--text2);line-height:1.65;max-width:520px;margin-bottom:28px;}
+.h-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.h-author{display:flex;align-items:center;gap:10px;}
+.h-avatar{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--cond);font-size:12px;font-weight:900;color:#000;}
+.h-author-name{font-size:13px;color:var(--text2);}
+.h-date{font-family:var(--cond);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.h-read{font-family:var(--cond);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:4px 10px;border:1px solid var(--bdr);}
+.h-set-badge{position:absolute;bottom:64px;right:32px;background:rgba(10,12,16,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 18px;text-align:center;}
+.h-set-num{font-family:var(--cond);font-size:28px;font-weight:900;color:rgba(255,255,255,.9);line-height:1;}
+.h-set-lbl{font-family:var(--cond);font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:2px;}
+
+/* ── LAYOUT ── */
+.page{max-width:1280px;margin:0 auto;padding:0 32px;}
+.article-layout{display:grid;grid-template-columns:1fr 320px;gap:56px;padding:64px 0;}
+
+/* ── ARTICLE BODY ── */
+.article-body{}
+.section-title-sm{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-title-sm::before{content:'';width:24px;height:1px;background:var(--gold);}
+.chapter{margin-bottom:56px;}
+.chapter h2{font-family:var(--serif);font-size:clamp(28px,3vw,38px);font-style:italic;color:var(--text);line-height:1.1;margin-bottom:18px;letter-spacing:-.01em;}
+.chapter p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:16px;}
+.chapter p strong{color:var(--text);font-weight:600;}
+.pull-quote{border-left:2px solid var(--gold);padding:20px 24px;margin:32px 0;background:rgba(201,162,39,.04);}
+.pull-quote p{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--text);line-height:1.4;margin:0;}
+.pull-quote cite{display:block;font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-top:10px;}
+
+/* ── INLINE PHOTO ── */
+.inline-photo{margin:32px 0;border-radius:8px;overflow:hidden;position:relative;}
+.inline-photo img{width:100%;display:block;filter:brightness(.85);}
+.inline-photo-cap{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(10,12,16,.9));font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+
+/* ── SPECS TABLE ── */
+.specs-table{margin:32px 0;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;}
+.specs-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--bdr);}
+.specs-row:last-child{border-bottom:none;}
+.specs-label{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);padding:12px 16px;background:var(--sur);}
+.specs-val{font-family:var(--cond);font-size:14px;font-weight:700;color:var(--text);padding:12px 16px;background:var(--sur2);}
+.specs-val.gold{color:var(--gold);}
+
+/* ── RVB COMPARISON ── */
+.rvb-compare{margin:40px 0;}
+.rvb-compare h3{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.rvb-compare h3::before{content:'';width:24px;height:1px;background:var(--gold);}
+.rvb-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:8px;overflow:hidden;}
+.rvb-cell{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;}
+.rvb-cell img{width:100%;height:100%;object-fit:cover;filter:brightness(.25) saturate(.2);transform:scale(1.04);transition:filter .8s cubic-bezier(.16,1,.3,1),transform .8s;}
+.rvb-cell:hover img{filter:brightness(.88) saturate(1.1);transform:scale(1);}
+.rvb-ovl{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,12,16,.95) 0%,transparent 60%);}
+.rvb-tag{position:absolute;top:12px;left:12px;font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
+.rvb-tag.real{background:rgba(200,40,30,.85);color:#fff;}
+.rvb-tag.brick{background:rgba(201,162,39,.85);color:#000;}
+.rvb-info{position:absolute;bottom:0;left:0;right:0;padding:16px;}
+.rvb-lbl{font-family:var(--cond);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.rvb-val{font-family:var(--cond);font-size:18px;font-weight:900;text-transform:uppercase;color:var(--text);}
+
+/* ── LEGO RATING ── */
+.lego-rating{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:28px;margin:40px 0;}
+.lr-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--bdr);}
+.lr-title{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);}
+.lr-score{display:flex;align-items:baseline;gap:4px;}
+.lr-num{font-family:var(--cond);font-size:48px;font-weight:900;color:var(--gold);line-height:1;}
+.lr-max{font-family:var(--cond);font-size:18px;color:var(--text3);}
+.lr-rows{display:flex;flex-direction:column;gap:12px;}
+.lr-row{display:grid;grid-template-columns:140px 1fr 36px;align-items:center;gap:12px;}
+.lr-lbl{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.lr-bar-bg{height:4px;background:var(--sur2);border-radius:2px;overflow:hidden;}
+.lr-bar{height:4px;background:var(--gold);border-radius:2px;transition:width .8s ease;}
+.lr-val{font-family:var(--cond);font-size:13px;font-weight:900;color:var(--text);text-align:right;}
+.lr-verdict{margin-top:20px;padding-top:20px;border-top:1px solid var(--bdr);font-size:14px;color:var(--text2);line-height:1.65;}
+.lr-verdict strong{color:var(--text);}
+
+/* ── SIDEBAR ── */
+.sidebar{position:sticky;top:80px;align-self:start;}
+.sb-card{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:16px;}
+.sb-img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.2);display:block;transition:filter .6s;}
+.sb-card:hover .sb-img{filter:brightness(.8);}
+.sb-body{padding:20px;}
+.sb-eyebrow{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.sb-title{font-family:var(--cond);font-size:18px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.1;margin-bottom:8px;}
+.sb-sub{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:16px;}
+.sb-btn{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;background:var(--gold);color:#000;border:none;border-radius:5px;cursor:pointer;width:100%;}
+.sb-price-card{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:20px;margin-bottom:16px;}
+.sb-p-label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
+.sb-p-rows{display:flex;flex-direction:column;gap:8px;}
+.sb-p-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--sur2);border-radius:6px;}
+.sb-p-store{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);}
+.sb-p-val{font-family:var(--cond);font-size:16px;font-weight:900;color:var(--gold);}
+.sb-p-badge{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:3px;}
+.badge-sale{background:rgba(200,40,30,.2);color:#E8715B;}
+.badge-new{background:rgba(39,174,96,.2);color:#5DBE8A;}
+.sb-toc{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:20px;margin-bottom:16px;}
+.sb-toc-title{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
+.sb-toc a{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bdr);text-decoration:none;transition:color .15s;}
+.sb-toc a:last-child{border-bottom:none;}
+.sb-toc a:hover{color:var(--gold);}
+.sb-toc-n{font-family:var(--cond);font-size:10px;font-weight:900;color:var(--text3);width:18px;}
+.sb-toc-txt{font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);}
+.sb-toc a:hover .sb-toc-txt{color:var(--gold);}
+
+/* ── RELATED ── */
+.related{padding:56px 0;border-top:1px solid var(--bdr);}
+.related-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+.related-title{font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text);}
+.related-link{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;}
+.rc{background:var(--sur);cursor:pointer;overflow:hidden;transition:background .2s;}
+.rc:hover{background:var(--sur2);}
+.rc-photo{aspect-ratio:16/9;overflow:hidden;position:relative;}
+.rc-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.18) saturate(.2);transform:scale(1.04);transition:filter .7s,transform .7s;}
+.rc:hover .rc-photo img{filter:brightness(.82) saturate(1);transform:scale(1);}
+.rc-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,22,32,.95) 0%,transparent 60%);}
+.rc-tag{position:absolute;bottom:10px;left:12px;font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.rc-body{padding:16px 18px;}
+.rc-series{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.rc-title{font-family:var(--cond);font-size:16px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.1;margin-bottom:6px;transition:color .2s;}
+.rc:hover .rc-title{color:var(--gold);}
+.rc-meta{font-family:var(--cond);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);}
+
+/* ── FOOTER ── */
+footer{background:var(--sur);border-top:1px solid var(--bdr);padding:32px 0;}
+.foot-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;}
+.foot-logo{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--text);}
+.foot-logo span{color:var(--gold);}
+.foot-copy{font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+
+/* ── PROGRESS BAR ── */
+.read-progress{position:fixed;top:58px;left:0;right:0;height:2px;background:var(--bdr);z-index:199;}
+.read-progress-fill{height:100%;background:var(--gold);width:0%;transition:width .1s;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-stripe"></div>
+      <div class="nav-text">Eight <span>Wide</span></div>
+      <div class="nav-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="on">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang">
+        <button class="nav-lb on">CZ</button>
+        <button class="nav-lb">EN</button>
+      </div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<!-- READ PROGRESS -->
+<div class="read-progress"><div class="read-progress-fill" id="rpFill"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-grad2"></div>
+  <div class="hero-content">
+    <div class="h-breadcrumb">
+      <span class="h-bc-item">Eight Wide</span>
+      <span class="h-bc-sep">›</span>
+      <span class="h-bc-item">DNA Series</span>
+      <span class="h-bc-sep">›</span>
+      <span class="h-bc-item cur">Ferrari F40</span>
+    </div>
+    <div class="h-series">
+      <div class="h-series-dot"></div>
+      <span class="h-series-txt">DNA Series</span>
+      <span class="h-num">· #047</span>
+    </div>
+    <h1>Ferrari<span>F40</span></h1>
+    <p class="h-deck">Poslední auto které Enzo Ferrari osobně schválil. Kevlarová karoserie, žádná elektronika, 478 koní. A pak — 318 plastových dílků.</p>
+    <div class="h-meta">
+      <div class="h-author">
+        <div class="h-avatar">EW</div>
+        <span class="h-author-name">Eight Wide redakce</span>
+      </div>
+      <span class="h-date">14. dubna 2025</span>
+      <span class="h-read">14 min čtení</span>
+    </div>
+    <div class="h-set-badge">
+      <div class="h-set-num">76934</div>
+      <div class="h-set-lbl">Set No.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE -->
+<div class="page">
+  <div class="article-layout">
+
+    <!-- MAIN CONTENT -->
+    <article class="article-body">
+
+      <!-- ČÁST 1 — REÁLNÉ AUTO -->
+      <div class="chapter" id="real">
+        <div class="section-title-sm">Příběh reálného auta</div>
+        <h2>Závěť starého muže z Maranella</h2>
+        <p>Byl rok 1987. Enzo Ferrari měl 89 let a cítil, že jeho čas se krátí. Chtěl zanechat světu jeden poslední vzkaz — auto tak brutální, tak ryzí, tak beze zbytku kompromisů, aby nikdo nepochyboval, co Ferrari znamená.</p>
+        <p>F40 se narodilo ze závodního vozu 288 GTO Evoluzione. <strong>478 koní z turbochargovaného V8 o objemu 2,9 litru</strong>, kevlarová a karbon-Kevlarová karoserie, žádná klimatizace, žádné koberce, žádná elektronická pomoc. Plátěné pásy místo oken. Vůz vážil 1 100 kg — o 200 kg méně než dnešní Golf.</p>
+        <div class="pull-quote">
+          <p>"Nestavíme auto pro zákazníka. Stavíme ho pro sebe."</p>
+          <cite>— Enzo Ferrari, 1987</cite>
+        </div>
+        <p>Maximální rychlost <strong>324 km/h</strong> z něj v roce 1987 udělala nejrychlejší sériové auto světa. Stovka za 3,8 sekundy bez ESP, bez ABS, bez trakční kontroly. Jen řidič, motor a fyzika.</p>
+        <p>Prodalo se 1 315 kusů. Každý byl trochu jiný — ruční výroba nikdy nedává dvě identická auta. Dnes se na aukcích prodávají za 1,5–2,5 milionu dolarů. Enzo zemřel rok po premiéře, v srpnu 1988. F40 bylo skutečně jeho závětí.</p>
+      </div>
+
+      <!-- INLINE FOTO -->
+      <div class="inline-photo">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85" alt="Ferrari detail">
+        <div class="inline-photo-cap">Reálné Ferrari F40 — detail zadní části · Foto: Unsplash</div>
+      </div>
+
+      <!-- ČÁST 2 — SPECS -->
+      <div class="chapter" id="specs">
+        <div class="section-title-sm">Technická data</div>
+        <h2>Čísla která mluví za sebe</h2>
+        <p>F40 nebylo jen rychlé — bylo extrémní ve všem. Pojďme se podívat na čísla, která z něj udělala legendu.</p>
+        <div class="specs-table">
+          <div class="specs-row"><div class="specs-label">Motor</div><div class="specs-val">V8 biturbo · 2 936 cm³</div></div>
+          <div class="specs-row"><div class="specs-label">Výkon</div><div class="specs-val gold">478 HP při 7 000 ot/min</div></div>
+          <div class="specs-row"><div class="specs-label">Točivý moment</div><div class="specs-val">577 Nm při 4 000 ot/min</div></div>
+          <div class="specs-row"><div class="specs-label">0–100 km/h</div><div class="specs-val gold">3,8 sekundy</div></div>
+          <div class="specs-row"><div class="specs-label">Vmax</div><div class="specs-val">324 km/h</div></div>
+          <div class="specs-row"><div class="specs-label">Hmotnost</div><div class="specs-val">1 100 kg</div></div>
+          <div class="specs-row"><div class="specs-label">Vyrobeno kusů</div><div class="specs-val">1 315</div></div>
+          <div class="specs-row"><div class="specs-label">Karoserie</div><div class="specs-val">Kevlar / karbon / sklolaminát</div></div>
+          <div class="specs-row"><div class="specs-label">Rok výroby</div><div class="specs-val">1987 — 1992</div></div>
+        </div>
+      </div>
+
+      <!-- ČÁST 3 — REAL VS BRICK -->
+      <div class="chapter" id="rvb">
+        <div class="section-title-sm">Real vs. Brick</div>
+        <h2>Jak moc si trouflo LEGO?</h2>
+        <p>LEGO vydalo F40 jako set 76934 v roce 2023. Čekali jsme na to 8 let od prvního Speed Champions setu. Otázka je — zasloužilo to čekání?</p>
+        <div class="rvb-compare">
+          <h3>Porovnej sám</h3>
+          <div class="rvb-grid">
+            <div class="rvb-cell">
+              <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=700&q=80" alt="Ferrari F40 reálné">
+              <div class="rvb-ovl"></div>
+              <div class="rvb-tag real">Reálné</div>
+              <div class="rvb-info">
+                <div class="rvb-lbl">Ferrari F40 · 1987</div>
+                <div class="rvb-val">324 km/h</div>
+              </div>
+            </div>
+            <div class="rvb-cell">
+              <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="LEGO Ferrari F40">
+              <div class="rvb-ovl"></div>
+              <div class="rvb-tag brick">LEGO Set 76934</div>
+              <div class="rvb-info">
+                <div class="rvb-lbl">Set 76934 · 318 dílků</div>
+                <div class="rvb-val">629 Kč</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Na první pohled je věrnost fascinující. <strong>Zadní spoiler, typické tvarování zadních světel, charakteristické žaluzie na zádi</strong> — LEGO zachytilo ty nejdůležitější vizuální detaily. Přední část s průduchami chladiče je správná, linie střechy přesná.</p>
+        <p>Kde to trochu skřípe? Boční linie. Reálné F40 má agresivnější záhyby a ostřejší přechody. V plastiku to jde jen do určité míry. Ale buďme upřímní — za 629 Kč je to výjimečný výsledek.</p>
+      </div>
+
+      <!-- LEGO HODNOCENÍ -->
+      <div class="chapter" id="hodnoceni">
+        <div class="section-title-sm">LEGO recenze</div>
+        <h2>Set 76934 — náš verdikt</h2>
+        <p>Prošli jsme set od prvního dílku po poslední. Hodnotíme věrnost originálu, stavební zážitek, kvalitu detailů a poměr cena/hodnota.</p>
+        <div class="lego-rating">
+          <div class="lr-head">
+            <div>
+              <div class="lr-title">DNA Score — Set 76934</div>
+              <div style="font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:4px;">Ferrari F40 · 318 dílků · 629 Kč</div>
+            </div>
+            <div class="lr-score">
+              <div class="lr-num">9.2</div>
+              <div class="lr-max">/10</div>
+            </div>
+          </div>
+          <div class="lr-rows">
+            <div class="lr-row">
+              <div class="lr-lbl">Věrnost tvaru</div>
+              <div class="lr-bar-bg"><div class="lr-bar" style="width:92%"></div></div>
+              <div class="lr-val">9.2</div>
+            </div>
+            <div class="lr-row">
+              <div class="lr-lbl">Detailnost</div>
+              <div class="lr-bar-bg"><div class="lr-bar" style="width:88%"></div></div>
+              <div class="lr-val">8.8</div>
+            </div>
+            <div class="lr-row">
+              <div class="lr-lbl">Stavební zážitek</div>
+              <div class="lr-bar-bg"><div class="lr-bar" style="width:85%"></div></div>
+              <div class="lr-val">8.5</div>
+            </div>
+            <div class="lr-row">
+              <div class="lr-lbl">Poměr cena/hodnota</div>
+              <div class="lr-bar-bg"><div class="lr-bar" style="width:94%"></div></div>
+              <div class="lr-val">9.4</div>
+            </div>
+            <div class="lr-row">
+              <div class="lr-lbl">Prezentace na polici</div>
+              <div class="lr-bar-bg"><div class="lr-bar" style="width:96%"></div></div>
+              <div class="lr-val">9.6</div>
+            </div>
+          </div>
+          <div class="lr-verdict">
+            <strong>Verdikt:</strong> Set 76934 je jeden z nejlepších Speed Champions setů vůbec. LEGO zachytilo esenci F40 — agresivní spoiler, průduchy, charakteristický zad. Za 629 Kč je to téměř bezkonkurenční poměr hodnoty. Jediná výhrada: boční linie mohly být ostřejší. Jinak — kupte to, pokud ještě nemáte.
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- TOC -->
+      <div class="sb-toc">
+        <div class="sb-toc-title">Obsah článku</div>
+        <a href="#real"><div class="sb-toc-n">01</div><div class="sb-toc-txt">Příběh reálného auta</div></a>
+        <a href="#specs"><div class="sb-toc-n">02</div><div class="sb-toc-txt">Technická data</div></a>
+        <a href="#rvb"><div class="sb-toc-n">03</div><div class="sb-toc-txt">Real vs. Brick</div></a>
+        <a href="#hodnoceni"><div class="sb-toc-n">04</div><div class="sb-toc-txt">LEGO recenze</div></a>
+      </div>
+
+      <!-- CENY -->
+      <div class="sb-price-card">
+        <div class="sb-p-label">Kde koupit · Set 76934</div>
+        <div class="sb-p-rows">
+          <div class="sb-p-row">
+            <div>
+              <div class="sb-p-store">Mall.cz</div>
+              <span class="sb-p-badge badge-sale">−12 %</span>
+            </div>
+            <div class="sb-p-val">629 Kč</div>
+          </div>
+          <div class="sb-p-row">
+            <div>
+              <div class="sb-p-store">LEGO.com</div>
+              <span class="sb-p-badge" style="color:var(--text3);">RRP</span>
+            </div>
+            <div class="sb-p-val">719 Kč</div>
+          </div>
+          <div class="sb-p-row">
+            <div>
+              <div class="sb-p-store">Alza.cz</div>
+              <span class="sb-p-badge badge-new">Skladem</span>
+            </div>
+            <div class="sb-p-val">649 Kč</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RELATED SIDEBAR -->
+      <div class="sb-card">
+        <img class="sb-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80" alt="Porsche">
+        <div class="sb-body">
+          <div class="sb-eyebrow">Generace · #032</div>
+          <div class="sb-title">Porsche 911 RSR — 2016 vs. 2023</div>
+          <div class="sb-sub">Sedm let a přechod z 6-wide na 8-wide. Kdo vyhrál?</div>
+          <button class="sb-btn">Číst článek →</button>
+        </div>
+      </div>
+
+      <div class="sb-card">
+        <img class="sb-img" src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=400&q=80" alt="Lamborghini">
+        <div class="sb-body">
+          <div class="sb-eyebrow">DNA · #038</div>
+          <div class="sb-title">Lamborghini Countach LP400</div>
+          <div class="sb-sub">Nejprovokativnější auto Bertoneho kariéry a 50 let čekání.</div>
+          <button class="sb-btn">Číst článek →</button>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- RELATED ARTICLES -->
+  <div class="related">
+    <div class="related-head">
+      <div class="related-title">Další DNA články</div>
+      <button class="related-link">Celý archiv →</button>
+    </div>
+    <div class="related-grid">
+      <div class="rc">
+        <div class="rc-photo">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80" alt="McLaren">
+          <div class="rc-grad"></div>
+          <div class="rc-tag">DNA Series · #048</div>
+        </div>
+        <div class="rc-body">
+          <div class="rc-series">McLaren · 2026</div>
+          <div class="rc-title">W1 — nástupce P1 a konec jedné éry</div>
+          <div class="rc-meta">14 min · 345 dílků · 629 Kč</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-photo">
+          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=600&q=80" alt="Lamborghini">
+          <div class="rc-grad"></div>
+          <div class="rc-tag">DNA Series · #038</div>
+        </div>
+        <div class="rc-body">
+          <div class="rc-series">Lamborghini · 2022</div>
+          <div class="rc-title">Countach — nejprovokativnější auto Bertoneho kariéry</div>
+          <div class="rc-meta">10 min · 262 dílků · retired</div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-photo">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Porsche">
+          <div class="rc-grad"></div>
+          <div class="rc-tag">DNA Series · #031</div>
+        </div>
+        <div class="rc-body">
+          <div class="rc-series">Porsche · 2023</div>
+          <div class="rc-title">911 RSR — závodní monster ze Stuttgartu</div>
+          <div class="rc-meta">12 min · 434 dílků · 699 Kč</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">Eight <span>Wide</span></div>
+    <div class="foot-copy">© 2025 Eight Wide · speedchampions.cz · Not affiliated with LEGO Group</div>
+  </div>
+</footer>
+
+<script>
+// Read progress bar
+const fill = document.getElementById('rpFill');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  fill.style.width = pct + '%';
+}, { passive: true });
+</script>
+
+</body>
+</html>

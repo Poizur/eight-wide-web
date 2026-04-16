@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paddock Rumors — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;--spec:#9B59B6;--prob:#E67E22;--like:#27AE60;--conf:#3498DB;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.logo{display:flex;flex-direction:column;margin-right:36px;text-decoration:none;}
+.logo-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.logo-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nlb{font-family:var(--cond);font-size:12px;font-weight:700;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;}
+.nlb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* HERO */
+.hero{padding-top:58px;position:relative;overflow:hidden;background:linear-gradient(to bottom,rgba(200,40,30,.04) 0%,transparent 60%);}
+.hero-in{max-width:1280px;margin:0 auto;padding:64px 32px 48px;display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:start;}
+.h-eye{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.h-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+.h-ser{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);}
+.h-title{font-family:var(--serif);font-size:clamp(44px,5.5vw,72px);font-style:italic;color:var(--text);line-height:.95;margin-bottom:14px;}
+.h-desc{font-size:15px;color:var(--text2);line-height:1.65;margin-bottom:28px;}
+/* Meter legend */
+.meter-legend{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:20px;position:sticky;top:76px;}
+.ml-title{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bdr);}
+.ml-rows{display:flex;flex-direction:column;gap:12px;}
+.ml-row{display:flex;align-items:flex-start;gap:12px;}
+.ml-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.ml-info{}
+.ml-label{font-family:var(--cond);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.ml-desc{font-size:12px;color:var(--text2);line-height:1.45;}
+.ml-count{font-family:var(--cond);font-size:11px;font-weight:700;color:var(--gold);margin-top:4px;}
+
+/* TABS */
+.tabs{position:sticky;top:58px;z-index:100;background:rgba(10,12,16,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);}
+.tabs-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;}
+.tab{font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 18px;background:none;border:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
+.tab:hover{color:var(--text2);}
+.tab.on{color:var(--red);border-bottom-color:var(--red);}
+
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:40px 32px 80px;}
+.rumors-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:48px;}
+.rc-big{grid-column:span 2;}
+
+/* RUMOR CARD */
+.rcard{background:var(--sur);cursor:pointer;transition:background .15s;overflow:hidden;position:relative;}
+.rcard:hover{background:var(--sur2);}
+.rc-photo{position:relative;overflow:hidden;}
+.rc-photo.sm{aspect-ratio:16/9;}
+.rc-photo.lg{aspect-ratio:21/9;}
+.rc-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.15) saturate(.2);transform:scale(1.03);transition:filter .7s,transform .7s;}
+.rcard:hover .rc-photo img{filter:brightness(.7) saturate(.8);transform:scale(1);}
+.rc-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,22,32,.98) 0%,rgba(17,22,32,.4) 50%,transparent 100%);}
+
+/* Confidence meter badge */
+.conf-badge{position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:5px;z-index:2;}
+.cb-dot{width:8px;height:8px;border-radius:50%;}
+.cb-txt{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;}
+.cb-spec{background:rgba(155,89,182,.2);border:1px solid rgba(155,89,182,.3);}
+.cb-spec .cb-dot{background:var(--spec);}
+.cb-spec .cb-txt{color:var(--spec);}
+.cb-prob{background:rgba(230,126,34,.2);border:1px solid rgba(230,126,34,.3);}
+.cb-prob .cb-dot{background:var(--prob);}
+.cb-prob .cb-txt{color:var(--prob);}
+.cb-like{background:rgba(39,174,96,.2);border:1px solid rgba(39,174,96,.3);}
+.cb-like .cb-dot{background:var(--like);}
+.cb-like .cb-txt{color:var(--like);}
+.cb-conf{background:rgba(52,152,219,.2);border:1px solid rgba(52,152,219,.3);}
+.cb-conf .cb-dot{background:var(--conf);}
+.cb-conf .cb-txt{color:var(--conf);}
+
+/* Meter bar */
+.meter-bar{position:absolute;bottom:0;left:0;right:0;height:3px;z-index:3;}
+.rc-body{padding:18px 20px 20px;}
+.rc-brand{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.rc-car{font-family:var(--cond);font-size:20px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.05;margin-bottom:8px;transition:color .2s;}
+.rc-car.lg{font-size:26px;}
+.rcard:hover .rc-car{color:var(--gold);}
+.rc-desc{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:12px;}
+.rc-footer{display:flex;align-items:center;justify-content:space-between;}
+.rc-source{font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);display:flex;align-items:center;gap:6px;}
+.rc-date{font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+
+/* SPLNĚNÉ */
+.fulfilled-section{border-top:1px solid var(--bdr);padding-top:40px;}
+.fs-title{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--like);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.fs-title::before{content:'✓';color:var(--like);}
+.fulfilled-list{display:flex;flex-direction:column;gap:1px;background:var(--bdr);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;}
+.fl-row{background:var(--sur);display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:background .15s;}
+.fl-row:hover{background:var(--sur2);}
+.fl-check{width:20px;height:20px;border-radius:50%;background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:var(--like);}
+.fl-car{font-family:var(--cond);font-size:15px;font-weight:900;text-transform:uppercase;color:var(--text);flex:1;}
+.fl-meta{font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+.fl-predicted{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:rgba(39,174,96,.1);color:var(--like);border-radius:4px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-stripe"></div>
+      <div class="logo-text">Eight <span>Wide</span></div>
+      <div class="logo-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#" class="on">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang"><button class="nlb on">CZ</button><button class="nlb">EN</button></div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="h-eye"><div class="h-dot"></div><div class="h-ser">Paddock Rumors</div></div>
+      <div class="h-title">Co přijde<br>příště?</div>
+      <p class="h-desc">Spekulujeme, analyzujeme patentové databáze, sledujeme leaky a čteme mezi řádky. Toto je náš taktický výhled — s jasně označenou mírou důvěryhodnosti.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="background:var(--sur);border:1px solid var(--bdr);border-radius:8px;padding:12px 16px;text-align:center;"><div style="font-family:var(--cond);font-size:22px;font-weight:900;color:var(--spec)">8</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:2px">Spekulace</div></div>
+        <div style="background:var(--sur);border:1px solid var(--bdr);border-radius:8px;padding:12px 16px;text-align:center;"><div style="font-family:var(--cond);font-size:22px;font-weight:900;color:var(--prob)">5</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:2px">Pravděpodobné</div></div>
+        <div style="background:var(--sur);border:1px solid var(--bdr);border-radius:8px;padding:12px 16px;text-align:center;"><div style="font-family:var(--cond);font-size:22px;font-weight:900;color:var(--like)">3</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:2px">Téměř jisté</div></div>
+        <div style="background:var(--sur);border:1px solid var(--bdr);border-radius:8px;padding:12px 16px;text-align:center;"><div style="font-family:var(--cond);font-size:22px;font-weight:900;color:var(--conf)">1</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:2px">Potvrzeno</div></div>
+      </div>
+    </div>
+    <div class="meter-legend">
+      <div class="ml-title">Rumor Meter — stupnice</div>
+      <div class="ml-rows">
+        <div class="ml-row"><div class="ml-dot" style="background:var(--spec)"></div><div><div class="ml-label" style="color:var(--spec)">Spekulace</div><div class="ml-desc">Komunita wish-list, bez konkrétního zdroje</div><div class="ml-count">8 aktivních</div></div></div>
+        <div class="ml-row"><div class="ml-dot" style="background:var(--prob)"></div><div><div class="ml-label" style="color:var(--prob)">Pravděpodobné</div><div class="ml-desc">Nepřímé důkazy — vzory, licence, trendy</div><div class="ml-count">5 aktivních</div></div></div>
+        <div class="ml-row"><div class="ml-dot" style="background:var(--like)"></div><div><div class="ml-label" style="color:var(--like)">Téměř jisté</div><div class="ml-desc">Patent databáze nebo věrohodný leak</div><div class="ml-count">3 aktivní</div></div></div>
+        <div class="ml-row"><div class="ml-dot" style="background:var(--conf)"></div><div><div class="ml-label" style="color:var(--conf)">Potvrzeno</div><div class="ml-desc">Oficiální oznámení LEGO</div><div class="ml-count">1 aktivní</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tabs-in">
+    <button class="tab on">Všechny (17)</button>
+    <button class="tab">Spekulace (8)</button>
+    <button class="tab">Pravděpodobné (5)</button>
+    <button class="tab">Téměř jisté (3)</button>
+    <button class="tab">Potvrzeno (1)</button>
+    <button class="tab">Splněné ✓</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="rumors-grid">
+
+    <!-- BIG FEATURED — TÉMĚŘ JISTÉ -->
+    <div class="rcard rc-big">
+      <div class="rc-photo lg">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1400&q=85" alt="Nissan R34">
+        <div class="rc-grad"></div>
+        <div class="conf-badge cb-like"><div class="cb-dot"></div><div class="cb-txt">Téměř jisté</div></div>
+        <div class="meter-bar" style="background:linear-gradient(to right,var(--like) 85%,transparent 85%)"></div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-brand">Nissan · Japonsko</div>
+        <div class="rc-car lg">Skyline GT-R R34</div>
+        <p class="rc-desc">Patent LEGO na „japonské kupé s bočními výduchy" byl zaregistrován v Dánsku Q4 2024. Rozměry sedí přesně na 8-wide scale. R34 je dlouhodobě nejžádanější auto v komunitě — toto nevypadá jako shoda okolností.</p>
+        <div class="rc-footer">
+          <div class="rc-source">Zdroj: Patent databáze DK · November 2024</div>
+          <div class="rc-date">Aktualizováno: 8. 4. 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POTVRZENO -->
+    <div class="rcard">
+      <div class="rc-photo sm">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="Porsche GT3 RS">
+        <div class="rc-grad"></div>
+        <div class="conf-badge cb-conf"><div class="cb-dot"></div><div class="cb-txt">Potvrzeno ★</div></div>
+        <div class="meter-bar" style="background:var(--conf)"></div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-brand">Porsche · Německo</div>
+        <div class="rc-car">911 GT3 RS — 2026</div>
+        <p class="rc-desc">LEGO officiálně potvrdilo set 76935 na LEGO Con 2025. Dostupný od září 2026.</p>
+        <div class="rc-footer">
+          <div class="rc-source">Zdroj: LEGO Con · oficální</div>
+          <div class="rc-date">Únor 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRAVDĚPODOBNÉ -->
+    <div class="rcard">
+      <div class="rc-photo sm">
+        <img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=700&q=80" alt="BMW M3 E30">
+        <div class="rc-grad"></div>
+        <div class="conf-badge cb-prob"><div class="cb-dot"></div><div class="cb-txt">Pravděpodobné</div></div>
+        <div class="meter-bar" style="background:linear-gradient(to right,var(--prob) 65%,transparent 65%)"></div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-brand">BMW · Německo</div>
+        <div class="rc-car">M3 E30 DTM</div>
+        <p class="rc-desc">BMW drží platnou licenci, která vypráší v Q3 2025. Buď ji obnoví nebo ne — pokud ano, E30 je logický kandidát. LEGO zatím nemá žádné vintage BMW.</p>
+        <div class="rc-footer">
+          <div class="rc-source">Zdroj: Licence databáze · analýza</div>
+          <div class="rc-date">Březen 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEKULACE -->
+    <div class="rcard">
+      <div class="rc-photo sm">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="Bugatti EB110">
+        <div class="rc-grad"></div>
+        <div class="conf-badge cb-spec"><div class="cb-dot"></div><div class="cb-txt">Spekulace</div></div>
+        <div class="meter-bar" style="background:linear-gradient(to right,var(--spec) 25%,transparent 25%)"></div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-brand">Bugatti · Francie</div>
+        <div class="rc-car">EB110</div>
+        <p class="rc-desc">Bugatti Chiron byl hit. Komunita chce EB110 — Michaelovo nejoblíbenější auto. Žádný konkrétní důkaz, ale je to jen otázka času.</p>
+        <div class="rc-footer">
+          <div class="rc-source">Zdroj: Komunita wish-list</div>
+          <div class="rc-date">Průběžně</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRAVDĚPODOBNÉ -->
+    <div class="rcard">
+      <div class="rc-photo sm">
+        <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=700&q=80" alt="Toyota Supra A90">
+        <div class="rc-grad"></div>
+        <div class="conf-badge cb-prob"><div class="cb-dot"></div><div class="cb-txt">Pravděpodobné</div></div>
+        <div class="meter-bar" style="background:linear-gradient(to right,var(--prob) 60%,transparent 60%)"></div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-brand">Toyota · Japonsko</div>
+        <div class="rc-car">GR Supra A90</div>
+        <p class="rc-desc">Toyota je nová značka v SC od 2024. GR Supra je jejich nejznámější auto globálně. Dávalo by smysl jako druhý set po GR86.</p>
+        <div class="rc-footer">
+          <div class="rc-source">Zdroj: Vzor nových licencí</div>
+          <div class="rc-date">Duben 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEKULACE -->
+    <div class="rcard">
+      <div class="rc-photo sm">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=700&q=80" alt="Lamborghini Diablo">
+        <div class="rc-grad"></div>
+        <div class="conf-badge cb-spec"><div class="cb-dot"></div><div class="cb-txt">Spekulace</div></div>
+        <div class="meter-bar" style="background:linear-gradient(to right,var(--spec) 30%,transparent 30%)"></div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-brand">Lamborghini · Itálie</div>
+        <div class="rc-car">Diablo VT</div>
+        <p class="rc-desc">Po Countach by Diablo dávalo smysl jako pokračování retro Lamborghini linie. Ale bez důkazů je to zatím jen přání fanoušků.</p>
+        <div class="rc-footer">
+          <div class="rc-source">Zdroj: Fanoušci · Reddit</div>
+          <div class="rc-date">Průběžně</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SPLNĚNÉ -->
+  <div class="fulfilled-section">
+    <div class="fs-title">Splněné rumors — trefili jsme to</div>
+    <div class="fulfilled-list">
+      <div class="fl-row"><div class="fl-check">✓</div><div class="fl-car">Ferrari F40</div><div class="fl-meta">Předpověděno: leden 2022 · Vydáno: 2023</div><span class="fl-predicted">Téměř jisté → Splněno</span></div>
+      <div class="fl-row"><div class="fl-check">✓</div><div class="fl-car">McLaren W1</div><div class="fl-meta">Předpověděno: září 2024 · Vydáno: 2026</div><span class="fl-predicted">Pravděpodobné → Splněno</span></div>
+      <div class="fl-row"><div class="fl-check">✓</div><div class="fl-car">Porsche 911 GT3 RS (nová gen)</div><div class="fl-meta">Předpověděno: březen 2024 · Potvrzeno: únor 2025</div><span class="fl-predicted">Téměř jisté → Splněno</span></div>
+      <div class="fl-row"><div class="fl-check">✓</div><div class="fl-car">Lamborghini Countach LP400</div><div class="fl-meta">Předpověděno: červen 2021 · Vydáno: 2022</div><span class="fl-predicted">Pravděpodobné → Splněno</span></div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--sur);border-top:1px solid var(--bdr);padding:28px 0;margin-top:20px;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-family:var(--sans);font-size:16px;font-weight:600;color:var(--text);">Eight <span style="color:var(--gold)">Wide</span></div>
+    <div style="font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);">© 2025 Eight Wide · speedchampions.cz</div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab').forEach(t=>{t.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));this.classList.add('on');});});
+</script>
+</body>
+</html>

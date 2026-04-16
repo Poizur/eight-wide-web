@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hall of Fame — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.logo{display:flex;flex-direction:column;margin-right:36px;text-decoration:none;}
+.logo-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.logo-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nlb{font-family:var(--cond);font-size:12px;font-weight:700;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;}
+.nlb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* HERO */
+.hero{position:relative;min-height:52vh;display:flex;align-items:flex-end;overflow:hidden;padding-top:58px;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85') center/cover no-repeat;filter:brightness(.2) saturate(.3);}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,rgba(10,12,16,.7) 50%,transparent 100%);}
+.hero-content{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;padding:0 32px 48px;}
+.h-eye{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.h-trophy{font-size:28px;line-height:1;}
+.h-ser{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
+.h-title{font-family:var(--serif);font-size:clamp(48px,6vw,80px);font-style:italic;color:var(--text);line-height:.95;margin-bottom:12px;}
+.h-desc{font-size:15px;color:var(--text2);max-width:500px;line-height:1.65;}
+
+/* LAYOUT */
+.page{max-width:1280px;margin:0 auto;padding:48px 32px 80px;display:grid;grid-template-columns:1fr 260px;gap:48px;}
+
+/* HOF LIST */
+.hof-list{display:flex;flex-direction:column;gap:3px;}
+
+/* #1 SPECIAL */
+.hof-hero{background:var(--sur);border:1px solid rgba(201,162,39,.2);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s;position:relative;margin-bottom:4px;}
+.hof-hero:hover{border-color:rgba(201,162,39,.5);}
+.hof-hero-inner{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:0;}
+.hof-hero-rank{display:flex;align-items:center;justify-content:center;background:rgba(201,162,39,.08);border-right:1px solid rgba(201,162,39,.15);padding:32px 24px;position:relative;}
+.rank-num{font-family:var(--cond);font-size:72px;font-weight:900;color:var(--gold);line-height:1;opacity:.9;}
+.rank-lbl{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-family:var(--cond);font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,162,39,.5);white-space:nowrap;}
+.hof-hero-photo{position:relative;height:180px;overflow:hidden;}
+.hof-hero-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.2) saturate(.2);transition:filter .7s;}
+.hof-hero:hover .hof-hero-photo img{filter:brightness(.85) saturate(1);}
+.hof-hero-photo-grad{position:absolute;inset:0;background:linear-gradient(to right,transparent,var(--sur));}
+.hof-hero-info{padding:28px 28px;}
+.hof-brand{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.hof-name{font-family:var(--cond);font-size:26px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.1;margin-bottom:6px;}
+.hof-set{font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;}
+.hof-bars{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.hof-bar-row{display:grid;grid-template-columns:100px 1fr 36px;align-items:center;gap:8px;}
+.hof-bar-lbl{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.hof-bar-bg{height:3px;background:var(--sur2);border-radius:2px;}
+.hof-bar-fill{height:3px;background:var(--gold);border-radius:2px;}
+.hof-bar-val{font-family:var(--cond);font-size:11px;font-weight:900;color:var(--gold);text-align:right;}
+.hof-hero-score{padding:28px;border-left:1px solid rgba(201,162,39,.12);text-align:center;min-width:110px;}
+.hs-big{font-family:var(--cond);font-size:56px;font-weight:900;color:var(--gold);line-height:1;}
+.hs-max{font-family:var(--cond);font-size:18px;color:var(--text3);}
+.hs-lbl{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-top:8px;}
+.hof-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.htag{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.2);color:var(--gold);}
+
+/* REGULAR ROWS */
+.hof-row{background:var(--sur);border-radius:8px;overflow:hidden;cursor:pointer;transition:background .15s;display:grid;grid-template-columns:72px 90px 1fr auto auto;align-items:center;gap:0;border:1px solid var(--bdr);}
+.hof-row:hover{background:var(--sur2);}
+.hof-row-rank{display:flex;align-items:center;justify-content:center;padding:20px 16px;border-right:1px solid var(--bdr);}
+.row-rn{font-family:var(--cond);font-size:24px;font-weight:900;color:rgba(255,255,255,.12);}
+.hof-row-img{position:relative;height:70px;overflow:hidden;}
+.hof-row-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.18) saturate(.2);transition:filter .5s;}
+.hof-row:hover .hof-row-img img{filter:brightness(.8) saturate(1);}
+.hof-row-info{padding:14px 20px;}
+.hof-row-brand{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);}
+.hof-row-name{font-family:var(--cond);font-size:16px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.1;transition:color .15s;}
+.hof-row:hover .hof-row-name{color:var(--gold);}
+.hof-row-set{font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+.hof-row-tags{padding:0 16px;display:flex;gap:5px;flex-wrap:wrap;}
+.hof-row-score{padding:14px 24px;text-align:center;border-left:1px solid var(--bdr);min-width:80px;}
+.rsc-n{font-family:var(--cond);font-size:22px;font-weight:900;color:var(--gold);line-height:1;}
+.rsc-m{font-family:var(--cond);font-size:12px;color:var(--text3);}
+
+/* HONORABLE */
+.honors-title{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);padding:32px 0 16px;display:flex;align-items:center;gap:12px;}
+.honors-title::before{content:'';flex:1;height:1px;background:var(--bdr);}
+.honors-title::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.honors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;}
+.hc{background:var(--sur);cursor:pointer;transition:background .15s;overflow:hidden;}
+.hc:hover{background:var(--sur2);}
+.hc-img{aspect-ratio:16/9;overflow:hidden;}
+.hc-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.14) saturate(.2);transition:filter .6s;}
+.hc:hover .hc-img img{filter:brightness(.8) saturate(1);}
+.hc-body{padding:14px;}
+.hc-brand{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);}
+.hc-name{font-family:var(--cond);font-size:15px;font-weight:900;text-transform:uppercase;color:var(--text);margin-bottom:4px;}
+.hc-score{font-family:var(--cond);font-size:14px;font-weight:900;color:var(--gold);}
+
+/* SIDEBAR */
+.sidebar{align-self:start;position:sticky;top:76px;}
+.sb{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:18px;margin-bottom:14px;}
+.sb-t{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bdr);}
+.filter-rows{display:flex;flex-direction:column;gap:3px;}
+.fr{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:6px;cursor:pointer;color:var(--text3);transition:all .15s;display:flex;justify-content:space-between;}
+.fr:hover,.fr.on{background:var(--sur2);color:var(--gold);}
+.fr-count{color:var(--text3);font-weight:400;}
+.methodology{font-size:12px;color:var(--text2);line-height:1.65;}
+.methodology strong{color:var(--text);}
+.me-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdr);font-family:var(--cond);font-size:11px;}
+.me-item:last-child{border-bottom:none;}
+.me-lbl{color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+.me-pct{color:var(--gold);font-weight:700;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-stripe"></div>
+      <div class="logo-text">Eight <span>Wide</span></div>
+      <div class="logo-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#" class="on">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang"><button class="nlb on">CZ</button><button class="nlb">EN</button></div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <div class="h-eye">
+      <div class="h-trophy">🏆</div>
+      <div class="h-ser">Hall of Fame</div>
+    </div>
+    <div class="h-title">Nejlepší<br>Speed Champions<br>vůbec</div>
+    <p class="h-desc">Hodnotíme každý set podle věrnosti, detailu, stavebního zážitku, hodnoty a prezentace. Toto je náš konečný ranking — aktualizovaný po každém novém DNA článku.</p>
+  </div>
+</div>
+
+<div class="page">
+  <div>
+    <div class="hof-list">
+
+      <!-- #1 LOTUS EVIJA -->
+      <div class="hof-hero">
+        <div class="hof-hero-inner">
+          <div class="hof-hero-rank">
+            <div class="rank-num">01</div>
+            <div class="rank-lbl">Absolutní vítěz</div>
+          </div>
+          <div class="hof-hero-photo">
+            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=700&q=85" alt="Lotus Evija">
+            <div class="hof-hero-photo-grad"></div>
+          </div>
+          <div class="hof-hero-info">
+            <div class="hof-brand">Lotus · Set 76907 · 247 dílků · 2022</div>
+            <div class="hof-name">Evija</div>
+            <div class="hof-set">Set 76907 · 247 dílků · dostupný · 549 Kč</div>
+            <div class="hof-bars">
+              <div class="hof-bar-row"><span class="hof-bar-lbl">Věrnost tvaru</span><div class="hof-bar-bg"><div class="hof-bar-fill" style="width:98%"></div></div><span class="hof-bar-val">9.8</span></div>
+              <div class="hof-bar-row"><span class="hof-bar-lbl">Detailnost</span><div class="hof-bar-bg"><div class="hof-bar-fill" style="width:95%"></div></div><span class="hof-bar-val">9.5</span></div>
+              <div class="hof-bar-row"><span class="hof-bar-lbl">Stavba</span><div class="hof-bar-bg"><div class="hof-bar-fill" style="width:92%"></div></div><span class="hof-bar-val">9.2</span></div>
+              <div class="hof-bar-row"><span class="hof-bar-lbl">Hodnota</span><div class="hof-bar-bg"><div class="hof-bar-fill" style="width:97%"></div></div><span class="hof-bar-val">9.7</span></div>
+            </div>
+            <div class="hof-tags">
+              <span class="htag">Nejdetailnější</span>
+              <span class="htag">Věrnost 98%</span>
+              <span class="htag">Nejlepší tvar</span>
+            </div>
+          </div>
+          <div class="hof-hero-score">
+            <div class="hs-big">9.8</div>
+            <div class="hs-max">/10</div>
+            <div class="hs-lbl">DNA Score</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- #2 -->
+      <div class="hof-row">
+        <div class="hof-row-rank"><span class="row-rn">02</span></div>
+        <div class="hof-row-img"><img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=400&q=80" alt="Ferrari F40"></div>
+        <div class="hof-row-info">
+          <div class="hof-row-brand">Ferrari · 2023 · Set 76934</div>
+          <div class="hof-row-name">F40</div>
+          <div class="hof-row-set">318 dílků · 629 Kč · dostupný</div>
+        </div>
+        <div class="hof-row-tags"><span class="htag">Ikonický model</span><span class="htag">9.2 věrnost</span></div>
+        <div class="hof-row-score"><div class="rsc-n">9.2</div><div class="rsc-m">/10</div></div>
+      </div>
+
+      <!-- #3 -->
+      <div class="hof-row">
+        <div class="hof-row-rank"><span class="row-rn">03</span></div>
+        <div class="hof-row-img"><img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=400&q=80" alt="Countach"></div>
+        <div class="hof-row-info">
+          <div class="hof-row-brand">Lamborghini · 2022 · Set 76908</div>
+          <div class="hof-row-name">Countach LP400</div>
+          <div class="hof-row-set">262 dílků · Retired · BrickLink od 750 Kč</div>
+        </div>
+        <div class="hof-row-tags"><span class="htag">Nejlepší tvar</span></div>
+        <div class="hof-row-score"><div class="rsc-n">9.3</div><div class="rsc-m">/10</div></div>
+      </div>
+
+      <!-- #4 -->
+      <div class="hof-row">
+        <div class="hof-row-rank"><span class="row-rn">04</span></div>
+        <div class="hof-row-img"><img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=400&q=80" alt="Ferrari 512M"></div>
+        <div class="hof-row-info">
+          <div class="hof-row-brand">Ferrari · 2022 · Set 76912</div>
+          <div class="hof-row-name">512M</div>
+          <div class="hof-row-set">291 dílků · Retired · BrickLink od 890 Kč</div>
+        </div>
+        <div class="hof-row-tags"><span class="htag">Retro gem</span></div>
+        <div class="hof-row-score"><div class="rsc-n">9.1</div><div class="rsc-m">/10</div></div>
+      </div>
+
+      <!-- #5 -->
+      <div class="hof-row">
+        <div class="hof-row-rank"><span class="row-rn">05</span></div>
+        <div class="hof-row-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80" alt="Porsche 911 RSR"></div>
+        <div class="hof-row-info">
+          <div class="hof-row-brand">Porsche · 2023 · Set 75912</div>
+          <div class="hof-row-name">911 RSR + Turbo 3.0</div>
+          <div class="hof-row-set">434 dílků · 699 Kč · dostupný</div>
+        </div>
+        <div class="hof-row-tags"><span class="htag">Dvojbalení</span><span class="htag">Nejlepší Porsche</span></div>
+        <div class="hof-row-score"><div class="rsc-n">9.0</div><div class="rsc-m">/10</div></div>
+      </div>
+
+      <!-- #6–10 zkrácené -->
+      <div class="hof-row">
+        <div class="hof-row-rank"><span class="row-rn">06</span></div>
+        <div class="hof-row-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80" alt="McLaren W1"></div>
+        <div class="hof-row-info">
+          <div class="hof-row-brand">McLaren · 2026 · Set 77261</div>
+          <div class="hof-row-name">W1</div>
+          <div class="hof-row-set">345 dílků · 629 Kč · nový</div>
+        </div>
+        <div class="hof-row-tags"><span class="htag">Nejrychlejší SC auto</span></div>
+        <div class="hof-row-score"><div class="rsc-n">9.0</div><div class="rsc-m">/10</div></div>
+      </div>
+
+      <div class="hof-row">
+        <div class="hof-row-rank"><span class="row-rn">07</span></div>
+        <div class="hof-row-img"><img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=400&q=80" alt="Aston Martin"></div>
+        <div class="hof-row-info">
+          <div class="hof-row-brand">Aston Martin · 2022 · Set 76910</div>
+          <div class="hof-row-name">Valkyrie AMR Pro</div>
+          <div class="hof-row-set">286 dílků · 699 Kč · dostupný</div>
+        </div>
+        <div class="hof-row-tags"><span class="htag">Nejlepší Aston</span></div>
+        <div class="hof-row-score"><div class="rsc-n">8.8</div><div class="rsc-m">/10</div></div>
+      </div>
+
+    </div>
+
+    <!-- HONORABLE MENTIONS -->
+    <div class="honors-title">Honorable Mentions</div>
+    <div class="honors-grid">
+      <div class="hc">
+        <div class="hc-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80" alt=""></div>
+        <div class="hc-body">
+          <div class="hc-brand">BMW · 2016 · Retired</div>
+          <div class="hc-name">M3 GT2</div>
+          <div class="hc-score">8.5 / 10</div>
+        </div>
+      </div>
+      <div class="hc">
+        <div class="hc-img"><img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=500&q=80" alt=""></div>
+        <div class="hc-body">
+          <div class="hc-brand">Ferrari · 2020 · Retired</div>
+          <div class="hc-name">F8 Tributo</div>
+          <div class="hc-score">8.4 / 10</div>
+        </div>
+      </div>
+      <div class="hc">
+        <div class="hc-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80" alt=""></div>
+        <div class="hc-body">
+          <div class="hc-brand">McLaren · 2017 · Retired</div>
+          <div class="hc-name">720S</div>
+          <div class="hc-score">8.3 / 10</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb">
+      <div class="sb-t">Filtrovat</div>
+      <div class="filter-rows">
+        <div class="fr on">Všechny éry<span class="fr-count">47</span></div>
+        <div class="fr">6-wide (2015–2019)<span class="fr-count">18</span></div>
+        <div class="fr">8-wide (2020–)<span class="fr-count">29</span></div>
+      </div>
+      <div style="height:16px"></div>
+      <div class="filter-rows">
+        <div class="fr on">Všechny značky<span class="fr-count">47</span></div>
+        <div class="fr">Ferrari<span class="fr-count">14</span></div>
+        <div class="fr">Porsche<span class="fr-count">11</span></div>
+        <div class="fr">McLaren<span class="fr-count">9</span></div>
+        <div class="fr">Lamborghini<span class="fr-count">8</span></div>
+      </div>
+    </div>
+    <div class="sb">
+      <div class="sb-t">Metodika hodnocení</div>
+      <div>
+        <div class="me-item"><span class="me-lbl">Věrnost tvaru</span><span class="me-pct">25%</span></div>
+        <div class="me-item"><span class="me-lbl">Detailnost</span><span class="me-pct">25%</span></div>
+        <div class="me-item"><span class="me-lbl">Stavební zážitek</span><span class="me-pct">20%</span></div>
+        <div class="me-item"><span class="me-lbl">Cena / hodnota</span><span class="me-pct">20%</span></div>
+        <div class="me-item"><span class="me-lbl">Prezentace</span><span class="me-pct">10%</span></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer style="background:var(--sur);border-top:1px solid var(--bdr);padding:28px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-family:var(--sans);font-size:16px;font-weight:600;color:var(--text);">Eight <span style="color:var(--gold)">Wide</span></div>
+    <div style="font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);">© 2025 Eight Wide · speedchampions.cz</div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.fr').forEach(r=>{r.addEventListener('click',function(){this.closest('.filter-rows').querySelectorAll('.fr').forEach(x=>x.classList.remove('on'));this.classList.add('on');});});
+</script>
+</body>
+</html>

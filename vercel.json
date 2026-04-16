@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/sync-brickset",
+      "schedule": "0 5 * * *"
+    },
+    {
+      "path": "/api/cron/check-alerts",
+      "schedule": "0 7 * * *"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komunita — Bazaar — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.logo{display:flex;flex-direction:column;margin-right:36px;text-decoration:none;}
+.logo-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.logo-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nlb{font-family:var(--cond);font-size:12px;font-weight:700;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;}
+.nlb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* HERO */
+.hero{min-height:100vh;padding-top:58px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero-bg-text{position:absolute;font-family:var(--cond);font-size:clamp(180px,22vw,320px);font-weight:900;color:rgba(255,255,255,.02);letter-spacing:-.05em;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;line-height:1;}
+.hero-in{max-width:1280px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;position:relative;z-index:2;}
+
+.h-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.2);border-radius:6px;padding:6px 14px;margin-bottom:20px;}
+.h-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
+.h-badge-txt{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.h-title{font-family:var(--serif);font-size:clamp(44px,5.5vw,72px);font-style:italic;color:var(--text);line-height:.95;margin-bottom:16px;}
+.h-desc{font-size:15px;color:var(--text2);line-height:1.7;max-width:480px;margin-bottom:32px;}
+
+/* COUNTDOWN */
+.countdown{display:flex;gap:3px;margin-bottom:32px;}
+.cd-block{background:var(--sur);border:1px solid var(--bdr);border-radius:8px;padding:16px 20px;text-align:center;flex:1;}
+.cd-num{font-family:var(--cond);font-size:40px;font-weight:900;color:var(--gold);line-height:1;id:cdNum}
+.cd-lbl{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-top:4px;}
+.cd-sep{display:flex;align-items:center;padding:0 4px;font-family:var(--cond);font-size:28px;font-weight:900;color:var(--text3);margin-top:-16px;}
+
+/* FORM */
+.signup-form{display:flex;gap:8px;margin-bottom:24px;}
+.sf-input{flex:1;padding:12px 16px;background:var(--sur);border:1px solid var(--bdr);color:var(--text);font-family:var(--sans);font-size:14px;border-radius:8px;outline:none;transition:border-color .2s;}
+.sf-input:focus{border-color:var(--gold);}
+.sf-btn{padding:12px 22px;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.counter{font-family:var(--cond);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+.counter span{color:var(--gold);font-weight:700;}
+
+/* MOCKUP PREVIEW */
+.preview-card{background:var(--sur);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;position:relative;}
+.pc-badge{position:absolute;top:16px;right:16px;background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.2);border-radius:6px;padding:4px 10px;font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);z-index:2;}
+.pc-header{padding:20px 20px 16px;border-bottom:1px solid var(--bdr);}
+.pc-title{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;}
+.pc-sub{font-family:var(--cond);font-size:18px;font-weight:900;text-transform:uppercase;color:var(--text);}
+.pc-listings{display:flex;flex-direction:column;gap:1px;background:var(--bdr);}
+.pcl{background:var(--sur);display:flex;align-items:center;gap:12px;padding:12px 16px;}
+.pcl-img{width:52px;height:32px;background:var(--sur2);border-radius:4px;overflow:hidden;flex-shrink:0;}
+.pcl-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.2);}
+.pcl-info{flex:1;}
+.pcl-brand{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
+.pcl-name{font-family:var(--cond);font-size:13px;font-weight:900;text-transform:uppercase;color:var(--text);}
+.pcl-right{text-align:right;}
+.pcl-price{font-family:var(--cond);font-size:16px;font-weight:900;color:var(--gold);}
+.pcl-cond{font-family:var(--cond);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.pc-blur{filter:blur(4px);opacity:.4;pointer-events:none;}
+
+/* FEATURES */
+.features{max-width:1280px;margin:0 auto;padding:0 32px 80px;}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;}
+.feat{background:var(--sur);padding:28px;}
+.feat-num{font-family:var(--cond);font-size:40px;font-weight:900;color:rgba(201,162,39,.15);line-height:1;margin-bottom:12px;}
+.feat-title{font-family:var(--cond);font-size:16px;font-weight:900;text-transform:uppercase;color:var(--text);margin-bottom:8px;}
+.feat-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-stripe"></div>
+      <div class="logo-text">Eight <span>Wide</span></div>
+      <div class="logo-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#" class="on">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang"><button class="nlb on">CZ</button><button class="nlb">EN</button></div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg-text">BAZAAR</div>
+  <div class="hero-in">
+    <div>
+      <div class="h-badge"><div class="h-badge-dot"></div><div class="h-badge-txt">Připravujeme · Q3 2026</div></div>
+      <div class="h-title">Kup & Prodej<br>Speed<br>Champions</div>
+      <p class="h-desc">Dedikovaný marketplace pro SC komunitu. Retired sety, otevřené boxy, celé sbírky. Bez poplatků, jen mezi fanoušky. Každý inzerát doplněn o aktuální BrickEconomy data.</p>
+
+      <div class="countdown">
+        <div class="cd-block"><div class="cd-num" id="cdDays">87</div><div class="cd-lbl">Dní</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><div class="cd-num" id="cdHours">14</div><div class="cd-lbl">Hodin</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><div class="cd-num" id="cdMins">32</div><div class="cd-lbl">Minut</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><div class="cd-num" id="cdSecs">09</div><div class="cd-lbl">Sekund</div></div>
+      </div>
+
+      <div class="signup-form">
+        <input class="sf-input" type="email" placeholder="tvůj@email.cz — chci být první">
+        <button class="sf-btn">Notifikovat mě →</button>
+      </div>
+      <div class="counter"><span id="waitCount">847</span> fanoušků čeká · zdarma pro členy Eight Wide</div>
+    </div>
+
+    <!-- MOCKUP -->
+    <div class="preview-card">
+      <div class="pc-badge">Preview</div>
+      <div class="pc-header">
+        <div class="pc-title">Bazaar — Aktuální inzeráty</div>
+        <div class="pc-sub">Retired Sety</div>
+      </div>
+      <div class="pc-listings">
+        <div class="pcl">
+          <div class="pcl-img"><img src="https://images.brickset.com/sets/images/76908-1.jpg" alt="Countach"></div>
+          <div class="pcl-info">
+            <div class="pcl-brand">Lamborghini · Set 76908</div>
+            <div class="pcl-name">Countach LP400</div>
+          </div>
+          <div class="pcl-right">
+            <div class="pcl-price">890 Kč</div>
+            <div class="pcl-cond">Nový, zapečetěný</div>
+          </div>
+        </div>
+        <div class="pcl pc-blur">
+          <div class="pcl-img"><img src="https://images.brickset.com/sets/images/76912-1.jpg" alt="512M"></div>
+          <div class="pcl-info">
+            <div class="pcl-brand">Ferrari · Set 76912</div>
+            <div class="pcl-name">Ferrari 512M</div>
+          </div>
+          <div class="pcl-right">
+            <div class="pcl-price">1 150 Kč</div>
+            <div class="pcl-cond">Nový, zapečetěný</div>
+          </div>
+        </div>
+        <div class="pcl pc-blur">
+          <div class="pcl-img"><img src="https://images.brickset.com/sets/images/75912-1.jpg" alt="911 RSR"></div>
+          <div class="pcl-info">
+            <div class="pcl-brand">Porsche · Set 75888</div>
+            <div class="pcl-name">911 RSR 2016</div>
+          </div>
+          <div class="pcl-right">
+            <div class="pcl-price">650 Kč</div>
+            <div class="pcl-cond">Postavený, kompletní</div>
+          </div>
+        </div>
+        <div class="pcl pc-blur">
+          <div class="pcl-img"><img src="https://images.brickset.com/sets/images/76907-1.jpg" alt="Lotus"></div>
+          <div class="pcl-info">
+            <div class="pcl-brand">Lotus · Set 76907</div>
+            <div class="pcl-name">Evija</div>
+          </div>
+          <div class="pcl-right">
+            <div class="pcl-price">520 Kč</div>
+            <div class="pcl-cond">Nový, otevřený</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-num">01</div>
+      <div class="feat-title">Retired sety</div>
+      <div class="feat-desc">Sety které LEGO přestalo vyrábět — Countach, Ferrari 512M, staré Porsche. Tady je ještě najdeš za rozumné ceny.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">02</div>
+      <div class="feat-title">BrickEconomy data</div>
+      <div class="feat-desc">Každý inzerát automaticky doplněn o aktuální tržní cenu, trend za 6 měsíců a fair-price indikátor.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">03</div>
+      <div class="feat-title">Verified sellers</div>
+      <div class="feat-desc">Každý prodejce má profil s historií transakcí a hodnocením od kupujících. Bez anonymních prodejů.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">04</div>
+      <div class="feat-title">Foto standard</div>
+      <div class="feat-desc">Povinné fotky ze čtyř stran, foto příslušenství, minifigurky i krabičky. Víš přesně co kupuješ.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">05</div>
+      <div class="feat-title">Bez poplatků</div>
+      <div class="feat-desc">Zdarma pro členy Eight Wide newsletteru. Žádná provize, žádné poplatky za inzerát. Jen komunita.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">06</div>
+      <div class="feat-title">Price Watch</div>
+      <div class="feat-desc">Nastav hlídač ceny — upozorníme tě emailem když se objeví inzerát pod tvou cílovou cenou.</div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--sur);border-top:1px solid var(--bdr);padding:28px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-family:var(--sans);font-size:16px;font-weight:600;color:var(--text);">Eight <span style="color:var(--gold)">Wide</span></div>
+    <div style="font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);">© 2025 Eight Wide · speedchampions.cz</div>
+  </div>
+</footer>
+<script>
+// Countdown to Q3 2026 (Sep 1, 2026)
+const target=new Date('2026-09-01T08:00:00');
+function tick(){
+  const now=new Date();
+  const diff=target-now;
+  if(diff<=0)return;
+  const d=Math.floor(diff/864e5);
+  const h=Math.floor((diff%864e5)/36e5);
+  const m=Math.floor((diff%36e5)/6e4);
+  const s=Math.floor((diff%6e4)/1e3);
+  document.getElementById('cdDays').textContent=String(d).padStart(2,'0');
+  document.getElementById('cdHours').textContent=String(h).padStart(2,'0');
+  document.getElementById('cdMins').textContent=String(m).padStart(2,'0');
+  document.getElementById('cdSecs').textContent=String(s).padStart(2,'0');
+}
+tick();
+setInterval(tick,1000);
+// Fake counter animation
+let cnt=847;
+setInterval(()=>{
+  if(Math.random()>.85){cnt+=1;document.getElementById('waitCount').textContent=cnt;}
+},8000);
+</script>
+</body>
+</html>

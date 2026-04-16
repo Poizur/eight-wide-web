@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Stránka nenalezena — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.logo{display:flex;flex-direction:column;margin-right:36px;text-decoration:none;}
+.logo-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.logo-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05);}
+
+/* MAIN */
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding-top:58px;overflow:hidden;position:relative;}
+
+/* BIG 404 BG */
+.bg-num{position:absolute;font-family:var(--cond);font-size:clamp(280px,38vw,520px);font-weight:900;color:rgba(255,255,255,.018);letter-spacing:-.06em;line-height:1;pointer-events:none;user-select:none;top:50%;left:50%;transform:translate(-50%,-50%);}
+
+/* GRID OF DARK CARS */
+.bg-cars{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;opacity:.06;pointer-events:none;}
+.bg-car{overflow:hidden;}
+.bg-car img{width:100%;height:100%;object-fit:cover;filter:saturate(0);}
+
+.content{position:relative;z-index:2;text-align:center;padding:40px 32px;max-width:600px;}
+
+/* SIGNAL/STATUS */
+.status-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,40,30,.08);border:1px solid rgba(200,40,30,.2);border-radius:6px;padding:6px 14px;margin-bottom:28px;}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.sb-txt{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);}
+
+.err-code{font-family:var(--cond);font-size:clamp(80px,12vw,120px);font-weight:900;color:var(--text);line-height:1;letter-spacing:-.04em;margin-bottom:4px;}
+.err-code span{color:var(--gold);}
+
+.err-title{font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-style:italic;color:var(--text2);line-height:1.2;margin-bottom:16px;}
+
+.err-desc{font-size:15px;color:var(--text3);line-height:1.65;max-width:400px;margin:0 auto 36px;}
+
+/* ACTIONS */
+.actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:48px;}
+.btn-primary{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 28px;background:var(--gold);color:#000;border:none;border-radius:8px;cursor:pointer;text-decoration:none;transition:opacity .2s;}
+.btn-primary:hover{opacity:.85;}
+.btn-sec{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 28px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:8px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.btn-sec:hover{border-color:rgba(255,255,255,.18);color:var(--text2);}
+
+/* SUGGESTED LINKS */
+.suggestions{border-top:1px solid var(--bdr);padding-top:32px;}
+.sug-title{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;}
+.sug-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.sg{background:var(--sur);border:1px solid var(--bdr);border-radius:8px;padding:14px;text-align:left;text-decoration:none;display:block;transition:all .2s;cursor:pointer;}
+.sg:hover{background:var(--sur2);border-color:rgba(255,255,255,.12);}
+.sg-ser{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.sg-name{font-family:var(--cond);font-size:13px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.2;}
+.sg-arr{font-size:14px;color:var(--text3);margin-top:8px;display:block;transition:color .15s;}
+.sg:hover .sg-arr{color:var(--gold);}
+
+footer{background:var(--sur);border-top:1px solid var(--bdr);padding:20px 0;}
+.ft-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-stripe"></div>
+      <div class="logo-text">Eight <span>Wide</span></div>
+      <div class="logo-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+  <!-- BG -->
+  <div class="bg-num">404</div>
+  <div class="bg-cars">
+    <div class="bg-car"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=40" alt=""></div>
+    <div class="bg-car"><img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=400&q=40" alt=""></div>
+    <div class="bg-car"><img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=400&q=40" alt=""></div>
+    <div class="bg-car"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=40" alt=""></div>
+    <div class="bg-car"><img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=400&q=40" alt=""></div>
+  </div>
+
+  <div class="content">
+    <div class="status-badge"><div class="sb-dot"></div><div class="sb-txt">Signal Lost — 404</div></div>
+
+    <div class="err-code">4<span>0</span>4</div>
+    <div class="err-title">Tato stránka<br>skončila v bariérách.</div>
+    <p class="err-desc">Buď jsi zadal špatnou adresu, nebo jsme stránku přestěhovali. Každopádně — není to tvoje chyba, je to naše.</p>
+
+    <div class="actions">
+      <a href="index.html" class="btn-primary">← Zpět na hlavní</a>
+      <a href="databaze.html" class="btn-sec">Databáze setů</a>
+      <a href="ceny.html" class="btn-sec">Ceny & slevy</a>
+    </div>
+
+    <div class="suggestions">
+      <div class="sug-title">Možná hledáš toto —</div>
+      <div class="sug-grid">
+        <a href="dna-archive.html" class="sg">
+          <div class="sg-ser">DNA Series</div>
+          <div class="sg-name">Příběhy aut + LEGO recenze</div>
+          <span class="sg-arr">→</span>
+        </a>
+        <a href="hall-of-fame.html" class="sg">
+          <div class="sg-ser">Hall of Fame</div>
+          <div class="sg-name">Nejlepší Speed Champions ever</div>
+          <span class="sg-arr">→</span>
+        </a>
+        <a href="paddock-rumors.html" class="sg">
+          <div class="sg-ser">Paddock Rumors</div>
+          <div class="sg-name">Co přijde příště?</div>
+          <span class="sg-arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-in">
+    <div style="font-family:var(--sans);font-size:15px;font-weight:600;color:var(--text);">Eight <span style="color:var(--gold)">Wide</span></div>
+    <div style="font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);">speedchampions.cz</div>
+  </div>
+</footer>
+
+</body>
+</html>

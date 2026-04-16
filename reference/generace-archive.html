@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generace vs. Generace — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.logo{display:flex;flex-direction:column;margin-right:36px;text-decoration:none;}
+.logo-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.logo-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nlb{font-family:var(--cond);font-size:12px;font-weight:700;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;}
+.nlb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* PAGE HEADER */
+.ph{padding:120px 0 56px;border-bottom:1px solid var(--bdr);background:linear-gradient(to bottom,rgba(201,162,39,.03) 0%,transparent 100%);}
+.ph-in{max-width:1280px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:end;}
+.ph-eye{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.ph-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.ph-ser{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
+.ph-title{font-family:var(--serif);font-size:clamp(44px,5.5vw,72px);font-style:italic;color:var(--text);line-height:.95;letter-spacing:-.02em;margin-bottom:16px;}
+.ph-desc{font-size:15px;color:var(--text2);line-height:1.65;max-width:480px;margin-bottom:28px;}
+.ph-stats{display:flex;gap:28px;}
+.ph-sn{font-family:var(--cond);font-size:26px;font-weight:900;color:var(--gold);line-height:1;}
+.ph-sl{font-family:var(--cond);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-top:3px;}
+/* Hero split preview */
+.ph-preview{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--bdr);}
+.ph-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);}
+.ph-half{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.ph-half img{width:100%;height:100%;object-fit:cover;filter:brightness(.35) saturate(.4);}
+.ph-half-tag{position:absolute;bottom:10px;left:10px;font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+.tag-old{background:rgba(255,255,255,.12);color:var(--text2);}
+.tag-new{background:rgba(201,162,39,.85);color:#000;}
+.ph-vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--cond);font-size:20px;font-weight:900;color:var(--gold);background:var(--bg);border:1px solid var(--gold);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;letter-spacing:.1em;z-index:2;}
+
+/* FILTERS */
+.fb{position:sticky;top:58px;z-index:100;background:rgba(10,12,16,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);}
+.fb-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:10px;height:54px;overflow-x:auto;}
+.flbl{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);flex-shrink:0;}
+.fbtn{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:6px;cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;}
+.fbtn:hover{border-color:rgba(255,255,255,.2);color:var(--text2);}
+.fbtn.on{background:var(--gold);border-color:var(--gold);color:#000;}
+.fsep{width:1px;height:20px;background:var(--bdr);flex-shrink:0;}
+.fsort{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;background:var(--sur);border:1px solid var(--bdr);color:var(--text3);border-radius:6px;cursor:pointer;margin-left:auto;flex-shrink:0;}
+
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:48px 32px 80px;}
+
+/* GEN CARDS */
+.gen-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:2px;}
+.gen-grid.top{grid-template-columns:1fr;}
+
+.gc{background:var(--sur);cursor:pointer;overflow:hidden;transition:background .2s;position:relative;}
+.gc:hover{background:var(--sur2);}
+.gc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.gc:hover::after{transform:scaleX(1);}
+
+/* Split photo for gen cards */
+.gc-photo{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdr);position:relative;}
+.gc-photo.tall .gc-half{aspect-ratio:3/2;}
+.gc-half{position:relative;overflow:hidden;aspect-ratio:16/9;}
+.gc-half img{width:100%;height:100%;object-fit:cover;filter:brightness(.18) saturate(.2);transform:scale(1.04);transition:filter .7s cubic-bezier(.16,1,.3,1),transform .7s;}
+.gc:hover .gc-half img{filter:brightness(.78) saturate(1);transform:scale(1);}
+.gc-half-tag{position:absolute;bottom:8px;left:10px;font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
+.gc-vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--cond);font-size:13px;font-weight:900;color:var(--gold);background:var(--bg);border:1px solid var(--bdr);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;z-index:3;}
+.gc-set-badge{position:absolute;top:8px;right:8px;background:rgba(10,12,16,.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px;text-align:center;opacity:0;transform:translateY(-3px);transition:opacity .3s,transform .3s;z-index:4;}
+.gc:hover .gc-set-badge{opacity:1;transform:translateY(0);}
+.gc-set-num{font-family:var(--cond);font-size:14px;font-weight:900;color:rgba(255,255,255,.9);line-height:1;}
+.gc-set-lbl{font-family:var(--cond);font-size:7px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+
+.gc-body{padding:18px 20px 20px;}
+.gc-brand{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.gc-title{font-family:var(--cond);font-size:20px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.05;margin-bottom:8px;transition:color .2s;}
+.gc-title.lg{font-size:26px;}
+.gc:hover .gc-title{color:var(--gold);}
+.gc-excerpt{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:12px;}
+.gc-footer{display:flex;align-items:center;justify-content:space-between;}
+.gc-sets{display:flex;gap:8px;align-items:center;}
+.gc-set{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid var(--bdr);color:var(--text3);}
+.gc-set.new{border-color:rgba(201,162,39,.3);color:var(--gold);}
+.gc-meta{font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+.gc-winner{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.winner-new{background:rgba(39,174,96,.15);color:#5DBE8A;}
+.winner-old{background:rgba(201,162,39,.15);color:var(--gold);}
+.winner-tie{background:rgba(255,255,255,.08);color:var(--text2);}
+
+/* LEGEND */
+.legend{display:flex;align-items:center;gap:20px;padding:16px 0;margin-bottom:8px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.leg-dot{width:8px;height:8px;border-radius:2px;}
+
+/* PAGINATION */
+.pag{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:32px;}
+.pgb{font-family:var(--cond);font-size:13px;font-weight:700;padding:8px 14px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:6px;cursor:pointer;transition:all .15s;}
+.pgb:hover{border-color:rgba(255,255,255,.2);color:var(--text2);}
+.pgb.on{background:var(--gold);border-color:var(--gold);color:#000;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-stripe"></div>
+      <div class="logo-text">Eight <span>Wide</span></div>
+      <div class="logo-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#">DNA</a>
+      <a href="#" class="on">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang"><button class="nlb on">CZ</button><button class="nlb">EN</button></div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="ph">
+  <div class="ph-in">
+    <div>
+      <div class="ph-eye"><div class="ph-dot"></div><div class="ph-ser">Generace vs. Generace</div></div>
+      <div class="ph-title">Kdo vyhrál —<br>starý nebo nový?</div>
+      <p class="ph-desc">Pokaždé když LEGO vydá novou verzi stejného auta — srovnáme ji s předchůdcem dílkem po dílku. Větší není vždy lepší.</p>
+      <div class="ph-stats">
+        <div><div class="ph-sn">23</div><div class="ph-sl">srovnání</div></div>
+        <div><div class="ph-sn">14×</div><div class="ph-sl">vyhrál nový</div></div>
+        <div><div class="ph-sn">7×</div><div class="ph-sl">vyhrál starý</div></div>
+        <div><div class="ph-sn">2×</div><div class="ph-sl">remíza</div></div>
+      </div>
+    </div>
+    <div class="ph-preview">
+      <div class="ph-split">
+        <div class="ph-half">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80" alt="Starý set">
+          <div class="ph-half-tag tag-old">6-wide · 2016</div>
+        </div>
+        <div class="ph-half">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80" alt="Nový set">
+          <div class="ph-half-tag tag-new">8-wide · 2023 ★</div>
+        </div>
+      </div>
+      <div class="ph-vs">VS</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="fb">
+  <div class="fb-in">
+    <span class="flbl">Auto:</span>
+    <button class="fbtn on">Vše</button>
+    <button class="fbtn">Porsche</button>
+    <button class="fbtn">Ferrari</button>
+    <button class="fbtn">McLaren</button>
+    <button class="fbtn">Lamborghini</button>
+    <button class="fbtn">BMW</button>
+    <div class="fsep"></div>
+    <span class="flbl">Éra:</span>
+    <button class="fbtn">6wide → 8wide</button>
+    <button class="fbtn">8wide → 8wide</button>
+    <select class="fsort">
+      <option>Nejnovější</option>
+      <option>Největší rozdíl</option>
+      <option>Vyhrál nový</option>
+      <option>Vyhrál starý</option>
+    </select>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#5DBE8A"></div>Vyhrál nový set</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div>Vyhrál starý set</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--text3)"></div>Remíza</div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="gen-grid top" style="margin-bottom:2px;">
+    <div class="gc">
+      <div class="gc-photo tall">
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="Porsche 2016">
+          <div class="gc-half-tag tag-old">75888 · 2016 · 6-wide</div>
+        </div>
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="Porsche 2023">
+          <div class="gc-half-tag tag-new">75912 · 2023 · 8-wide</div>
+        </div>
+        <div class="gc-vs">VS</div>
+        <div class="gc-set-badge" style="top:8px;right:8px;">
+          <div class="gc-set-num">75912</div>
+          <div class="gc-set-lbl">Winner</div>
+        </div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-brand">Porsche · 911 RSR · 7 let rozdíl</div>
+        <div class="gc-title lg">2016 vs. 2023 — přechod z 6-wide na 8-wide. Kdo skutečně vyhrál?</div>
+        <p class="gc-excerpt">Sedm let, dvě generace, přechod z 6-wide na 8-wide scale. Porsche 911 RSR je jedním z mála aut která LEGO postavilo dvakrát. Testujeme každý detail side-by-side.</p>
+        <div class="gc-footer">
+          <div class="gc-sets">
+            <span class="gc-set">75888 · 214 dílků</span>
+            <span style="color:var(--text3);font-size:12px;">→</span>
+            <span class="gc-set new">75912 · 434 dílků</span>
+          </div>
+          <span class="gc-winner winner-new">Vyhrál nový ★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID 2×2 -->
+  <div class="gen-grid" style="margin-bottom:2px;">
+    <div class="gc">
+      <div class="gc-photo">
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=500&q=80" alt="Ferrari 2020">
+          <div class="gc-half-tag tag-old">76895 · 2020</div>
+        </div>
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=500&q=80" alt="Ferrari 2024">
+          <div class="gc-half-tag tag-new">76932 · 2024</div>
+        </div>
+        <div class="gc-vs">VS</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-brand">Ferrari · F8 Tributo</div>
+        <div class="gc-title">2020 vs. 2024 — čtyři roky evoluce</div>
+        <div class="gc-footer">
+          <div class="gc-sets"><span class="gc-set">275 dílků</span><span style="color:var(--text3);font-size:11px;">→</span><span class="gc-set new">261 dílků</span></div>
+          <span class="gc-winner winner-new">Vyhrál nový</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gc">
+      <div class="gc-photo">
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80" alt="McLaren 2015">
+          <div class="gc-half-tag tag-old">75909 · 2015</div>
+        </div>
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80" alt="McLaren 2022">
+          <div class="gc-half-tag tag-new">76918 · 2022</div>
+        </div>
+        <div class="gc-vs">VS</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-brand">McLaren · P1 / Senna</div>
+        <div class="gc-title">75909 vs. 76918 — McLaren přes generace</div>
+        <div class="gc-footer">
+          <div class="gc-sets"><span class="gc-set">227 dílků</span><span style="color:var(--text3);font-size:11px;">→</span><span class="gc-set new">291 dílků</span></div>
+          <span class="gc-winner winner-new">Vyhrál nový</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gc">
+      <div class="gc-photo">
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=500&q=80" alt="Lamborghini 2015">
+          <div class="gc-half-tag tag-old">75899 · 2015</div>
+        </div>
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=500&q=80" alt="Lamborghini 2021">
+          <div class="gc-half-tag tag-new">76899 · 2021</div>
+        </div>
+        <div class="gc-vs">VS</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-brand">Lamborghini · Huracán</div>
+        <div class="gc-title">2015 vs. 2021 — 6 let a nová škála</div>
+        <div class="gc-footer">
+          <div class="gc-sets"><span class="gc-set">163 dílků</span><span style="color:var(--text3);font-size:11px;">→</span><span class="gc-set new">185 dílků</span></div>
+          <span class="gc-winner winner-old">Překvapení: starý ★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gc">
+      <div class="gc-photo">
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=500&q=80" alt="BMW 2016">
+          <div class="gc-half-tag tag-old">75877 · 2016</div>
+        </div>
+        <div class="gc-half">
+          <img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=500&q=80" alt="BMW 2023">
+          <div class="gc-half-tag tag-new">76925 · 2023</div>
+        </div>
+        <div class="gc-vs">VS</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-brand">BMW · M4 GT3</div>
+        <div class="gc-title">M3 GT2 vs. M4 GT3 — závodní BMW v LEGO</div>
+        <div class="gc-footer">
+          <div class="gc-sets"><span class="gc-set">275 dílků</span><span style="color:var(--text3);font-size:11px;">→</span><span class="gc-set new">341 dílků</span></div>
+          <span class="gc-winner winner-tie">Remíza</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pag">
+    <button class="pgb">← Novější</button>
+    <button class="pgb on">1</button>
+    <button class="pgb">2</button>
+    <button class="pgb">3</button>
+    <button class="pgb">→ Starší</button>
+  </div>
+</div>
+
+<footer style="background:var(--sur);border-top:1px solid var(--bdr);padding:28px 0;margin-top:0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-family:var(--sans);font-size:16px;font-weight:600;color:var(--text);">Eight <span style="color:var(--gold)">Wide</span></div>
+    <div style="font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);">© 2025 Eight Wide · speedchampions.cz</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.fbtn').forEach(b=>{
+  b.addEventListener('click',function(){
+    const bar=this.closest('.fb-in');
+    const sep=this.previousElementSibling;
+    if(!sep||!sep.classList.contains('fsep')){
+      let prev=this.previousElementSibling;
+      while(prev&&!prev.classList.contains('fsep')&&!prev.classList.contains('flbl')){
+        if(prev.classList.contains('fbtn'))prev.classList.remove('on');
+        prev=prev.previousElementSibling;
+      }
+      let next=this.nextElementSibling;
+      while(next&&!next.classList.contains('fsep')){
+        if(next.classList.contains('fbtn'))next.classList.remove('on');
+        next=next.nextElementSibling;
+      }
+      this.classList.add('on');
+    }
+  });
+});
+</script>
+</body>
+</html>

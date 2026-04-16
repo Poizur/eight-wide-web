@@ -1,0 +1,37 @@
+{
+  "name": "eight-wide-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "next-sitemap",
+    "start": "next start",
+    "lint": "next lint",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:import-brickset": "tsx scripts/import-brickset.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.103.3",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.5.0",
+    "contentlayer2": "^0.5.8",
+    "dotenv": "^17.4.2",
+    "next": "^14.2.35",
+    "next-contentlayer2": "^0.5.8",
+    "next-sitemap": "^4.2.3",
+    "postcss": "^8.5.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
+    "tsx": "^4.21.0"
+  }
+}

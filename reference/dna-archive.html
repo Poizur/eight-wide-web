@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA Series — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--gold2:#E8C547;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed','Arial Narrow',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.nav-logo{display:flex;flex-direction:column;margin-right:36px;flex-shrink:0;text-decoration:none;}
+.nav-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.nav-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.nav-text span{color:var(--gold);}
+.nav-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nav-lb{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;}
+.nav-lb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* PAGE HEADER */
+.page-header{padding:120px 0 56px;border-bottom:1px solid var(--bdr);background:linear-gradient(to bottom,rgba(201,162,39,.04) 0%,transparent 100%);}
+.page-header-in{max-width:1280px;margin:0 auto;padding:0 32px;}
+.ph-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+.ph-dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+.ph-series{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);}
+.ph-title{font-family:var(--serif);font-size:clamp(48px,6vw,80px);font-style:italic;color:var(--text);line-height:.95;letter-spacing:-.02em;margin-bottom:16px;}
+.ph-desc{font-size:16px;color:var(--text2);line-height:1.65;max-width:560px;margin-bottom:32px;}
+.ph-stats{display:flex;gap:32px;}
+.ph-stat-num{font-family:var(--cond);font-size:28px;font-weight:900;color:var(--gold);line-height:1;}
+.ph-stat-lbl{font-family:var(--cond);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-top:3px;}
+
+/* FILTERS */
+.filters-bar{position:sticky;top:58px;z-index:100;background:rgba(10,12,16,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);padding:0;}
+.filters-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:12px;height:56px;overflow-x:auto;}
+.filter-label{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);flex-shrink:0;margin-right:4px;}
+.fbtn{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:6px;cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;}
+.fbtn:hover{border-color:rgba(255,255,255,.2);color:var(--text2);}
+.fbtn.on{background:var(--gold);border-color:var(--gold);color:#000;}
+.filter-sep{width:1px;height:20px;background:var(--bdr);flex-shrink:0;margin:0 4px;}
+.fsort{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:6px;cursor:pointer;margin-left:auto;flex-shrink:0;}
+
+/* MAIN LAYOUT */
+.main{max-width:1280px;margin:0 auto;padding:48px 32px 80px;display:grid;grid-template-columns:1fr 280px;gap:48px;}
+
+/* ARTICLE GRID */
+.articles{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);align-content:start;}
+.articles.full{grid-template-columns:1fr 1fr 1fr;}
+
+.ac{background:var(--sur);cursor:pointer;overflow:hidden;transition:background .2s;position:relative;}
+.ac:hover{background:var(--sur2);}
+.ac::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;z-index:2;}
+.ac:hover::before{transform:scaleY(1);}
+.ac.featured{grid-column:span 2;}
+
+.ac-photo{position:relative;overflow:hidden;}
+.ac-photo.ratio-wide{aspect-ratio:16/9;}
+.ac-photo.ratio-tall{aspect-ratio:3/2;}
+.ac-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.15) saturate(.2);transform:scale(1.04);transition:filter .7s cubic-bezier(.16,1,.3,1),transform .7s;display:block;}
+.ac:hover .ac-photo img{filter:brightness(.82) saturate(1);transform:scale(1);}
+.ac-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,22,32,.95) 0%,rgba(17,22,32,.3) 50%,transparent 100%);transition:opacity .5s;}
+.ac:hover .ac-grad{opacity:.65;}
+.ac-num{position:absolute;top:14px;left:16px;font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.35);background:rgba(10,12,16,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.08);padding:3px 8px;border-radius:3px;}
+.ac-set{position:absolute;top:14px;right:14px;background:rgba(10,12,16,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:7px 11px;text-align:center;opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s;}
+.ac:hover .ac-set{opacity:1;transform:translateY(0);}
+.ac-set-num{font-family:var(--cond);font-size:16px;font-weight:900;color:rgba(255,255,255,.9);line-height:1;}
+.ac-set-lbl{font-family:var(--cond);font-size:7px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:1px;}
+
+.ac-body{padding:18px 20px 20px;}
+.ac-brand{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.ac-title{font-family:var(--cond);font-size:20px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.05;margin-bottom:8px;transition:color .2s;}
+.ac-title.lg{font-size:26px;}
+.ac:hover .ac-title{color:var(--red);}
+.ac-excerpt{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:12px;}
+.ac-footer{display:flex;align-items:center;justify-content:space-between;}
+.ac-meta{display:flex;gap:10px;}
+.ac-meta span{font-family:var(--cond);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+.ac-score{display:flex;align-items:baseline;gap:2px;}
+.ac-score-num{font-family:var(--cond);font-size:18px;font-weight:900;color:var(--gold);}
+.ac-score-max{font-family:var(--cond);font-size:11px;color:var(--text3);}
+.ac-retired{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;background:rgba(200,40,30,.15);color:var(--red);border-radius:3px;}
+.ac-new{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;background:rgba(39,174,96,.15);color:#5DBE8A;border-radius:3px;}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:32px;}
+.pg-btn{font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.1em;padding:8px 14px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:6px;cursor:pointer;transition:all .15s;}
+.pg-btn:hover{border-color:rgba(255,255,255,.2);color:var(--text2);}
+.pg-btn.on{background:var(--gold);border-color:var(--gold);color:#000;}
+.pg-btn.arr{padding:8px 16px;}
+
+/* SIDEBAR */
+.sidebar{align-self:start;}
+.sb-section{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:20px;margin-bottom:16px;}
+.sb-title{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bdr);}
+.brand-list{display:flex;flex-direction:column;gap:2px;}
+.brand-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;cursor:pointer;transition:background .15s;}
+.brand-row:hover,.brand-row.on{background:var(--sur2);}
+.brand-row.on .br-name{color:var(--gold);}
+.br-name{font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);transition:color .15s;}
+.br-count{font-family:var(--cond);font-size:12px;font-weight:900;color:var(--text3);}
+.brand-row.on .br-count{color:var(--gold);}
+
+.score-top{display:flex;flex-direction:column;gap:8px;}
+.st-row{display:flex;align-items:center;gap:10px;}
+.st-rank{font-family:var(--cond);font-size:11px;font-weight:900;color:var(--text3);width:20px;}
+.st-name{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);flex:1;}
+.st-score{font-family:var(--cond);font-size:14px;font-weight:900;color:var(--gold);}
+
+.nl-mini{display:flex;flex-direction:column;gap:8px;}
+.nl-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+.nl-input{width:100%;padding:9px 12px;background:var(--sur2);border:1px solid var(--bdr);color:var(--text);font-family:var(--sans);font-size:13px;border-radius:6px;outline:none;}
+.nl-input:focus{border-color:var(--gold);}
+.nl-submit{width:100%;padding:9px;background:var(--gold);color:#000;border:none;border-radius:6px;font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-stripe"></div>
+      <div class="nav-text">Eight <span>Wide</span></div>
+      <div class="nav-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="on">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang">
+        <button class="nav-lb on">CZ</button>
+        <button class="nav-lb">EN</button>
+      </div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-in">
+    <div class="ph-eyebrow"><div class="ph-dot"></div><div class="ph-series">DNA Series</div></div>
+    <div class="ph-title">Příběh<br>reálného auta</div>
+    <p class="ph-desc">Každý článek začíná tam kde LEGO skončilo. Historie, závodní kariéra, kulturní dopad — a pak teprve hodnotíme jak moc to LEGO zachytilo.</p>
+    <div class="ph-stats">
+      <div><div class="ph-stat-num">47</div><div class="ph-stat-lbl">DNA článků</div></div>
+      <div><div class="ph-stat-num">18</div><div class="ph-stat-lbl">Automobilek</div></div>
+      <div><div class="ph-stat-num">9.1</div><div class="ph-stat-lbl">Průměrné skóre</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filters-in">
+    <span class="filter-label">Značka:</span>
+    <button class="fbtn on" onclick="setFilter(this)">Vše</button>
+    <button class="fbtn" onclick="setFilter(this)">Ferrari</button>
+    <button class="fbtn" onclick="setFilter(this)">Porsche</button>
+    <button class="fbtn" onclick="setFilter(this)">McLaren</button>
+    <button class="fbtn" onclick="setFilter(this)">Lamborghini</button>
+    <button class="fbtn" onclick="setFilter(this)">Aston Martin</button>
+    <button class="fbtn" onclick="setFilter(this)">BMW</button>
+    <button class="fbtn" onclick="setFilter(this)">Ford</button>
+    <div class="filter-sep"></div>
+    <span class="filter-label">Stav:</span>
+    <button class="fbtn" onclick="setFilter(this)">Dostupný</button>
+    <button class="fbtn" onclick="setFilter(this)">Retired</button>
+    <select class="fsort">
+      <option>Nejnovější</option>
+      <option>Nejlepší skóre</option>
+      <option>Nejlevnější</option>
+      <option>Nejdražší</option>
+      <option>#047 → #001</option>
+    </select>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div>
+    <div class="articles" id="grid">
+
+      <!-- FEATURED -->
+      <div class="ac featured">
+        <div class="ac-photo ratio-wide">
+          <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1200&q=85" alt="Ferrari F40">
+          <div class="ac-grad"></div>
+          <div class="ac-num">#047</div>
+          <div class="ac-set"><div class="ac-set-num">76934</div><div class="ac-set-lbl">Set No.</div></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-brand">Ferrari · 1987 · 318 dílků</div>
+          <div class="ac-title lg">F40 — Poslední auto které Enzo osobně schválil</div>
+          <p class="ac-excerpt">478 koní, kevlarová karoserie, žádná elektronika. Nejsurovější supercar osmdesátých let a LEGO ho konečně postavilo. Stálo to za čekání?</p>
+          <div class="ac-footer">
+            <div class="ac-meta"><span>14 min</span><span>·</span><span>629 Kč</span><span>·</span><span>Mall.cz</span></div>
+            <div class="ac-score"><span class="ac-score-num">9.2</span><span class="ac-score-max">/10</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="ac">
+        <div class="ac-photo ratio-wide">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="McLaren W1">
+          <div class="ac-grad"></div>
+          <div class="ac-num">#048</div>
+          <div class="ac-set"><div class="ac-set-num">77261</div><div class="ac-set-lbl">Set No.</div></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-brand">McLaren · 2024 · 345 dílků</div>
+          <div class="ac-title">W1 — nástupce P1 a konec jedné éry</div>
+          <div class="ac-footer">
+            <div class="ac-meta"><span>11 min</span><span>·</span><span>629 Kč</span></div>
+            <div class="ac-score"><span class="ac-score-num">9.0</span><span class="ac-score-max">/10</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="ac">
+        <div class="ac-photo ratio-wide">
+          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=700&q=80" alt="Lamborghini Countach">
+          <div class="ac-grad"></div>
+          <div class="ac-num">#038</div>
+          <div class="ac-set"><div class="ac-set-num">76908</div><div class="ac-set-lbl">Set No.</div></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-brand">Lamborghini · 1974 · 262 dílků</div>
+          <div class="ac-title">Countach — nejprovokativnější auto Bertoneho</div>
+          <div class="ac-footer">
+            <div class="ac-meta"><span>10 min</span><span>·</span><span class="ac-retired">Retired</span></div>
+            <div class="ac-score"><span class="ac-score-num">9.3</span><span class="ac-score-max">/10</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="ac">
+        <div class="ac-photo ratio-wide">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="Porsche 911">
+          <div class="ac-grad"></div>
+          <div class="ac-num">#031</div>
+          <div class="ac-set"><div class="ac-set-num">75912</div><div class="ac-set-lbl">Set No.</div></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-brand">Porsche · 1973 · 200 dílků</div>
+          <div class="ac-title">911 RSR — závodní monster ze Stuttgartu</div>
+          <div class="ac-footer">
+            <div class="ac-meta"><span>12 min</span><span>·</span><span class="ac-retired">Retired</span></div>
+            <div class="ac-score"><span class="ac-score-num">8.8</span><span class="ac-score-max">/10</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="ac">
+        <div class="ac-photo ratio-wide">
+          <img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=700&q=80" alt="Aston Martin">
+          <div class="ac-grad"></div>
+          <div class="ac-num">#041</div>
+          <div class="ac-set"><div class="ac-set-num">76910</div><div class="ac-set-lbl">Set No.</div></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-brand">Aston Martin · 2022 · 286 dílků</div>
+          <div class="ac-title">Valkyrie AMR Pro — nejbrutálnější silniční auto Británie</div>
+          <div class="ac-footer">
+            <div class="ac-meta"><span>9 min</span><span>·</span><span>699 Kč</span></div>
+            <div class="ac-score"><span class="ac-score-num">8.6</span><span class="ac-score-max">/10</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="ac">
+        <div class="ac-photo ratio-wide">
+          <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=700&q=80" alt="Ferrari SF90">
+          <div class="ac-grad"></div>
+          <div class="ac-num">#046</div>
+          <div class="ac-set"><div class="ac-set-num">76932</div><div class="ac-set-lbl">Set No.</div></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-brand">Ferrari · 2019 · 261 dílků</div>
+          <div class="ac-title">SF90 Stradale — hybridní Ferrari pro každý den</div>
+          <div class="ac-footer">
+            <div class="ac-meta"><span>8 min</span><span>·</span><span class="ac-new">Nový · 2026</span></div>
+            <div class="ac-score"><span class="ac-score-num">8.9</span><span class="ac-score-max">/10</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button class="pg-btn arr">← Novější</button>
+      <button class="pg-btn on">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <button class="pg-btn">4</button>
+      <span style="font-family:var(--cond);font-size:12px;color:var(--text3);padding:0 4px;">…</span>
+      <button class="pg-btn">8</button>
+      <button class="pg-btn arr">Starší →</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- ZNAČKY -->
+    <div class="sb-section">
+      <div class="sb-title">Filtrovat dle značky</div>
+      <div class="brand-list">
+        <div class="brand-row on"><span class="br-name">Všechny</span><span class="br-count">47</span></div>
+        <div class="brand-row"><span class="br-name">Ferrari</span><span class="br-count">14</span></div>
+        <div class="brand-row"><span class="br-name">Porsche</span><span class="br-count">11</span></div>
+        <div class="brand-row"><span class="br-name">McLaren</span><span class="br-count">9</span></div>
+        <div class="brand-row"><span class="br-name">Lamborghini</span><span class="br-count">8</span></div>
+        <div class="brand-row"><span class="br-name">Aston Martin</span><span class="br-count">5</span></div>
+        <div class="brand-row"><span class="br-name">BMW</span><span class="br-count">6</span></div>
+        <div class="brand-row"><span class="br-name">Ford</span><span class="br-count">5</span></div>
+        <div class="brand-row"><span class="br-name">Další</span><span class="br-count">+12</span></div>
+      </div>
+    </div>
+
+    <!-- TOP SKÓRE -->
+    <div class="sb-section">
+      <div class="sb-title">Nejlépe hodnocené</div>
+      <div class="score-top">
+        <div class="st-row"><span class="st-rank">01</span><span class="st-name">Lotus Evija</span><span class="st-score">9.8</span></div>
+        <div class="st-row"><span class="st-rank">02</span><span class="st-name">Ferrari F40</span><span class="st-score">9.2</span></div>
+        <div class="st-row"><span class="st-rank">03</span><span class="st-name">Countach LP400</span><span class="st-score">9.3</span></div>
+        <div class="st-row"><span class="st-rank">04</span><span class="st-name">Ferrari 512M</span><span class="st-score">9.1</span></div>
+        <div class="st-row"><span class="st-rank">05</span><span class="st-name">McLaren W1</span><span class="st-score">9.0</span></div>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="sb-section">
+      <div class="sb-title">DNA Newsletter</div>
+      <div class="nl-mini">
+        <p class="nl-desc">Nový DNA článek každý pátek. Příběh auta + hodnocení LEGO setu.</p>
+        <input class="nl-input" type="email" placeholder="tvůj@email.cz">
+        <button class="nl-submit">Odebírat →</button>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<script>
+function setFilter(btn) {
+  btn.closest('.filters-in').querySelectorAll('.fbtn').forEach(b => {
+    if (b.parentElement === btn.parentElement || b.closest('.filters-in') === btn.closest('.filters-in')) {
+      if (b.previousElementSibling?.classList?.contains('filter-label') === btn.previousElementSibling?.classList?.contains('filter-label')) {
+        b.classList.remove('on');
+      }
+    }
+  });
+  btn.classList.add('on');
+}
+document.querySelectorAll('.fbtn').forEach(b => {
+  b.addEventListener('click', function() {
+    const group = this.parentElement;
+    const siblings = [...group.children].filter(el => el.classList.contains('fbtn') && Math.abs(el.offsetLeft - this.offsetLeft) < 500);
+    this.classList.add('on');
+  });
+});
+document.querySelectorAll('.brand-row').forEach(row => {
+  row.addEventListener('click', function() {
+    document.querySelectorAll('.brand-row').forEach(r => r.classList.remove('on'));
+    this.classList.add('on');
+  });
+});
+</script>
+</body>
+</html>

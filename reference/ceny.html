@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pit Stop — Ceny dnes — Eight Wide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0C10;--sur:#111620;--sur2:#181F2E;--bdr:rgba(255,255,255,0.07);--gold:#C9A227;--red:#C8281E;--text:#EAE8E0;--text2:#8B95A8;--text3:#3E4A58;--cond:'Barlow Condensed',Arial,sans-serif;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;--green:#27AE60;--orange:#E67E22;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,12,16,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);height:58px;display:flex;align-items:center;}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 32px;width:100%;display:flex;align-items:center;}
+.logo{display:flex;flex-direction:column;margin-right:36px;text-decoration:none;}
+.logo-stripe{width:24px;height:2px;background:var(--gold);margin-bottom:4px;}
+.logo-text{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--cond);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.nav-links{display:flex;gap:2px;flex:1;}
+.nav-links a{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .15s;}
+.nav-links a:hover,.nav-links a.on{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-r{display:flex;gap:8px;align-items:center;}
+.nav-lang{display:flex;border:1px solid var(--bdr);border-radius:6px;overflow:hidden;}
+.nlb{font-family:var(--cond);font-size:12px;font-weight:700;padding:5px 11px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;}
+.nlb.on{background:#111;color:#fff;}
+.nav-cta{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 18px;border:none;background:#111;color:#fff;border-radius:6px;cursor:pointer;}
+
+/* PAGE HEADER */
+.ph{padding:100px 0 40px;border-bottom:1px solid var(--bdr);}
+.ph-in{max-width:1280px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;}
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.ph-live{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.ph-title{font-family:var(--serif);font-size:clamp(40px,5vw,64px);font-style:italic;color:var(--text);line-height:.95;margin-bottom:12px;}
+.ph-meta{font-family:var(--cond);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.ph-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.ps-card{background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:16px 20px;text-align:center;}
+.ps-num{font-family:var(--cond);font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;}
+.ps-lbl{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);}
+
+/* TABS */
+.tabs{position:sticky;top:58px;z-index:100;background:rgba(10,12,16,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);}
+.tabs-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:0;}
+.tab{font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 20px;background:none;border:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
+.tab:hover{color:var(--text2);}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-spacer{flex:1;}
+.search-wrap{display:flex;align-items:center;gap:8px;}
+.search-wrap input{padding:7px 14px;background:var(--sur);border:1px solid var(--bdr);color:var(--text);font-family:var(--sans);font-size:13px;border-radius:6px;outline:none;width:220px;}
+.search-wrap input:focus{border-color:var(--gold);}
+
+/* FILTERS ROW */
+.filters{background:var(--sur);border-bottom:1px solid var(--bdr);}
+.filters-in{max-width:1280px;margin:0 auto;padding:12px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.flbl{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);}
+.fbtn{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:5px;cursor:pointer;transition:all .15s;}
+.fbtn:hover{border-color:rgba(255,255,255,.2);color:var(--text2);}
+.fbtn.on{background:var(--gold);border-color:var(--gold);color:#000;}
+.filter-sep{width:1px;height:16px;background:var(--bdr);}
+.range-wrap{display:flex;align-items:center;gap:8px;margin-left:8px;}
+.range-lbl{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
+input[type=range]{width:100px;accent-color:var(--gold);}
+.range-val{font-family:var(--cond);font-size:11px;font-weight:700;color:var(--gold);min-width:56px;}
+
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:32px 32px 80px;}
+
+/* PRICE TABLE */
+.pt-wrap{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;margin-bottom:32px;}
+.pt-head{display:grid;grid-template-columns:280px 80px 1fr 1fr 1fr 1fr 80px 80px;align-items:center;padding:12px 20px;background:var(--sur2);border-bottom:1px solid var(--bdr);}
+.pt-hcell{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);cursor:pointer;display:flex;align-items:center;gap:4px;transition:color .15s;}
+.pt-hcell:hover{color:var(--text2);}
+.pt-hcell.sorted{color:var(--gold);}
+
+.pt-row{display:grid;grid-template-columns:280px 80px 1fr 1fr 1fr 1fr 80px 80px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .15s;position:relative;}
+.pt-row:last-child{border-bottom:none;}
+.pt-row:hover{background:var(--sur2);}
+.pt-row.row-sale{border-left:3px solid var(--green);}
+.pt-row.row-retire{border-left:3px solid var(--orange);}
+.pt-row.row-new{border-left:3px solid #3498DB;}
+.pt-row.row-hot{border-left:3px solid var(--red);}
+
+.pt-name-wrap{display:flex;align-items:center;gap:12px;}
+.pt-set-img{width:48px;height:30px;object-fit:cover;border-radius:4px;background:var(--sur2);filter:brightness(.2);transition:filter .4s;}
+.pt-row:hover .pt-set-img{filter:brightness(.8);}
+.pt-brand{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);}
+.pt-name{font-family:var(--cond);font-size:14px;font-weight:900;text-transform:uppercase;color:var(--text);line-height:1.1;}
+.pt-cell{font-family:var(--cond);font-size:13px;color:var(--text2);}
+.pt-cell.best{color:var(--green);font-weight:700;}
+.pt-cell.high{color:var(--red);}
+.pt-pieces{font-family:var(--cond);font-size:13px;color:var(--text3);}
+.pt-status{display:inline-flex;align-items:center;}
+.badge{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border-radius:4px;}
+.b-sale{background:rgba(39,174,96,.15);color:#5DBE8A;}
+.b-retire{background:rgba(230,126,34,.15);color:#E67E22;}
+.b-new{background:rgba(52,152,219,.15);color:#5DADE2;}
+.b-hot{background:rgba(200,40,30,.15);color:#E8715B;}
+.b-ok{background:rgba(255,255,255,.06);color:var(--text3);}
+.pt-trend{display:flex;align-items:center;gap:3px;font-family:var(--cond);font-size:12px;font-weight:700;}
+.trend-up{color:var(--red);}
+.trend-dn{color:var(--green);}
+.trend-eq{color:var(--text3);}
+.pt-alert{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;background:none;border:1px solid var(--bdr);color:var(--text3);border-radius:4px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.pt-alert:hover{border-color:var(--gold);color:var(--gold);}
+
+/* PRICE ALERT SECTION */
+.alert-section{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:28px;margin-bottom:32px;}
+.as-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
+.as-title{font-family:var(--serif);font-size:28px;font-style:italic;color:var(--text);margin-bottom:6px;}
+.as-sub{font-size:14px;color:var(--text2);}
+.as-badge{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(201,162,39,.3);color:var(--gold);border-radius:6px;}
+.as-form{display:grid;grid-template-columns:1fr 200px 160px 160px auto;gap:10px;align-items:end;}
+.as-field{display:flex;flex-direction:column;gap:6px;}
+.as-label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
+.as-input{padding:10px 14px;background:var(--sur2);border:1px solid var(--bdr);color:var(--text);font-family:var(--sans);font-size:14px;border-radius:7px;outline:none;}
+.as-input:focus{border-color:var(--gold);}
+.as-btn{padding:10px 20px;background:var(--gold);color:#000;border:none;border-radius:7px;font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+
+/* LEGEND */
+.legend{display:flex;align-items:center;gap:20px;margin-bottom:16px;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:6px;font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+.leg-line{width:16px;height:3px;border-radius:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <div class="logo-stripe"></div>
+      <div class="logo-text">Eight <span>Wide</span></div>
+      <div class="logo-sub">Lego Speed Champions</div>
+    </a>
+    <div class="nav-links">
+      <a href="#">DNA</a>
+      <a href="#">Generace</a>
+      <a href="#" class="on">Ceny & Slevy</a>
+      <a href="#">Hall of Fame</a>
+      <a href="#">Paddock Rumors</a>
+      <a href="#">Komunita</a>
+    </div>
+    <div class="nav-r">
+      <div class="nav-lang"><button class="nlb on">CZ</button><button class="nlb">EN</button></div>
+      <button class="nav-cta">Newsletter</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="ph">
+  <div class="ph-in">
+    <div>
+      <div class="ph-live"><span class="live-dot"></span>Live data</div>
+      <div class="ph-title">Pit Stop —<br>ceny dnes</div>
+      <div class="ph-meta">Aktualizováno: pondělí 14. 4. 2025 · 08:00 · Zdroje: Mall.cz, Alza, LEGO.com, BrickLink</div>
+    </div>
+    <div class="ph-stats-grid">
+      <div class="ps-card"><div class="ps-num" style="color:var(--green)">12</div><div class="ps-lbl">Aktivních slev</div></div>
+      <div class="ps-card"><div class="ps-num" style="color:var(--orange)">3</div><div class="ps-lbl">Retiring brzy</div></div>
+      <div class="ps-card"><div class="ps-num" style="color:#5DADE2">5</div><div class="ps-lbl">Nové 2026</div></div>
+      <div class="ps-card"><div class="ps-num" style="color:var(--gold)">147</div><div class="ps-lbl">Setů celkem</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tabs-in">
+    <button class="tab on">Aktuální ceny</button>
+    <button class="tab">Slevy</button>
+    <button class="tab">Retiring soon</button>
+    <button class="tab">Retired sety</button>
+    <button class="tab">Price history</button>
+    <div class="tab-spacer"></div>
+    <div class="search-wrap">
+      <input type="text" placeholder="Hledat set nebo model...">
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filters-in">
+    <span class="flbl">Značka:</span>
+    <button class="fbtn on">Vše</button>
+    <button class="fbtn">Ferrari</button>
+    <button class="fbtn">Porsche</button>
+    <button class="fbtn">McLaren</button>
+    <button class="fbtn">Lamborghini</button>
+    <button class="fbtn">BMW</button>
+    <div class="filter-sep"></div>
+    <span class="flbl">Stav:</span>
+    <button class="fbtn">Dostupný</button>
+    <button class="fbtn">Retiring</button>
+    <button class="fbtn">Na skladě</button>
+    <div class="filter-sep"></div>
+    <div class="range-wrap">
+      <span class="range-lbl">Cena:</span>
+      <input type="range" min="200" max="2000" value="200" id="prMin">
+      <span class="range-val" id="prMinVal">200 Kč</span>
+      <span style="color:var(--text3);font-family:var(--cond);font-size:11px;">—</span>
+      <input type="range" min="200" max="2000" value="2000" id="prMax">
+      <span class="range-val" id="prMaxVal">2 000 Kč</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg"><div class="leg-line" style="background:var(--green)"></div>Sleva</div>
+    <div class="leg"><div class="leg-line" style="background:var(--orange)"></div>Retiring soon</div>
+    <div class="leg"><div class="leg-line" style="background:#3498DB"></div>Nový set</div>
+    <div class="leg"><div class="leg-line" style="background:var(--red)"></div>Zdražující / Hot</div>
+  </div>
+
+  <!-- PRICE TABLE -->
+  <div class="pt-wrap">
+    <div class="pt-head">
+      <div class="pt-hcell">Set / Model</div>
+      <div class="pt-hcell">Dílků</div>
+      <div class="pt-hcell sorted">Mall.cz ↓</div>
+      <div class="pt-hcell">Alza.cz</div>
+      <div class="pt-hcell">LEGO.com</div>
+      <div class="pt-hcell">BrickLink</div>
+      <div class="pt-hcell">Stav</div>
+      <div class="pt-hcell">Alert</div>
+    </div>
+
+    <div class="pt-row row-sale">
+      <div class="pt-name-wrap">
+        <img class="pt-set-img" src="https://images.brickset.com/sets/images/76908-1.jpg" alt="Countach" onerror="this.style.display='none'">
+        <div><div class="pt-brand">Lamborghini</div><div class="pt-name">Countach LP400</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.1em;color:var(--text3);">Set 76908</div></div>
+      </div>
+      <div class="pt-pieces">262</div>
+      <div class="pt-cell best">589 Kč <small style="color:var(--green);font-size:10px;">−35%</small></div>
+      <div class="pt-cell">629 Kč</div>
+      <div class="pt-cell">719 Kč</div>
+      <div class="pt-cell high">1 240 Kč</div>
+      <div class="pt-status"><span class="badge b-sale">Sleva</span></div>
+      <button class="pt-alert">+ Alert</button>
+    </div>
+
+    <div class="pt-row row-retire">
+      <div class="pt-name-wrap">
+        <img class="pt-set-img" src="https://images.brickset.com/sets/images/75912-1.jpg" alt="911 RSR">
+        <div><div class="pt-brand">Porsche</div><div class="pt-name">911 RSR</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.1em;color:var(--text3);">Set 75912</div></div>
+      </div>
+      <div class="pt-pieces">434</div>
+      <div class="pt-cell">699 Kč</div>
+      <div class="pt-cell">699 Kč</div>
+      <div class="pt-cell">699 Kč</div>
+      <div class="pt-cell high">980 Kč</div>
+      <div class="pt-status"><span class="badge b-retire">Retiring</span></div>
+      <button class="pt-alert">+ Alert</button>
+    </div>
+
+    <div class="pt-row row-new">
+      <div class="pt-name-wrap">
+        <img class="pt-set-img" src="https://images.brickset.com/sets/images/76934-1.jpg" alt="Ferrari F40">
+        <div><div class="pt-brand">Ferrari</div><div class="pt-name">F40</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.1em;color:var(--text3);">Set 76934</div></div>
+      </div>
+      <div class="pt-pieces">318</div>
+      <div class="pt-cell best">629 Kč</div>
+      <div class="pt-cell">649 Kč</div>
+      <div class="pt-cell">719 Kč</div>
+      <div class="pt-cell">720 Kč</div>
+      <div class="pt-status"><span class="badge b-new">Nový 2026</span></div>
+      <button class="pt-alert">+ Alert</button>
+    </div>
+
+    <div class="pt-row row-hot">
+      <div class="pt-name-wrap">
+        <img class="pt-set-img" src="https://images.brickset.com/sets/images/76909-1.jpg" alt="McLaren Senna">
+        <div><div class="pt-brand">McLaren</div><div class="pt-name">Senna</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.1em;color:var(--text3);">Set 76909 · Retired</div></div>
+      </div>
+      <div class="pt-pieces">291</div>
+      <div class="pt-cell" style="color:var(--text3);">Nedostupné</div>
+      <div class="pt-cell" style="color:var(--text3);">Nedostupné</div>
+      <div class="pt-cell" style="color:var(--text3);">Nedostupné</div>
+      <div class="pt-cell high">1 240 Kč <small style="color:var(--red);font-size:10px;">+42%</small></div>
+      <div class="pt-status"><span class="badge b-hot">Hot +42%</span></div>
+      <button class="pt-alert">+ Alert</button>
+    </div>
+
+    <div class="pt-row">
+      <div class="pt-name-wrap">
+        <img class="pt-set-img" src="https://images.brickset.com/sets/images/76910-1.jpg" alt="Aston Martin">
+        <div><div class="pt-brand">Aston Martin</div><div class="pt-name">Valkyrie AMR Pro</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.1em;color:var(--text3);">Set 76910</div></div>
+      </div>
+      <div class="pt-pieces">286</div>
+      <div class="pt-cell best">669 Kč</div>
+      <div class="pt-cell">699 Kč</div>
+      <div class="pt-cell">699 Kč</div>
+      <div class="pt-cell">750 Kč</div>
+      <div class="pt-status"><span class="badge b-ok">Dostupný</span></div>
+      <button class="pt-alert">+ Alert</button>
+    </div>
+
+    <div class="pt-row">
+      <div class="pt-name-wrap">
+        <img class="pt-set-img" src="https://images.brickset.com/sets/images/76907-1.jpg" alt="Lotus Evija">
+        <div><div class="pt-brand">Lotus</div><div class="pt-name">Evija</div><div style="font-family:var(--cond);font-size:9px;letter-spacing:.1em;color:var(--text3);">Set 76907</div></div>
+      </div>
+      <div class="pt-pieces">247</div>
+      <div class="pt-cell best">589 Kč</div>
+      <div class="pt-cell">619 Kč</div>
+      <div class="pt-cell best">599 Kč</div>
+      <div class="pt-cell">650 Kč</div>
+      <div class="pt-status"><span class="badge b-ok">Dostupný</span></div>
+      <button class="pt-alert">+ Alert</button>
+    </div>
+
+  </div>
+
+  <!-- PRICE ALERT -->
+  <div class="alert-section">
+    <div class="as-head">
+      <div>
+        <div class="as-title">Price Alert</div>
+        <div class="as-sub">Nastavíš cílovou cenu — my tě upozorníme emailem když set zlevní.</div>
+      </div>
+      <div class="as-badge">Zdarma · Žádný spam</div>
+    </div>
+    <div class="as-form">
+      <div class="as-field">
+        <div class="as-label">Tvůj email</div>
+        <input class="as-input" type="email" placeholder="tvůj@email.cz">
+      </div>
+      <div class="as-field">
+        <div class="as-label">Set číslo</div>
+        <input class="as-input" type="text" placeholder="např. 76934">
+      </div>
+      <div class="as-field">
+        <div class="as-label">Cílová cena</div>
+        <input class="as-input" type="number" placeholder="500">
+      </div>
+      <div class="as-field">
+        <div class="as-label">Obchod</div>
+        <select class="as-input" style="cursor:pointer;">
+          <option>Jakýkoli</option>
+          <option>Mall.cz</option>
+          <option>Alza.cz</option>
+          <option>LEGO.com</option>
+        </select>
+      </div>
+      <button class="as-btn">Nastavit alert →</button>
+    </div>
+  </div>
+
+</div>
+
+<footer style="background:var(--sur);border-top:1px solid var(--bdr);padding:28px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-family:var(--sans);font-size:16px;font-weight:600;color:var(--text);">Eight <span style="color:var(--gold)">Wide</span></div>
+    <div style="font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);">© 2025 Eight Wide · speedchampions.cz</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on');
+  });
+});
+document.querySelectorAll('.fbtn').forEach(b=>{
+  b.addEventListener('click',function(){
+    this.closest('.filters-in').querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on');
+  });
+});
+const prMin=document.getElementById('prMin');
+const prMax=document.getElementById('prMax');
+prMin.addEventListener('input',()=>document.getElementById('prMinVal').textContent=prMin.value+' Kč');
+prMax.addEventListener('input',()=>document.getElementById('prMaxVal').textContent=prMax.value==2000?'2 000+ Kč':prMax.value+' Kč');
+document.querySelectorAll('.pt-hcell').forEach(h=>{
+  h.addEventListener('click',function(){
+    document.querySelectorAll('.pt-hcell').forEach(x=>x.classList.remove('sorted'));
+    this.classList.add('sorted');
+  });
+});
+</script>
+</body>
+</html>

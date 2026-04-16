@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* -- Pozadi a povrchy -- */
+  --bg:    #0A0C10;
+  --sur:   #111620;
+  --sur2:  #181F2E;
+  --bdr:   rgba(255,255,255,0.07);
+
+  /* -- Akcenty -- */
+  --gold:  #C9A227;
+  --gold2: #E8C547;
+  --red:   #C8281E;
+  --green: #27AE60;
+  --orange: #E67E22;
+  --blue:  #3498DB;
+  --purple: #9B59B6;
+
+  /* -- Text -- */
+  --text:  #EAE8E0;
+  --text2: #8B95A8;
+  --text3: #3E4A58;
+
+  /* -- Typografie -- */
+  --cond:  'Barlow Condensed', Arial, sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans:  'DM Sans', -apple-system, sans-serif;
+
+  /* -- Layout -- */
+  --max-w: 1280px;
+  --px:    32px;
+  --nav-h: 58px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text3); border-radius: 3px; }
+
+/* -- Utility classes -- */
+@layer utilities {
+  .photo-dark {
+    filter: brightness(0.15) saturate(0.2);
+    transform: scale(1.04);
+    transition: filter 0.7s cubic-bezier(0.16,1,0.3,1),
+                transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .group:hover .photo-dark {
+    filter: brightness(0.85) saturate(1);
+    transform: scale(1);
+  }
+}
+
+/* Gold bar accent */
+.gold-bar { border-left: 3px solid var(--gold); }
+
+/* Live pulse dot */
+@keyframes live-pulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.3; }
+}

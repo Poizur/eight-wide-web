@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eight Wide — Photo Concept</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/barlow-condensed@5.0.8/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/barlow-condensed@5.0.8/900.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@4.5.13/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.8/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.8/600.css">
+<style>
+:root {
+  --bg:     #0A0C10;
+  --sur:    #111620;
+  --sur2:   #181F2E;
+  --border: rgba(255,255,255,0.07);
+  --gold:   #C9A227;
+  --gold2:  #E8C547;
+  --red:    #C8281E;
+  --text:   #EAE8E0;
+  --text2:  #8B95A8;
+  --text3:  #3E4A58;
+  --cond:   'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --serif:  'Instrument Serif', Georgia, serif;
+  --sans:   'Plus Jakarta Sans', -apple-system, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,12,16,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px; height: 56px;
+  display: flex; align-items: center; gap: 0;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+.logo-stripe {
+  width: 28px; height: 2px;
+  background: var(--gold);
+  margin-bottom: 5px;
+}
+.logo-text {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.logo-text .logo-wide {
+  color: var(--gold);
+  font-weight: 700;
+}
+.logo-sub {
+  font-family: var(--cond);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-top: 3px;
+}
+.nav-links { display: flex; gap: 2px; flex: 1; }
+.nav-links a { font-family: var(--cond); font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); padding: 6px 14px; text-decoration: none; border-radius: 5px; transition: all 0.15s; }
+.nav-links a:hover, .nav-links a.on { color: var(--text); }
+.nav-right { display: flex; gap: 8px; align-items: center; }
+.lang-wrap { display: flex; border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; overflow: hidden; }
+.lang-btn { font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; padding: 6px 12px; background: none; border: none; color: rgba(255,255,255,0.45); cursor: pointer; transition: all 0.15s; }
+.lang-btn:hover { color: rgba(255,255,255,0.8); }
+.lang-btn.on { background: #111; color: #fff; }
+.nav-cta { font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 7px 18px; border: none; background: #111; color: #fff; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+.nav-cta:hover { background: #333; }
+
+/* ── HERO ROTATION ── */
+.hero {
+  position: relative;
+  height: 85vh;
+  min-height: 560px;
+  max-height: 820px;
+  display: flex; align-items: center; overflow: hidden;
+}
+.hero-photo {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 40%;
+  filter: brightness(0.5) saturate(1);
+}
+.hero-photo-next {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 40%;
+  filter: brightness(0.5) saturate(1);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-photo-next.visible { opacity: 1; }
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 56px;
+  max-width: 860px;
+  opacity: 1;
+}
+.hero-content.out {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.hero-content.in {
+  animation: hcIn 0.65s ease forwards;
+}
+@keyframes hcIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-dots {
+  position: absolute; bottom: 32px; left: 56px;
+  display: flex; gap: 8px; z-index: 10;
+}
+.hero-dot {
+  width: 28px; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer; transition: all 0.35s;
+  border: none; padding: 0;
+}
+.hero-dot.active { background: var(--gold); width: 44px; }
+.hero-dot:hover { background: rgba(255,255,255,0.5); }
+.hero-counter {
+  position: absolute; bottom: 32px; right: 56px;
+  font-family: var(--cond); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.3); z-index: 10;
+}
+.hero-counter span { color: rgba(255,255,255,0.7); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  display: flex; align-items: center; overflow: hidden;
+}
+.hero-photo {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1800&q=85');
+  background-size: cover; background-position: center 40%;
+  filter: brightness(0.08) saturate(0.4);
+  transform: scale(1.05);
+  animation: heroReveal 2.4s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+}
+@keyframes heroReveal {
+  to { filter: brightness(0.55) saturate(1); transform: scale(1); }
+}
+/* Gradient overlay */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,12,16,0.98) 0%,
+    rgba(10,12,16,0.7) 30%,
+    rgba(10,12,16,0.2) 65%,
+    transparent 100%
+  );
+}
+/* Left gold bar */
+.hero-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--gold) 0%, transparent 80%); }
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 56px;
+  max-width: 860px;
+  opacity: 1;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--cond); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.htag-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
+.hero-title {
+  font-family: var(--serif); font-size: clamp(32px,3.8vw,52px);
+  font-style: italic; line-height: 1.08; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 16px;
+}
+.hero-deck { font-size: 15px; color: rgba(234,232,224,0.65); line-height: 1.7; max-width: 580px; margin-bottom: 28px; }
+.hero-specs {
+  display: flex; gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; overflow: hidden;
+  background: rgba(10,12,16,0.6);
+  backdrop-filter: blur(8px);
+  width: fit-content; margin-bottom: 28px;
+}
+.hs { padding: 11px 20px; border-right: 1px solid rgba(255,255,255,0.08); }
+.hs:last-child { border-right: none; }
+.hs-num { font-family: var(--cond); font-size: 22px; font-weight: 900; color: var(--text); line-height: 1; }
+.hs-lbl { font-family: var(--cond); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+.hero-btns { display: flex; gap: 12px; align-items: center; }
+.btn-gold { font-family: var(--cond); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; background: var(--gold); color: #000; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.btn-gold:hover { background: var(--gold2); gap: 12px; }
+.btn-ghost { font-family: var(--cond); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 20px; background: none; border: 1px solid rgba(255,255,255,0.15); color: var(--text2); border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: var(--text); }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 32px; right: 48px; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; animation: fadeUp 0.6s ease 2.4s forwards;
+}
+.scroll-hint span { font-family: var(--cond); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); }
+.scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--text3), transparent); animation: scrollLine 1.5s ease-in-out infinite; }
+@keyframes scrollLine { 0%,100% { transform: scaleY(1); opacity: 0.5; } 50% { transform: scaleY(0.3); opacity: 1; } }
+
+
+
+
+
+
+
+
+
+
+
+/* ── WRAP ── */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* ── SECTION HEAD ── */
+.sh { display: flex; align-items: center; justify-content: space-between; padding: 44px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.sh-l { display: flex; align-items: center; gap: 10px; }
+.sh-bar { width: 3px; height: 18px; background: var(--gold); border-radius: 1px; }
+.sh-title { font-family: var(--cond); font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); }
+.sh-sub { font-family: var(--cond); font-size: 12px; letter-spacing: 0.1em; color: var(--text3); }
+.sh-link { font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: gap 0.2s; }
+.sh-link:hover { gap: 9px; }
+
+/* ── PHOTO CARDS ── */
+.grid-main { display: grid; grid-template-columns: 1.55fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2px; }
+.grid-side { display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-left: none; border-right: none; margin-bottom: 40px; }
+
+.pcard { background: var(--sur); cursor: pointer; overflow: hidden; position: relative; transition: background 0.15s; }
+.pcard:hover { background: var(--sur2); }
+.pcard::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s; z-index: 10; }
+.pcard:hover::before { transform: scaleY(1); }
+
+/* THE KEY EFFECT — photo reveal on hover */
+.photo-wrap {
+  position: relative; overflow: hidden;
+  aspect-ratio: 16/9;
+}
+.photo-wrap.tall { aspect-ratio: 3/2; }
+.photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.18) saturate(0.3);
+  transform: scale(1.04);
+  transition: filter 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  display: block;
+}
+.pcard:hover .photo-wrap img {
+  filter: brightness(0.82) saturate(1);
+  transform: scale(1);
+}
+/* Gradient over photo */
+.photo-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(17,22,32,0.95) 0%, rgba(17,22,32,0.3) 50%, transparent 100%);
+  transition: opacity 0.5s;
+}
+.pcard:hover .photo-grad { opacity: 0.7; }
+/* Tag over photo */
+.photo-tag {
+  position: absolute; bottom: 14px; left: 16px; z-index: 2;
+  font-family: var(--cond); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  background: rgba(10,12,16,0.7); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7); padding: 3px 9px; border-radius: 3px;
+  transition: color 0.4s;
+}
+.pcard:hover .photo-tag { color: var(--gold); }
+
+/* ── SET BADGE — GT7 style ── */
+.set-badge {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 3;
+  background: rgba(10,12,16,0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 9px 13px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+.pcard:hover .set-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+.set-badge-num {
+  font-family: var(--cond);
+  font-size: 20px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.set-badge-lbl {
+  font-family: var(--cond);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+/* Always visible variant for RVB section */
+.set-badge.always {
+  opacity: 1;
+  transform: none;
+}
+
+/* Card body */
+.pbody { padding: 18px; }
+.pbody.sm { padding: 14px 16px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--cond); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px; margin-bottom: 10px;
+}
+.td { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.t-dna    { color: #E8352A; background: rgba(200,40,30,0.12); }
+.t-gen    { color: var(--gold); background: rgba(201,162,39,0.1); }
+.t-inv    { color: #1E9E5A; background: rgba(30,158,90,0.1); }
+.t-rmr    { color: #A97ED0; background: rgba(169,126,208,0.1); }
+.t-rvb    { color: #5CA0E0; background: rgba(92,160,224,0.1); }
+
+.ptitle-s { font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.2; letter-spacing: -0.01em; color: var(--text); margin-bottom: 8px; transition: color 0.2s; }
+.pcard:hover .ptitle-s { color: var(--gold); }
+.ptitle-c { font-family: var(--cond); font-size: 16px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.2; color: var(--text); margin-bottom: 6px; transition: color 0.2s; }
+.pcard:hover .ptitle-c { color: var(--gold); }
+.pexc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+.pfoot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; font-family: var(--cond); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+.pfoot.bare { border-top: none; padding-top: 4px; margin-top: 4px; }
+
+/* ── REAL VS BRICK ── */
+.rvb-section { margin-bottom: 44px; }
+.rvb-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.rvb-cell { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
+.rvb-cell img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.22) saturate(0.2); transform: scale(1.06); transition: filter 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); display: block; }
+.rvb-cell:hover img { filter: brightness(0.88) saturate(1.1); transform: scale(1); }
+.rvb-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,12,16,0.92) 0%, rgba(10,12,16,0.2) 60%, transparent 100%); transition: opacity 0.5s; }
+.rvb-cell:hover .rvb-overlay { opacity: 0.5; }
+.rvb-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px; z-index: 2; }
+.rvb-brand { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 3px; transition: color 0.4s; }
+.rvb-cell:hover .rvb-brand { color: var(--gold); }
+.rvb-model { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--text); line-height: 1.1; }
+.rvb-year { font-family: var(--cond); font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); margin-top: 2px; transition: color 0.4s; }
+.rvb-cell:hover .rvb-year { color: rgba(255,255,255,0.6); }
+.rvb-badge { position: absolute; top: 14px; right: 14px; font-family: var(--cond); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 9px; border-radius: 3px; z-index: 2; }
+.rb-dna { background: rgba(200,40,30,0.8); color: white; }
+.rb-gen { background: rgba(201,162,39,0.8); color: #000; }
+.rb-new { background: rgba(30,158,90,0.8); color: white; }
+
+/* ── DNA STRIP ── */
+.dna-strip {
+  position: relative; overflow: hidden;
+  background: var(--sur); border: 1px solid var(--border);
+  border-radius: 12px; margin-bottom: 40px; min-height: 260px;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.dna-photo { position: relative; overflow: hidden; }
+.dna-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.2) saturate(0.2);
+  transform: scale(1.04);
+  transition: filter 1s ease, transform 1s ease;
+  display: block;
+}
+.dna-strip:hover .dna-photo img { filter: brightness(0.7) saturate(1); transform: scale(1); }
+.dna-photo-grad { position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, var(--sur) 100%); }
+.dna-content { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+.dna-eyebrow { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+.dna-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+.dna-title { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--text); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 12px; }
+.dna-desc { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 380px; }
+.dna-stats { display: flex; gap: 20px; margin-bottom: 20px; }
+.ds { }
+.ds-num { font-family: var(--cond); font-size: 20px; font-weight: 900; color: var(--text); line-height: 1; }
+.ds-lbl { font-family: var(--cond); font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); }
+
+/* ── PRICE PANEL ── */
+.pp {
+  background: var(--sur); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin-bottom: 44px;
+}
+.pp-head {
+  background: rgba(0,0,0,0.3); padding: 13px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.pp-title { display: flex; align-items: center; gap: 8px; font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.live { width: 7px; height: 7px; border-radius: 50%; background: #1E9E5A; box-shadow: 0 0 6px #1E9E5A; animation: p 2s ease-in-out infinite; }
+@keyframes p { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+.pp-meta { font-family: var(--cond); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+.pp-row { display: grid; grid-template-columns: repeat(5,1fr); }
+.pc { padding: 16px 18px; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.15s; position: relative; }
+.pc:last-child { border-right: none; }
+.pc:hover { background: var(--sur2); }
+.pc::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform 0.2s; }
+.pc-s::after { background: #1E9E5A; }
+.pc-r::after { background: var(--red); }
+.pc-h::after { background: var(--gold); }
+.pc-n::after { background: #5CA0E0; }
+.pc-p::after { background: #A97ED0; }
+.pc:hover::after { transform: scaleX(1); }
+.pc-brand { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
+.pc-name { font-family: var(--cond); font-size: 14px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text); margin-bottom: 8px; line-height: 1.1; }
+.pc-val { font-family: var(--cond); font-size: 26px; font-weight: 900; color: var(--text); line-height: 1; margin-bottom: 5px; }
+.pcb { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
+.pbs { background: rgba(30,158,90,0.12); color: #1E9E5A; }
+.pbr { background: rgba(200,40,30,0.12); color: #E8352A; }
+.pbh { background: rgba(201,162,39,0.1); color: var(--gold); }
+.pbn { background: rgba(92,160,224,0.1); color: #5CA0E0; }
+.pbp { background: rgba(169,126,208,0.1); color: #A97ED0; }
+
+/* ── NL ── */
+.nl {
+  background: var(--sur); border: 1px solid var(--border);
+  border-radius: 12px; padding: 36px 40px; margin-bottom: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 28px; position: relative; overflow: hidden;
+}
+.nl::after { content: ''; position: absolute; right: -60px; bottom: -60px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%); pointer-events: none; }
+.nl-h { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
+.nl-h span { color: var(--gold); }
+.nl-s { font-size: 13px; color: var(--text2); line-height: 1.55; }
+.nl-f { display: flex; gap: 10px; position: relative; z-index: 1; flex-shrink: 0; }
+.nl-i { font-family: var(--sans); font-size: 13px; padding: 10px 16px; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text); border-radius: 6px; width: 220px; outline: none; transition: border-color 0.15s; }
+.nl-i::placeholder { color: var(--text3); }
+.nl-i:focus { border-color: var(--gold); }
+.nl-b { font-family: var(--cond); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 20px; background: var(--gold); color: #000; border: none; border-radius: 6px; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+.nl-b:hover { background: var(--gold2); }
+
+/* ── FOOTER ── */
+footer { background: #060809; border-top: 1px solid var(--border); padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; max-width: none; }
+.fl { display: flex; align-items: baseline; }
+.fle { font-family: var(--cond); font-size: 16px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; }
+.flw { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--gold); margin-left: 3px; }
+.ft { font-family: var(--cond); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); margin-top: 4px; }
+.flinks { display: flex; gap: 18px; }
+.flinks a { font-family: var(--cond); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); text-decoration: none; transition: color 0.15s; }
+.flinks a:hover { color: var(--text2); }
+.fdoms { display: flex; gap: 8px; }
+.fd { font-family: var(--cond); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 4px; background: var(--sur); border: 1px solid var(--border); color: var(--text3); }
+.fd.on { background: rgba(201,162,39,0.1); border-color: rgba(201,162,39,0.3); color: var(--gold); }
+
+/* LEGO ghost via CSS — defined once */
+
+
+
+
+
+.rvb-cell 
+
+
+
+
+.rvb-cell 
+/* ── ZNAČKY ── */
+.brands-section { background: var(--sur2); padding: 0 0 8px; }
+.brands-grid { display: grid; grid-template-columns: repeat(8,1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.brand-card { background: var(--sur); padding: 22px 16px; cursor: pointer; transition: background 0.2s; text-align: center; }
+.brand-card:hover { background: var(--sur2); }
+.brand-logo { font-family: var(--cond); font-size: 15px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); margin-bottom: 8px; }
+.brand-count { font-family: var(--cond); font-size: 22px; font-weight: 900; color: var(--gold); line-height: 1; }
+.brand-years { font-family: var(--cond); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-top: 4px; }
+.bc-more .brand-logo { color: var(--gold); font-size: 28px; }
+.bc-more .brand-count { color: var(--text2); font-size: 12px; font-weight: 400; }
+
+/* ── HALL OF FAME ── */
+.hof-section { background: var(--bg); padding-bottom: 8px; }
+.hof-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.hof-item { background: var(--sur); display: grid; grid-template-columns: 56px 80px 1fr auto auto; align-items: center; gap: 20px; padding: 16px 22px; cursor: pointer; transition: background 0.2s; }
+.hof-item:hover { background: var(--sur2); }
+.hof-gold { border-left: 3px solid var(--gold); }
+.hof-rank { font-family: var(--cond); font-size: 28px; font-weight: 900; color: rgba(255,255,255,0.12); line-height: 1; }
+.hof-gold .hof-rank { color: var(--gold); }
+.hof-img { width: 80px; height: 50px; overflow: hidden; border-radius: 4px; background: var(--sur2); }
+.hof-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.15); transition: filter 0.5s; }
+.hof-item:hover .hof-img img { filter: brightness(0.85); }
+.hof-brand { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text3); }
+.hof-name { font-family: var(--cond); font-size: 20px; font-weight: 900; text-transform: uppercase; color: var(--text); line-height: 1.1; margin: 2px 0; }
+.hof-set { font-family: var(--cond); font-size: 10px; letter-spacing: 0.1em; color: var(--text3); }
+.hof-score { text-align: center; padding: 0 16px; border-left: 1px solid var(--border); }
+.hof-num { font-family: var(--cond); font-size: 28px; font-weight: 900; color: var(--gold); line-height: 1; }
+.hof-lbl { font-family: var(--cond); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); }
+.hof-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.htag { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; background: rgba(201,162,39,0.08); border: 1px solid rgba(201,162,39,0.2); color: var(--gold); border-radius: 3px; }
+
+/* ── TIMELINE ── */
+.timeline-section { background: var(--sur2); padding-bottom: 8px; }
+.tl-wrap { position: relative; padding: 8px 0 32px; }
+.tl-line { position: absolute; left: 48px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+.tl-items { display: flex; flex-direction: column; gap: 2px; }
+.tl-item { display: grid; grid-template-columns: 96px 80px 1fr; align-items: start; gap: 0; position: relative; background: var(--sur); padding: 20px 24px 20px 0; cursor: default; }
+.tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); border: 2px solid var(--sur2); position: absolute; left: 44px; top: 24px; }
+.tl-dot-gold { background: var(--gold); border-color: var(--bg); box-shadow: 0 0 0 3px rgba(201,162,39,0.25); }
+.tl-year { font-family: var(--cond); font-size: 28px; font-weight: 900; color: rgba(255,255,255,0.12); line-height: 1; padding-left: 70px; padding-top: 2px; }
+.tl-key .tl-year { color: var(--gold); }
+.tl-era { font-family: var(--cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
+.tl-desc { font-size: 13px; color: var(--text2); line-height: 1.55; margin-bottom: 8px; max-width: 580px; }
+.tl-stat { font-family: var(--cond); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+.tl-card-gold { background: rgba(201,162,39,0.04); border-left: 2px solid rgba(201,162,39,0.3); padding-left: 16px; }
+
+/* ── KOMUNITA ── */
+.community-section { background: var(--bg); padding: 0 0 0; }
+.comm-grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: center; padding: 56px 0; border-top: 1px solid var(--border); }
+.comm-label { font-family: var(--cond); font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.comm-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.comm-title { font-family: var(--serif); font-size: clamp(28px,3vw,42px); font-style: italic; line-height: 1.1; color: var(--text); margin-bottom: 16px; }
+.comm-desc { font-size: 15px; color: var(--text2); line-height: 1.65; max-width: 480px; margin-bottom: 28px; }
+.comm-stats { display: flex; gap: 32px; }
+.cs-n { font-family: var(--cond); font-size: 24px; font-weight: 900; color: var(--gold); line-height: 1; }
+.cs-l { font-family: var(--cond); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-top: 3px; }
+.comm-side { display: flex; flex-direction: column; gap: 2px; }
+.comm-feature { display: flex; gap: 16px; align-items: flex-start; background: var(--sur); padding: 18px 20px; border-left: 2px solid var(--border); transition: border-color 0.2s; cursor: default; }
+.comm-feature:hover { border-color: var(--gold); }
+.cf-icon { font-family: var(--cond); font-size: 13px; font-weight: 900; color: var(--gold); opacity: 0.5; flex-shrink: 0; margin-top: 2px; }
+.cf-title { font-family: var(--cond); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 4px; }
+.cf-desc { font-size: 12px; color: var(--text3); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-stripe"></div>
+    <div class="logo-text">Eight <span class="logo-wide">Wide</span></div>
+    <div class="logo-sub">Lego Speed Champions</div>
+  </div>
+  <div class="nav-links">
+    <a href="#dna" class="on">DNA</a>
+    <a href="#generace">Generace</a>
+    <a href="#ceny">Ceny & Slevy</a>
+    <a href="#hof">Hall of Fame</a>
+    <a href="#paddock">Paddock Rumors</a>
+    <a href="#komunita">Komunita</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-btn on">CZ</button>
+      <button class="lang-btn">EN</button>
+    </div>
+    <button class="nav-cta">Newsletter</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo" id="heroPhoto"></div>
+  <div class="hero-photo-next" id="heroPhotoNext"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-bar"></div>
+
+  <div class="hero-content" id="heroContent">
+    <div class="hero-tag"><div class="htag-dot"></div>DNA Series · #047 · Ferrari</div>
+    <h1 class="hero-title">Poslední auto<br>které Enzo<br>osobně schválil</h1>
+    <p class="hero-deck">Byl 1987. Enzo Ferrari měl 89 let a věděl, že tohle bude jeho závěť. 478 koní, kevlarová karoserie, žádná elektronika. Nejsurovější supercar osmdesátých let — a teď v 318 plastových dílcích.</p>
+    <div class="hero-specs">
+      <div class="hs"><div class="hs-num">478</div><div class="hs-lbl">HP · V8</div></div>
+      <div class="hs"><div class="hs-num">1987</div><div class="hs-lbl">Rok</div></div>
+      <div class="hs"><div class="hs-num">318</div><div class="hs-lbl">Dílků</div></div>
+      <div class="hs"><div class="hs-num">629 Kč</div><div class="hs-lbl">Mall.cz</div></div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-gold">Číst DNA článek →</button>
+      <button class="btn-ghost">Srovnat generace</button>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-counter"><span id="heroNum">01</span> / 04</div>
+</section>
+
+<!-- ARTICLES -->
+<div class="wrap" id="dna">
+
+  <div class="sh">
+    <div class="sh-l"><div class="sh-bar"></div><div class="sh-title">Právě vyšlo</div><div class="sh-sub">— tento týden</div></div>
+    <button class="sh-link">Všechny články →</button>
+  </div>
+
+  <div class="grid-main" style="border-radius:10px;overflow:hidden">
+    <div class="pcard">
+      <div class="photo-wrap tall">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="Porsche 911">
+        <div class="photo-grad"></div>
+        <div class="photo-tag">Generace vs. Generace</div>
+        <div class="set-badge">
+          <div class="set-badge-num">75912</div>
+          <div class="set-badge-lbl">Set No.</div>
+        </div>
+      </div>
+      <div class="pbody">
+        <div class="tag t-gen"><div class="td"></div>Generace</div>
+        <div class="ptitle-s">Porsche 911 RSR — 2016 vs. 2023. Kdo skutečně vyhrál?</div>
+        <p class="pexc">Sedm let a přechod z 6-wide na 8-wide. Srovnáváme obě generace side-by-side — proporce, detaily, věrnost originálu a konečně: vyplatilo se čekat?</p>
+        <div class="pfoot"><span>Porsche · 2023</span><span>12 min · 4. 4. 2025</span></div>
+      </div>
+    </div>
+    <div class="grid-side">
+      <div class="pcard" style="flex:1">
+        <div class="pbody sm">
+          <div class="tag t-inv"><div class="td"></div>The Investment</div>
+          <div class="ptitle-c">7 setů které zdvojnásobily cenu za 5 let</div>
+          <p class="pexc" style="font-size:12px">Data z BrickEconomy. Kde jsou příležitosti dnes?</p>
+          <div class="pfoot bare"><span>Data · 2025</span><span>8 min</span></div>
+        </div>
+      </div>
+      <div class="pcard" style="flex:1">
+        <div class="pbody sm">
+          <div class="tag t-rmr"><div class="td"></div>Paddock Rumors</div>
+          <div class="ptitle-c">5 aut která LEGO musí postavit v 2026</div>
+          <p class="pexc" style="font-size:12px">Nissan R34, BMW M3 E30, Bugatti EB110 — komunita čeká roky.</p>
+          <div class="pfoot bare"><span>Spekulace</span><span>6 min</span></div>
+        </div>
+      </div>
+      <div class="pcard" style="flex:1">
+        <div class="pbody sm">
+          <div class="tag t-rvb"><div class="td"></div>Real vs. Brick</div>
+          <div class="ptitle-c">McLaren W1 — LEGO vs. realita v 10 fotkách</div>
+          <div class="pfoot bare"><span>McLaren · 2026</span><span>3 min</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="pcard">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=700&q=80" alt="Lamborghini">
+        <div class="photo-grad"></div>
+        <div class="photo-tag">DNA Series</div>
+        <div class="set-badge"><div class="set-badge-num">76908</div><div class="set-badge-lbl">Set No.</div></div>
+      </div>
+      <div class="pbody">
+        <div class="tag t-dna"><div class="td"></div>DNA Series</div>
+        <div class="ptitle-s">Lamborghini Countach — nejprovokativnější auto Bertoneho kariéry</div>
+        <div class="pfoot"><span>Lamborghini · 2022</span><span>10 min</span></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="McLaren">
+        <div class="photo-grad"></div>
+        <div class="photo-tag">DNA Series</div>
+        <div class="set-badge"><div class="set-badge-num">76918</div><div class="set-badge-lbl">Set No.</div></div>
+      </div>
+      <div class="pbody">
+        <div class="tag t-dna"><div class="td"></div>DNA Series</div>
+        <div class="ptitle-s">McLaren F1 — nejrychlejší přirozeně sací auto 20. století</div>
+        <div class="pfoot"><span>McLaren · 1992</span><span>14 min</span></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="photo-wrap">
+        <img src="https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=700&q=80" alt="Racing">
+        <div class="photo-grad"></div>
+        <div class="photo-tag">Hall of Fame</div>
+      </div>
+      <div class="pbody">
+        <div class="tag t-gen"><div class="td"></div>Hall of Fame</div>
+        <div class="ptitle-s">10 nejlepších Speed Champions setů všech dob — naše finální ranking</div>
+        <div class="pfoot"><span>Komunita · 2025</span><span>8 min</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REAL VS BRICK -->
+  <div class="rvb-section" id="generace">
+    <div class="sh" style="padding-top:0">
+      <div class="sh-l"><div class="sh-bar"></div><div class="sh-title">Real vs. Brick</div><div class="sh-sub">— reálné auto vs. LEGO</div></div>
+      <button class="sh-link">Celá galerie →</button>
+    </div>
+    <div class="rvb-grid">
+      <div class="rvb-cell">
+        <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=700&q=80" alt="Ferrari F40">
+        <div class="rvb-overlay"></div>
+        <div class="set-badge always"><div class="set-badge-num">76934</div><div class="set-badge-lbl">Set No.</div></div>
+        <div class="rvb-info">
+          <div class="rvb-brand">Ferrari · 1987</div>
+          <div class="rvb-model">F40</div>
+          <div class="rvb-year">318 dílků · 629 Kč</div>
+        </div>
+      </div>
+      <div class="rvb-cell">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="Porsche 911">
+        <div class="rvb-overlay"></div>
+        <div class="set-badge always"><div class="set-badge-num">75912</div><div class="set-badge-lbl">Set No.</div></div>
+        <div class="rvb-info">
+          <div class="rvb-brand">Porsche · 1973</div>
+          <div class="rvb-model">911 Carrera RSR</div>
+          <div class="rvb-year">200 dílků · retired</div>
+        </div>
+      </div>
+      <div class="rvb-cell">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=700&q=80" alt="Lamborghini Countach">
+        <div class="rvb-overlay"></div>
+        <div class="set-badge always"><div class="set-badge-num">76908</div><div class="set-badge-lbl">Set No.</div></div>
+        <div class="rvb-info">
+          <div class="rvb-brand">Lamborghini · 1974</div>
+          <div class="rvb-model">Countach LP400</div>
+          <div class="rvb-year">262 dílků · retired</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DNA STRIP -->
+  <div class="dna-strip" id="paddock">
+    <div class="dna-photo">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="McLaren W1">
+      <div class="dna-photo-grad"></div>
+    </div>
+    <div class="dna-content">
+      <div class="dna-eyebrow">DNA Series · #048 — McLaren</div>
+      <div class="dna-title">McLaren W1 —<br>nástupce P1,<br>konec éry</div>
+      <p class="dna-desc">1 275 HP, hybrid, 2,8 sekundy na stovku. A LEGO ho postavilo za 27 dolarů. Jak moc věrně?</p>
+      <div class="dna-stats">
+        <div class="ds"><div class="ds-num">1 275</div><div class="ds-lbl">HP celkem</div></div>
+        <div class="ds"><div class="ds-num">2026</div><div class="ds-lbl">Set rok</div></div>
+        <div class="ds"><div class="ds-num">645 Kč</div><div class="ds-lbl">Mall.cz</div></div>
+      </div>
+      <button class="btn-gold" style="width:fit-content">Číst DNA #048 →</button>
+    </div>
+  </div>
+
+  <!-- PRICE PANEL -->
+  <div class="pp" id="ceny">
+    <div class="pp-head">
+      <div class="pp-title"><div class="live"></div>Pit Stop — ceny dnes</div>
+      <div class="pp-meta">Aktualizováno každé pondělí · Mall, Alza, LEGO.com, BrickLink</div>
+    </div>
+    <div class="pp-row">
+      <div class="pc pc-s"><div class="pc-brand">Lamborghini</div><div class="pc-name">Countach</div><div class="pc-val">589 Kč</div><span class="pcb pbs">−35 % · Alza</span></div>
+      <div class="pc pc-r"><div class="pc-brand">Porsche</div><div class="pc-name">911 RSR</div><div class="pc-val">699 Kč</div><span class="pcb pbr">Retiring soon</span></div>
+      <div class="pc pc-n"><div class="pc-brand">Ferrari</div><div class="pc-name">SF90 Stradale</div><div class="pc-val">629 Kč</div><span class="pcb pbn">Nový · 2026</span></div>
+      <div class="pc pc-p"><div class="pc-brand">McLaren</div><div class="pc-name">Senna · retired</div><div class="pc-val">1 240 Kč</div><span class="pcb pbp">+42 % BrickLink</span></div>
+      <div class="pc pc-h"><div class="pc-brand">Ferrari</div><div class="pc-name">F40 · set 76934</div><div class="pc-val">649 Kč</div><span class="pcb pbh">Hot · Mall.cz</span></div>
+    </div>
+  </div>
+
+  <!-- NL -->
+  <div class="nl">
+    <div>
+      <div class="nl-h">Každé pondělí do inboxu —<br><span>ceny, DNA, novinky.</span></div>
+      <p class="nl-s">Žádný spam. Jen to co Speed Champions fanoušek skutečně potřebuje vědět.</p>
+    </div>
+    <div class="nl-f">
+      <input class="nl-i" type="email" placeholder="tvůj@email.cz">
+      <button class="nl-b">Přihlásit se →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ZNAČKY -->
+<div class="brands-section">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sh-l"><div class="sh-bar"></div><div class="sh-title">Značky</div><div class="sh-sub">— všechny automobilky v naší databázi</div></div>
+      <button class="sh-link">Celá databáze →</button>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-card">
+        <div class="brand-logo">Ferrari</div>
+        <div class="brand-count">14 setů</div>
+        <div class="brand-years">2015 — 2026</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-logo">Porsche</div>
+        <div class="brand-count">11 setů</div>
+        <div class="brand-years">2016 — 2026</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-logo">McLaren</div>
+        <div class="brand-count">9 setů</div>
+        <div class="brand-years">2017 — 2026</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-logo">Lamborghini</div>
+        <div class="brand-count">8 setů</div>
+        <div class="brand-years">2018 — 2025</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-logo">Aston Martin</div>
+        <div class="brand-count">5 setů</div>
+        <div class="brand-years">2019 — 2024</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-logo">BMW</div>
+        <div class="brand-count">6 setů</div>
+        <div class="brand-years">2015 — 2025</div>
+      </div>
+      <div class="brand-card">
+        <div class="brand-logo">Ford</div>
+        <div class="brand-count">5 setů</div>
+        <div class="brand-years">2016 — 2023</div>
+      </div>
+      <div class="brand-card bc-more">
+        <div class="brand-logo">+18</div>
+        <div class="brand-count">dalších značek</div>
+        <div class="brand-years">v databázi →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HALL OF FAME -->
+<div class="hof-section" id="hof">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sh-l"><div class="sh-bar"></div><div class="sh-title">Hall of Fame</div><div class="sh-sub">— nejlepší sety všech dob</div></div>
+      <button class="sh-link">Celý ranking →</button>
+    </div>
+    <div class="hof-list">
+      <div class="hof-item hof-gold">
+        <div class="hof-rank">01</div>
+        <div class="hof-img">
+          <img src="https://images.brickset.com/sets/images/76907-1.jpg" alt="Lotus Evija" onerror="this.style.display='none'">
+        </div>
+        <div class="hof-info">
+          <div class="hof-brand">Lotus · 2022</div>
+          <div class="hof-name">Evija</div>
+          <div class="hof-set">Set 76907 · 247 dílků</div>
+        </div>
+        <div class="hof-score">
+          <div class="hof-num">9.8</div>
+          <div class="hof-lbl">skóre</div>
+        </div>
+        <div class="hof-tags">
+          <span class="htag">Nejdetailnější</span>
+          <span class="htag">Věrnost 95%</span>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-rank">02</div>
+        <div class="hof-img">
+          <img src="https://images.brickset.com/sets/images/76934-1.jpg" alt="Ferrari F40" onerror="this.style.display='none'">
+        </div>
+        <div class="hof-info">
+          <div class="hof-brand">Ferrari · 2023</div>
+          <div class="hof-name">F40</div>
+          <div class="hof-set">Set 76934 · 318 dílků</div>
+        </div>
+        <div class="hof-score">
+          <div class="hof-num">9.5</div>
+          <div class="hof-lbl">skóre</div>
+        </div>
+        <div class="hof-tags">
+          <span class="htag">Ikonický model</span>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-rank">03</div>
+        <div class="hof-img">
+          <img src="https://images.brickset.com/sets/images/76908-1.jpg" alt="Lamborghini Countach" onerror="this.style.display='none'">
+        </div>
+        <div class="hof-info">
+          <div class="hof-brand">Lamborghini · 2022</div>
+          <div class="hof-name">Countach LP400</div>
+          <div class="hof-set">Set 76908 · 262 dílků</div>
+        </div>
+        <div class="hof-score">
+          <div class="hof-num">9.3</div>
+          <div class="hof-lbl">skóre</div>
+        </div>
+        <div class="hof-tags">
+          <span class="htag">Nejlepší tvar</span>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-rank">04</div>
+        <div class="hof-img">
+          <img src="https://images.brickset.com/sets/images/76912-1.jpg" alt="Ferrari 512M" onerror="this.style.display='none'">
+        </div>
+        <div class="hof-info">
+          <div class="hof-brand">Ferrari · 2022</div>
+          <div class="hof-name">512M</div>
+          <div class="hof-set">Set 76912 · 291 dílků</div>
+        </div>
+        <div class="hof-score">
+          <div class="hof-num">9.1</div>
+          <div class="hof-lbl">skóre</div>
+        </div>
+        <div class="hof-tags">
+          <span class="htag">Retro gem</span>
+        </div>
+      </div>
+      <div class="hof-item">
+        <div class="hof-rank">05</div>
+        <div class="hof-img">
+          <img src="https://images.brickset.com/sets/images/75912-1.jpg" alt="Porsche 911" onerror="this.style.display='none'">
+        </div>
+        <div class="hof-info">
+          <div class="hof-brand">Porsche · 2016</div>
+          <div class="hof-name">911 RSR & Turbo 3.0</div>
+          <div class="hof-set">Set 75912 · 407 dílků</div>
+        </div>
+        <div class="hof-score">
+          <div class="hof-num">9.0</div>
+          <div class="hof-lbl">skóre</div>
+        </div>
+        <div class="hof-tags">
+          <span class="htag">Dvojbalení</span>
+          <span class="htag">Klasika</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GENERACE TIMELINE -->
+<div class="timeline-section">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sh-l"><div class="sh-bar"></div><div class="sh-title">Vývoj série</div><div class="sh-sub">— od 6-wide k 8-wide</div></div>
+    </div>
+    <div class="tl-wrap">
+      <div class="tl-line"></div>
+      <div class="tl-items">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2015</div>
+          <div class="tl-card">
+            <div class="tl-era">6-wide éra začíná</div>
+            <div class="tl-desc">První Speed Champions sety. Menší scale, základní detaily. Ferrari, McLaren, Porsche jako první značky.</div>
+            <div class="tl-stat">17 setů · 150–200 dílků</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2017</div>
+          <div class="tl-card">
+            <div class="tl-era">Spolupráce s Ferrari</div>
+            <div class="tl-desc">LEGO podepsalo exkluzivní smlouvu s Ferrari. Detailnější modely, Scuderia livery, první minifigurky s helmami.</div>
+            <div class="tl-stat">5 Ferrari setů za rok</div>
+          </div>
+        </div>
+        <div class="tl-item tl-key">
+          <div class="tl-dot tl-dot-gold"></div>
+          <div class="tl-year">2020</div>
+          <div class="tl-card tl-card-gold">
+            <div class="tl-era">8-wide revoluce ★</div>
+            <div class="tl-desc">Největší redesign v historii série. Auta o 25 % širší, dramaticky více detailů, věrnější proporce. Zlomový rok.</div>
+            <div class="tl-stat">+25 % dílků · nové techniky stavby</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2022</div>
+          <div class="tl-card">
+            <div class="tl-era">Zlatý věk detailů</div>
+            <div class="tl-desc">Lotus, Lamborghini Countach, Ferrari 512M. Nejdetailnější sety do té doby. Komunita říká: konečně věrné originálu.</div>
+            <div class="tl-stat">Průměr 270 dílků na set</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2026</div>
+          <div class="tl-card">
+            <div class="tl-era">Současnost</div>
+            <div class="tl-desc">McLaren W1, Ferrari SF90, Porsche 911 GT3 RS. Série je na vrcholu. 150+ setů celkem od roku 2015.</div>
+            <div class="tl-stat">150+ setů celkem</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KOMUNITA TEASER -->
+<div class="community-section" id="komunita">
+  <div class="wrap">
+    <div class="comm-grid">
+      <div class="comm-main">
+        <div class="comm-label">Připravujeme</div>
+        <div class="comm-title">Bazaar — kup & prodej<br>Speed Champions</div>
+        <p class="comm-desc">Dedikovaný marketplace pro SC komunitu. Retired sety, otevřené boxy, celé sbírky. Bez poplatků, jen mezi fanoušky.</p>
+        <div class="comm-stats">
+          <div class="cs"><div class="cs-n">847</div><div class="cs-l">čtenářů čeká</div></div>
+          <div class="cs"><div class="cs-n">Q3 2026</div><div class="cs-l">spuštění</div></div>
+          <div class="cs"><div class="cs-n">zdarma</div><div class="cs-l">pro členy</div></div>
+        </div>
+        <div class="nl-f" style="margin-top:24px;max-width:420px">
+          <input class="nl-i" type="email" placeholder="Notifikovat mě při spuštění">
+          <button class="nl-b">Chci vědět →</button>
+        </div>
+      </div>
+      <div class="comm-side">
+        <div class="comm-feature">
+          <div class="cf-icon">01</div>
+          <div>
+            <div class="cf-title">Retired sety</div>
+            <div class="cf-desc">Sety které už LEGO nevyrábí — zde je ještě najdeš</div>
+          </div>
+        </div>
+        <div class="comm-feature">
+          <div class="cf-icon">02</div>
+          <div>
+            <div class="cf-title">Investiční analýza</div>
+            <div class="cf-desc">Každý inzerát doplněn o BrickEconomy data</div>
+          </div>
+        </div>
+        <div class="comm-feature">
+          <div class="cf-icon">03</div>
+          <div>
+            <div class="cf-title">Verified sellers</div>
+            <div class="cf-desc">Ověření prodejci, hodnocení, história transakcí</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="fl"><span class="fle">Eight</span><span class="flw">Wide</span></div>
+    <div class="ft">Where real cars meet real bricks</div>
+  </div>
+  <div class="flinks">
+    <a href="#">DNA</a><a href="#">Generace</a><a href="#">Ceny</a>
+    <a href="#">Komunita</a><a href="#">Hall of Fame</a><a href="#">O webu</a>
+  </div>
+  <div class="fdoms">
+    <div class="fd on">speedchampions.cz</div>
+    <div class="fd">speedchampions.eu</div>
+  </div>
+</footer>
+
+<script>
+const slides = [
+  {
+    photo: 'https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1800&q=85',
+    legoImg: 'https://images.brickset.com/sets/images/77254-1.jpg',
+    tag: 'DNA Series · #047 · Ferrari',
+    title: 'Poslední auto<br>které Enzo<br>osobně schválil',
+    deck: 'Byl 1987. Enzo Ferrari měl 89 let a věděl, že tohle bude jeho závěť. 478 koní, kevlarová karoserie, žádná elektronika.',
+    specs: [['478','HP · V8'],['1987','Rok'],['318','Dílků'],['629 Kč','Mall.cz']]
+  },
+  {
+    photo: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85',
+    legoImg: 'https://images.brickset.com/sets/images/75912-1.jpg',
+    tag: 'Generace · #032 · Porsche',
+    title: 'Porsche 911 RSR —<br>2016 vs. 2023.<br>Kdo vyhrál?',
+    deck: 'Sedm let. Přechod z 6-wide na 8-wide. LEGO postavilo 911 RSR dvakrát — a rozdíl je dramatický. Vyplatilo se čekat?',
+    specs: [['434','Dílků'],['2023','Set rok'],['7 let','Čekání'],['699 Kč','LEGO.com']]
+  },
+  {
+    photo: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1800&q=85',
+    legoImg: 'https://images.brickset.com/sets/images/76908-1.jpg',
+    tag: 'DNA Series · #038 · Lamborghini',
+    title: 'Countach —<br>nejprovokativnější<br>auto Bertoneho kariéry',
+    deck: 'Marcello Gandini navrhl Countach v roce 1971. Nůžkové dveře, žádné kompromisy. LEGO čekalo 50 let než ho postavilo.',
+    specs: [['262','Dílků'],['1974','Rok'],['450hp','V12'],['Retired','BrickLink']]
+  },
+  {
+    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1800&q=85',
+    legoImg: 'https://images.brickset.com/sets/images/76934-1.jpg',
+    tag: 'DNA Series · #048 · McLaren',
+    title: 'McLaren W1 —<br>nástupce P1<br>a konec jedné éry',
+    deck: '1 275 koní, hybrid, 2,8 sekundy na stovku. McLaren W1 je nejrychlejší sériové auto z Woking. LEGO za 27 dolarů.',
+    specs: [['1 275','HP hybrid'],['2026','Set rok'],['345','Dílků'],['629 Kč','Mall.cz']]
+  }
+];
+
+let current = 0;
+let busy = false;
+let timer;
+
+const photoA = document.getElementById('heroPhoto');
+const photoB = document.getElementById('heroPhotoNext');
+const content = document.getElementById('heroContent');
+const dotsWrap = document.getElementById('heroDots');
+const counter = document.getElementById('heroNum');
+
+function buildHTML(s) {
+  return `<div class="hero-tag"><div class="htag-dot"></div>${s.tag}</div>
+    <h1 class="hero-title">${s.title}</h1>
+    <p class="hero-deck">${s.deck}</p>
+    <div class="hero-specs">${s.specs.map(([n,l])=>`<div class="hs"><div class="hs-num">${n}</div><div class="hs-lbl">${l}</div></div>`).join('')}</div>
+    <div class="hero-btns">
+      <button class="btn-gold">Číst DNA článek →</button>
+      <button class="btn-ghost">Srovnat generace</button>
+    </div>`;
+}
+
+// Build dots
+slides.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsWrap.appendChild(d);
+});
+
+function updateDots(idx) {
+  document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  counter.textContent = String(idx+1).padStart(2,'0');
+}
+
+function goTo(idx) {
+  if (busy || idx === current) return;
+  busy = true;
+
+  // Step 1: fade out text
+  content.classList.add('out');
+
+  // Step 2: after text fades, crossfade photo
+  setTimeout(() => {
+    photoB.style.backgroundImage = `url('${slides[idx].photo}')`;
+    photoB.classList.add('visible');
+
+    // Step 3: after photo crossfades, update text and show it
+    setTimeout(() => {
+      photoA.style.backgroundImage = `url('${slides[idx].photo}')`;
+      photoB.classList.remove('visible');
+
+      content.innerHTML = buildHTML(slides[idx]);
+      content.classList.remove('out');
+      content.classList.add('in');
+
+      current = idx;
+      updateDots(idx);
+
+      setTimeout(() => {
+        content.classList.remove('in');
+        busy = false;
+      }, 700);
+    }, 700);
+  }, 350);
+}
+
+function next() { goTo((current + 1) % slides.length); }
+
+// Init
+photoA.style.backgroundImage = `url('${slides[0].photo}')`;
+
+content.innerHTML = buildHTML(slides[0]);
+content.style.opacity = '0';
+content.style.transform = 'translateY(16px)';
+content.style.transition = 'none';
+setTimeout(() => {
+  content.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+  content.style.opacity = '1';
+  content.style.transform = 'translateY(0)';
+  setTimeout(() => {
+    content.style.transition = '';
+    content.style.opacity = '';
+    content.style.transform = '';
+  }, 900);
+}, 300);
+
+const hero = document.querySelector('.hero');
+hero.addEventListener('mouseenter', () => clearInterval(timer));
+hero.addEventListener('mouseleave', () => { timer = setInterval(next, 9000); });
+
+timer = setInterval(next, 9000);
+// Scroll spy — active nav link
+const sections = ['dna','generace','ceny','hof','paddock','komunita'];
+const navLinks = document.querySelectorAll('.nav-links a');
+
+function updateNav() {
+  const scrollY = window.scrollY + 80;
+  let active = 'dna';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) active = id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('on', a.getAttribute('href') === '#' + active);
+  });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+</script>
+</body>
+</html>
