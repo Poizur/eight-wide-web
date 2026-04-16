@@ -45,7 +45,7 @@ function ArticleCard({ article, featured }: { article: Article; featured?: boole
             {series.label}
           </div>
           {featured ? (
-            <div className="font-serif font-black tracking-[-0.02em] text-[21px] leading-[1.2] mb-2 group-hover:text-gold transition-colors duration-200" style={{ color: 'var(--text)' }}>
+            <div className="font-serif font-bold tracking-[-0.02em] text-[21px] leading-[1.2] mb-2 group-hover:text-gold transition-colors duration-200" style={{ color: 'var(--text)' }}>
               {article.title}
             </div>
           ) : (

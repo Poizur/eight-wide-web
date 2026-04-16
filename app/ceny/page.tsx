@@ -103,7 +103,7 @@ export default async function CenyPage({ searchParams }: Props) {
               <span className="inline-block w-2 h-2 rounded-full" style={{ background: 'var(--green)', animation: 'live-pulse 2s ease-in-out infinite' }} />
               Live data
             </div>
-            <h1 className="font-serif font-black tracking-[-0.02em] leading-[0.95] mb-3" style={{ fontSize: 'clamp(40px,5vw,64px)', color: 'var(--text)' }}>
+            <h1 className="font-serif font-bold tracking-[-0.02em] leading-[0.95] mb-3" style={{ fontSize: 'clamp(40px,5vw,64px)', color: 'var(--text)' }}>
               Pit Stop —<br />ceny dnes
             </h1>
             <div className="font-cond text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--text3)' }}>
@@ -299,7 +299,7 @@ function PriceAlertSection() {
     <div className="rounded-xl p-7" style={{ background: 'var(--sur)', border: '1px solid var(--bdr)' }}>
       <div className="flex items-start justify-between mb-6">
         <div>
-          <div className="font-serif font-black tracking-[-0.02em] text-[28px] mb-1.5" style={{ color: 'var(--text)' }}>Price Alert</div>
+          <div className="font-serif font-bold tracking-[-0.02em] text-[28px] mb-1.5" style={{ color: 'var(--text)' }}>Price Alert</div>
           <div className="text-sm" style={{ color: 'var(--text2)' }}>Nastav cilovou cenu — upozornime te emailem kdyz set zlevni.</div>
         </div>
         <div className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-3.5 py-1.5 rounded-md" style={{ border: '1px solid rgba(201,162,39,0.3)', color: 'var(--gold)' }}>

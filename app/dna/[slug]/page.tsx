@@ -166,7 +166,7 @@ export default async function DnaArticlePage({ params }: Props) {
 
           {/* Title */}
           <h1
-            className="font-serif font-black tracking-[-0.02em] leading-[0.95] mb-4"
+            className="font-serif font-bold tracking-[-0.02em] leading-[0.95] mb-4"
             style={{ fontSize: 'clamp(52px,7vw,96px)', color: 'var(--text)' }}
           >
             {article.title}

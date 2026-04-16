@@ -18,7 +18,7 @@ export function Chapter({ title, children }: ChapterProps) {
         {title}
       </div>
       <h2
-        className="font-serif font-black tracking-[-0.02em] leading-[1.15] mb-[18px]"
+        className="font-serif font-bold tracking-[-0.02em] leading-[1.15] mb-[18px]"
         style={{ fontSize: 'clamp(28px,3vw,38px)', color: 'var(--text)' }}
       >
         {title}

@@ -32,7 +32,7 @@ export default async function HofPage() {
       <div className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg), rgba(201,162,39,0.04))' }}>
         <div className="max-w-content mx-auto px-8">
           <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--gold)' }}>Hall of Fame</div>
-          <h1 className="font-serif font-black tracking-[-0.02em] leading-[0.95] mb-4" style={{ fontSize: 'clamp(44px,6vw,72px)', color: 'var(--text)' }}>
+          <h1 className="font-serif font-bold tracking-[-0.02em] leading-[0.95] mb-4" style={{ fontSize: 'clamp(44px,6vw,72px)', color: 'var(--text)' }}>
             Nejlepsi sety<br />vsech dob.
           </h1>
           <p className="text-[15px] leading-[1.65] max-w-[500px]" style={{ color: 'var(--text2)' }}>

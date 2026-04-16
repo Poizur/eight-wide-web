@@ -14,7 +14,7 @@ export function PullQuote({ author, children }: PullQuoteProps) {
         background: 'rgba(201,162,39,0.04)',
       }}
     >
-      <div className="font-serif font-black tracking-[-0.02em] text-[22px] leading-[1.4]" style={{ color: 'var(--text)' }}>
+      <div className="font-serif font-bold tracking-[-0.02em] text-[22px] leading-[1.4]" style={{ color: 'var(--text)' }}>
         {children}
       </div>
       {author && (
