@@ -35,7 +35,7 @@ export function NewsletterForm() {
       <div className="absolute -right-[60px] -bottom-[60px] w-[280px] h-[280px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%)' }} />
 
       <div>
-        <div className="font-serif italic text-[26px] tracking-[-0.01em] mb-1.5" style={{ color: 'var(--text)' }}>
+        <div className="font-serif font-semibold text-[26px] tracking-[-0.01em] mb-1.5" style={{ color: 'var(--text)' }}>
           Kazde pondeli do inboxu —<br />
           <span style={{ color: 'var(--gold)' }}>ceny, DNA, novinky.</span>
         </div>

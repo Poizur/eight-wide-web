@@ -22,7 +22,7 @@ export default function Error({
           </span>
         </div>
 
-        <div className="font-serif italic text-[32px] leading-[1.2] mb-4" style={{ color: 'var(--text2)' }}>
+        <div className="font-serif font-semibold text-[32px] leading-[1.2] mb-4" style={{ color: 'var(--text2)' }}>
           Neco se pokazilo.
         </div>
         <p className="text-[15px] leading-[1.65] mb-8" style={{ color: 'var(--text3)' }}>

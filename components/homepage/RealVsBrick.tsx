@@ -74,7 +74,7 @@ export function RealVsBrick({ sets }: { sets: LegoSet[] }) {
               <div className="font-cond text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-[400ms] group-hover:text-gold" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 {set.brand} · {set.year_released}
               </div>
-              <div className="font-serif italic text-xl leading-[1.1]" style={{ color: 'var(--text)' }}>
+              <div className="font-serif font-semibold text-xl leading-[1.1]" style={{ color: 'var(--text)' }}>
                 {set.name}
               </div>
               <div className="font-cond text-[11px] tracking-[0.1em] mt-0.5 transition-colors duration-[400ms]" style={{ color: 'rgba(255,255,255,0.3)' }}>

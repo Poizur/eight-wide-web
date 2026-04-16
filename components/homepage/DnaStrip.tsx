@@ -37,7 +37,7 @@ export function DnaStrip({ article, set }: DnaStripProps) {
           <span className="block w-5 h-px" style={{ background: 'var(--gold)' }} />
           DNA Series · #{String(article.number ?? '').padStart(3, '0')} — {article.brand}
         </div>
-        <div className="font-serif italic text-[30px] leading-[1.15] tracking-[-0.01em] mb-3" style={{ color: 'var(--text)' }}>
+        <div className="font-serif font-semibold text-[30px] leading-[1.15] tracking-[-0.01em] mb-3" style={{ color: 'var(--text)' }}>
           {article.title}
         </div>
         <p className="text-[13px] leading-[1.65] mb-5 max-w-[380px]" style={{ color: 'var(--text2)' }}>

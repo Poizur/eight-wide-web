@@ -30,7 +30,7 @@ export default async function GeneraceArchivePage() {
           <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--gold)' }}>
             Generace
           </div>
-          <h1 className="font-serif italic leading-[0.95] mb-4" style={{ fontSize: 'clamp(40px,5vw,64px)', color: 'var(--text)' }}>
+          <h1 className="font-serif font-semibold leading-[0.95] mb-4" style={{ fontSize: 'clamp(40px,5vw,64px)', color: 'var(--text)' }}>
             Stare vs. nove —<br />kdo skutecne vyhral?
           </h1>
           <p className="text-[15px] leading-[1.65] max-w-[520px]" style={{ color: 'var(--text2)' }}>
