@@ -9,6 +9,7 @@ import { formatCZK } from '@/lib/utils'
 import { allDnaArticles } from '.contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer2/hooks'
 
+import { articleJsonLd, productJsonLd } from '@/lib/structured-data'
 import { ReadProgress } from '@/components/article/ReadProgress'
 import { TableOfContents } from '@/components/article/TableOfContents'
 import { PriceSidebar } from '@/components/article/PriceSidebar'
@@ -130,6 +131,18 @@ export default async function DnaArticlePage({ params }: Props) {
 
   return (
     <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd(article, set)) }}
+      />
+      {set && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(set, article)) }}
+        />
+      )}
+
       <ReadProgress />
 
       {/* Hero */}
