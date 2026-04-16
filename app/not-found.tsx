@@ -77,7 +77,7 @@ export default function NotFound() {
 
         {/* Title */}
         <div
-          className="font-serif font-semibold leading-[1.2] mb-4"
+          className="font-serif font-black tracking-[-0.02em] leading-[1.2] mb-4"
           style={{ fontSize: 'clamp(24px,3vw,36px)', color: 'var(--text2)' }}
         >
           Tato stranka<br />skoncila v barierach.

@@ -95,7 +95,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
 
         {/* Title */}
         <h1
-          className="font-serif font-semibold leading-[1.08] tracking-[-0.02em] mb-4"
+          className="font-serif font-black tracking-[-0.02em] leading-[1.08] mb-4"
           style={{ fontSize: 'clamp(32px,3.8vw,52px)', color: 'var(--text)' }}
         >
           {a.title}

@@ -67,7 +67,7 @@ export default function KomunitaPage() {
               <span className="block w-6 h-px" style={{ background: 'var(--gold)' }} />
               Pripravujeme · Q3 2026
             </div>
-            <h1 className="font-serif font-semibold leading-[1.05] mb-4" style={{ fontSize: 'clamp(44px,5.5vw,72px)', color: 'var(--text)' }}>
+            <h1 className="font-serif font-black tracking-[-0.02em] leading-[1.05] mb-4" style={{ fontSize: 'clamp(44px,5.5vw,72px)', color: 'var(--text)' }}>
               Bazaar — kup & prodej<br />Speed Champions
             </h1>
             <p className="text-[15px] leading-[1.65] max-w-[480px] mb-8" style={{ color: 'var(--text2)' }}>

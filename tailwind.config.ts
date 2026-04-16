@@ -21,7 +21,7 @@ export default {
       },
       fontFamily: {
         cond:  ['Barlow Condensed', 'Arial', 'sans-serif'],
-        serif: ['DM Sans', '-apple-system', 'sans-serif'],
+        serif: ['Barlow Condensed', 'Arial', 'sans-serif'],
         sans:  ['DM Sans', '-apple-system', 'sans-serif'],
       },
       maxWidth: {

@@ -66,7 +66,7 @@ export default async function DnaArchivePage({ searchParams }: Props) {
             </span>
           </div>
           <h1
-            className="font-serif font-semibold leading-[0.95] tracking-[-0.02em] mb-6"
+            className="font-serif font-black tracking-[-0.02em] leading-[0.95] mb-6"
             style={{ fontSize: 'clamp(48px,6vw,80px)', color: 'var(--text)' }}
           >
             Pribeh kazdeho auta.

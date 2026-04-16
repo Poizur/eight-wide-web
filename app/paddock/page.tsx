@@ -51,7 +51,7 @@ export default async function PaddockPage() {
             <span className="w-2 h-2 rounded-full" style={{ background: 'var(--red)', animation: 'live-pulse 1s ease-in-out infinite' }} />
             Paddock Rumors · Live
           </div>
-          <h1 className="font-serif font-semibold leading-[0.95] mb-6" style={{ fontSize: 'clamp(40px,5vw,64px)', color: 'var(--text)' }}>
+          <h1 className="font-serif font-black tracking-[-0.02em] leading-[0.95] mb-6" style={{ fontSize: 'clamp(40px,5vw,64px)', color: 'var(--text)' }}>
             Co prijde priste?
           </h1>
 

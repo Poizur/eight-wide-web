@@ -124,7 +124,7 @@ export default async function GeneraceArticlePage({ params }: Props) {
       {/* Article content */}
       <div className="max-w-content mx-auto px-8 py-12">
         <div className="max-w-[780px] mx-auto">
-          <h1 className="font-serif font-semibold text-[36px] leading-[1.1] mb-6" style={{ color: 'var(--text)' }}>
+          <h1 className="font-serif font-black tracking-[-0.02em] text-[36px] leading-[1.1] mb-6" style={{ color: 'var(--text)' }}>
             {a.title}
           </h1>
 

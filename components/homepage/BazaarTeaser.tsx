@@ -24,7 +24,7 @@ export function BazaarTeaser() {
               <span className="block w-6 h-px" style={{ background: 'var(--gold)' }} />
               Pripravujeme
             </div>
-            <div className="font-serif font-semibold leading-[1.1] mb-4" style={{ fontSize: 'clamp(28px,3vw,42px)', color: 'var(--text)' }}>
+            <div className="font-serif font-black tracking-[-0.02em] leading-[1.1] mb-4" style={{ fontSize: 'clamp(28px,3vw,42px)', color: 'var(--text)' }}>
               Bazaar — kup & prodej<br />Speed Champions
             </div>
             <p className="text-[15px] leading-[1.65] max-w-[480px] mb-7" style={{ color: 'var(--text2)' }}>

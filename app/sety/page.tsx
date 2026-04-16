@@ -84,7 +84,7 @@ export default async function SetyPage({ searchParams }: Props) {
           <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--gold)' }}>
             Databaze setu
           </div>
-          <h1 className="font-serif font-semibold leading-[0.95] mb-6" style={{ fontSize: 'clamp(40px,5vw,60px)', color: 'var(--text)' }}>
+          <h1 className="font-serif font-black tracking-[-0.02em] leading-[0.95] mb-6" style={{ fontSize: 'clamp(40px,5vw,60px)', color: 'var(--text)' }}>
             Vsechna Speed<br />Champions auta
           </h1>
 
