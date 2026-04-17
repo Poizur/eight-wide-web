@@ -54,13 +54,13 @@ body {
 /* -- Utility classes -- */
 @layer utilities {
   .photo-dark {
-    filter: brightness(0.15) saturate(0.2);
-    transform: scale(1.04);
+    filter: brightness(0.55) saturate(0.7);
+    transform: scale(1.02);
     transition: filter 0.7s cubic-bezier(0.16,1,0.3,1),
                 transform 0.7s cubic-bezier(0.16,1,0.3,1);
   }
   .group:hover .photo-dark {
-    filter: brightness(0.85) saturate(1);
+    filter: brightness(0.9) saturate(1);
     transform: scale(1);
   }
 }

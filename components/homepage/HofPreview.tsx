@@ -58,7 +58,7 @@ export function HofPreview({ items }: { items: HofItem[] }) {
                       width={80}
                       height={50}
                       className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-[0.85]"
-                      style={{ filter: 'brightness(0.15)' }}
+                      style={{ filter: 'brightness(0.55)' }}
                     />
                   )}
                 </div>

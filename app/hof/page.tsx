@@ -176,7 +176,7 @@ function HofRow({ rank, article, set }: { rank: number; article: Article; set: L
         {String(rank).padStart(2, '0')}
       </div>
       <div className="w-[90px] h-14 overflow-hidden rounded" style={{ background: 'var(--sur2)' }}>
-        {img && <Image src={img} alt={article.title} width={90} height={56} className="w-full h-full object-cover" style={{ filter: 'brightness(0.15)' }} />}
+        {img && <Image src={img} alt={article.title} width={90} height={56} className="w-full h-full object-cover" style={{ filter: 'brightness(0.55)' }} />}
       </div>
       <div>
         <div className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: 'var(--text3)' }}>{article.brand} · {set?.year_released}</div>

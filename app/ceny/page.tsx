@@ -229,7 +229,7 @@ export default async function CenyPage({ searchParams }: Props) {
                     width={48}
                     height={30}
                     className="rounded object-cover"
-                    style={{ background: 'var(--sur2)', filter: 'brightness(0.2)' }}
+                    style={{ background: 'var(--sur2)', filter: 'brightness(0.55)' }}
                   />
                   <div>
                     <div className="font-cond text-[10px] font-bold tracking-[0.14em] uppercase" style={{ color: 'var(--text3)' }}>{set.brand}</div>

@@ -69,7 +69,7 @@ export default async function GeneraceArticlePage({ params }: Props) {
       <section className="relative grid grid-cols-2" style={{ height: '80vh', minHeight: 500 }}>
         {/* Old set panel */}
         <div className="relative overflow-hidden">
-          <Image src={oldImg} alt={oldSet?.name ?? 'Old'} fill className="object-cover" style={{ filter: 'brightness(0.3) saturate(0.6)' }} sizes="50vw" />
+          <Image src={oldImg} alt={oldSet?.name ?? 'Old'} fill className="object-cover" style={{ filter: 'brightness(0.5) saturate(0.8)' }} sizes="50vw" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,12,16,0.95) 0%, rgba(10,12,16,0.3) 50%, transparent)' }} />
           <div className="absolute bottom-10 left-8 z-[2]">
             <span className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-2 py-1 rounded-sm mb-2 inline-block" style={{ background: 'rgba(200,40,30,0.8)', color: 'white' }}>
@@ -86,7 +86,7 @@ export default async function GeneraceArticlePage({ params }: Props) {
 
         {/* New set panel */}
         <div className="relative overflow-hidden">
-          <Image src={newImg} alt={newSet?.name ?? 'New'} fill className="object-cover" style={{ filter: 'brightness(0.3) saturate(0.6)' }} sizes="50vw" />
+          <Image src={newImg} alt={newSet?.name ?? 'New'} fill className="object-cover" style={{ filter: 'brightness(0.5) saturate(0.8)' }} sizes="50vw" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,12,16,0.95) 0%, rgba(10,12,16,0.3) 50%, transparent)' }} />
           <div className="absolute bottom-10 right-8 text-right z-[2]">
             <span className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-2 py-1 rounded-sm mb-2 inline-block" style={{ background: 'rgba(201,162,39,0.8)', color: '#000' }}>
