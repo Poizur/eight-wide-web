@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
 
 function LoginForm() {
   const [email, setEmail] = useState('')
@@ -13,11 +12,19 @@ function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  // Handle logout
-  if (searchParams.get('logout') === '1') {
+  // Handle logout + auto-redirect if already logged in
+  useEffect(() => {
     const supabase = createClient()
-    supabase.auth.signOut().then(() => router.replace('/admin/login'))
-  }
+    if (searchParams.get('logout') === '1') {
+      supabase.auth.signOut().then(() => {
+        router.replace('/admin/login')
+      })
+      return
+    }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace('/admin')
+    })
+  }, [searchParams, router])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
