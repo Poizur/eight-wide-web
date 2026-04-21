@@ -1,3 +1,28 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "JSXAttribute[name.name='src'] Literal[value=/unsplash\\.com/]",
+        "message": "Unsplash URLs are not allowed in src prop for set images. Use <SetImage set={...} /> wrapper or getSetImage() helper. For legitimate reference images (real car photos), use <RvbCompare realPhoto={...} /> component."
+      },
+      {
+        "selector": "JSXAttribute[name.name='src'] TemplateLiteral[quasis.0.value.raw=/unsplash\\.com/]",
+        "message": "Unsplash URLs are not allowed in src prop for set images (template literal detected). Use <SetImage /> wrapper."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "components/mdx/RvbCompare.tsx",
+        "app/not-found.tsx",
+        "lib/images.test.ts"
+      ],
+      "rules": {
+        "no-restricted-syntax": "off"
+      }
+    }
+  ]
 }
