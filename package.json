@@ -8,6 +8,8 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:seed": "tsx scripts/seed.ts",
     "db:import-brickset": "tsx scripts/import-brickset.ts"
   },
@@ -30,8 +32,10 @@
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.4",
-    "tsx": "^4.21.0"
+    "@vitest/ui": "^4.1.4",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "tsx": "^4.21.0",
+    "vitest": "^4.1.4"
   }
 }

@@ -1,89 +1,130 @@
+// TODO: replace hardcoded set list with DB-driven curation when agent pipeline defines flow
+
 import Image from 'next/image'
 import Link from 'next/link'
 import type { LegoSet } from '@/lib/supabase/types'
-import { setImageUrl } from '@/lib/affiliate'
 import { formatCZK } from '@/lib/utils'
+import { createServerClient } from '@/lib/supabase/server'
+import { getReferenceImage } from '@/lib/images'
+import { SetImage } from '@/components/ui/SetImage'
 import { SectionHead } from './SectionHead'
 
-// Placeholder real-car photos mapped by brand (Unsplash)
-const realPhotos: Record<string, string> = {
-  Ferrari: 'https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=700&q=80',
-  Porsche: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80',
-  Lamborghini: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=700&q=80',
-  McLaren: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80',
-  Lotus: 'https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=700&q=80',
-}
+const FEATURED_SET_NUMBERS = ['76934', '75912', '76908'] as const
 
-const fallback = 'https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&w=700&q=80'
+export async function RealVsBrick() {
+  const supabase = createServerClient()
+  const { data } = await supabase
+    .from('sets')
+    .select('*')
+    .in('set_number', FEATURED_SET_NUMBERS as unknown as string[])
 
-export function RealVsBrick({ sets }: { sets: LegoSet[] }) {
-  const display = sets.slice(0, 3)
-  if (display.length === 0) return null
+  const sets = (data ?? []) as LegoSet[]
+
+  // Preserve hardcoded order + filter out sets without reference image
+  const displayable = FEATURED_SET_NUMBERS
+    .map(num => sets.find(s => s.set_number === num))
+    .filter((s): s is LegoSet => {
+      if (!s) return false
+      return getReferenceImage(s) !== null
+    })
+
+  if (displayable.length === 0) return null
 
   return (
     <div className="mb-11">
-      <SectionHead title="Real vs. Brick" sub="— realne auto vs. LEGO" linkHref="/dna" linkLabel="Cela galerie" />
-      <div
-        className="grid grid-cols-3 gap-[2px] rounded-xl overflow-hidden"
-        style={{ background: 'var(--bdr)', border: '1px solid var(--bdr)' }}
-      >
-        {display.map((set) => (
-          <Link
-            key={set.id}
-            href={set.dna_article_slug ? `/dna/${set.dna_article_slug}` : `/sety`}
-            className="group relative overflow-hidden no-underline block"
-            style={{ aspectRatio: '4/3' }}
-          >
-            <Image
-              src={realPhotos[set.brand] ?? fallback}
-              alt={set.name}
-              fill
-              className="object-cover photo-dark"
-              sizes="33vw"
-            />
-
-            {/* Overlay gradient */}
-            <div
-              className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-50"
-              style={{
-                background: 'linear-gradient(to top, rgba(10,12,16,0.92) 0%, rgba(10,12,16,0.2) 60%, transparent 100%)',
-              }}
-            />
-
-            {/* Set badge - always visible */}
-            <div
-              className="absolute top-3.5 right-3.5 z-[2] text-center"
-              style={{
-                background: 'rgba(10,12,16,0.55)',
-                backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: 8,
-                padding: '9px 13px',
-              }}
-            >
-              <div className="font-cond text-xl font-black leading-none tracking-[0.02em]" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                {set.set_number}
-              </div>
-              <div className="font-cond text-[8px] font-bold tracking-[0.22em] uppercase mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                Set No.
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="absolute bottom-0 left-0 right-0 p-[18px] z-[2]">
-              <div className="font-cond text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-[400ms] group-hover:text-gold" style={{ color: 'rgba(255,255,255,0.4)' }}>
-                {set.brand} · {set.year_released}
-              </div>
-              <div className="font-serif font-bold tracking-[-0.02em] text-xl leading-[1.1]" style={{ color: 'var(--text)' }}>
-                {set.name}
-              </div>
-              <div className="font-cond text-[11px] tracking-[0.1em] mt-0.5 transition-colors duration-[400ms]" style={{ color: 'rgba(255,255,255,0.3)' }}>
-                {set.pieces} dilku · {set.rrp_czk ? formatCZK(set.rrp_czk) : set.status}
-              </div>
-            </div>
-          </Link>
+      <SectionHead
+        title="Real vs. Brick"
+        sub="— realne auto vs. LEGO side-by-side"
+        linkHref="/dna"
+        linkLabel="Cela galerie"
+      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] rounded-xl overflow-hidden" style={{ background: 'var(--bdr)', border: '1px solid var(--bdr)' }}>
+        {displayable.map(set => (
+          <RvbMiniSplit key={set.id} set={set} />
         ))}
       </div>
     </div>
+  )
+}
+
+function RvbMiniSplit({ set }: { set: LegoSet }) {
+  const referenceSrc = getReferenceImage(set) // guaranteed non-null by filter above
+  if (!referenceSrc) return null
+
+  const href = set.dna_article_slug ? `/dna/${set.dna_article_slug}` : '/sety'
+
+  return (
+    <Link
+      href={href}
+      className="group block no-underline"
+      style={{ background: 'var(--sur)' }}
+    >
+      {/* Split image pair */}
+      <div className="grid grid-cols-2 gap-[1px] relative" style={{ background: 'var(--bdr)' }}>
+        {/* LEFT — REALITY */}
+        <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
+          <Image
+            src={referenceSrc}
+            alt={`${set.name} — reference photo`}
+            fill
+            className="object-cover photo-dark"
+            sizes="(max-width: 768px) 50vw, 17vw"
+          />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,12,16,0.7) 0%, transparent 60%)' }} />
+          <span
+            className="absolute top-2 left-2 font-cond text-[9px] font-bold tracking-[0.14em] uppercase px-2 py-[3px] rounded-sm z-[2]"
+            style={{ background: 'rgba(200,40,30,0.85)', color: 'white' }}
+          >
+            Reality
+          </span>
+        </div>
+
+        {/* RIGHT — LEGO */}
+        <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
+          <SetImage
+            set={set}
+            alt={`LEGO ${set.name}`}
+            fill
+            className="object-cover photo-dark"
+            sizes="(max-width: 768px) 50vw, 17vw"
+          />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,12,16,0.7) 0%, transparent 60%)' }} />
+          <span
+            className="absolute top-2 left-2 font-cond text-[9px] font-bold tracking-[0.14em] uppercase px-2 py-[3px] rounded-sm z-[2]"
+            style={{ background: 'rgba(201,162,39,0.85)', color: '#000' }}
+          >
+            LEGO
+          </span>
+          {/* Set number badge, always visible */}
+          <div
+            className="absolute top-2 right-2 z-[2] text-center"
+            style={{
+              background: 'rgba(10,12,16,0.6)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 6,
+              padding: '4px 8px',
+            }}
+          >
+            <div className="font-cond text-xs font-black leading-none" style={{ color: 'rgba(255,255,255,0.9)' }}>
+              {set.set_number}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Info strip */}
+      <div className="px-4 py-3">
+        <div className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-[400ms] group-hover:text-gold" style={{ color: 'var(--text3)' }}>
+          {set.brand} · {set.year_released}
+        </div>
+        <div className="font-serif font-bold tracking-[-0.02em] text-lg leading-[1.1]" style={{ color: 'var(--text)' }}>
+          {set.name}
+        </div>
+        <div className="font-cond text-[11px] tracking-[0.1em] mt-0.5" style={{ color: 'var(--text3)' }}>
+          {set.pieces} dilku · {set.rrp_czk ? formatCZK(set.rrp_czk) : set.status}
+        </div>
+      </div>
+    </Link>
   )
 }

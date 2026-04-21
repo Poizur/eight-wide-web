@@ -111,7 +111,7 @@ export default async function HomePage() {
         <LatestArticles articles={articles} />
 
         {/* 3. Real vs Brick */}
-        <RealVsBrick sets={rvbDisplay} />
+        <RealVsBrick />
 
         {/* 4. DNA Strip */}
         {dnaStripArticle && <DnaStrip article={dnaStripArticle} set={dnaStripSet} />}

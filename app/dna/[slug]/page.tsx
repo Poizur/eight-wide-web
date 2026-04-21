@@ -67,9 +67,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function MdxContent({ slug }: { slug: string }) {
   const doc = allDnaArticles.find((a) => a.slug === slug)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const MDXContent = useMDXComponent(doc?.body.code ?? '')
   if (!doc) return null
-
-  const MDXContent = useMDXComponent(doc.body.code)
   return <MDXContent components={mdxComponents} />
 }
 

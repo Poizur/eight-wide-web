@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="LEGO Speed Champions placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0C10"/>
+      <stop offset="100%" stop-color="#181F2E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Subtle gold accent line top-left -->
+  <rect x="48" y="48" width="36" height="2" fill="#C9A227"/>
+
+  <!-- Main text: LEGO SPEED CHAMPIONS -->
+  <text
+    x="400"
+    y="215"
+    text-anchor="middle"
+    font-family="'Barlow Condensed', Arial, sans-serif"
+    font-size="42"
+    font-weight="900"
+    letter-spacing="8"
+    fill="#3E4A58"
+  >LEGO SPEED CHAMPIONS</text>
+
+  <!-- Em dash divider -->
+  <text
+    x="400"
+    y="265"
+    text-anchor="middle"
+    font-family="'Barlow Condensed', Arial, sans-serif"
+    font-size="28"
+    font-weight="400"
+    fill="#3E4A58"
+  >—</text>
+
+  <!-- Sub-label -->
+  <text
+    x="400"
+    y="305"
+    text-anchor="middle"
+    font-family="'Barlow Condensed', Arial, sans-serif"
+    font-size="13"
+    font-weight="700"
+    letter-spacing="4"
+    fill="#3E4A58"
+    opacity="0.6"
+  >IMAGE NOT AVAILABLE</text>
+</svg>
