@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { createServerClient } from '@/lib/supabase/server'
 import type { Article, LegoSet } from '@/lib/supabase/types'
 import { setImageUrl } from '@/lib/affiliate'
+import { SetImage } from '@/components/ui/SetImage'
 import { formatCZK } from '@/lib/utils'
 import { allGeneraceArticles } from '.contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer2/hooks'
@@ -59,8 +60,14 @@ export default async function GeneraceArticlePage({ params }: Props) {
   const doc = allGeneraceArticles.find(d => d.slug === params.slug)
   const winner = doc?.winner
 
-  const oldImg = a.set_number_old ? setImageUrl(a.set_number_old) : 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80'
-  const newImg = a.set_number ? setImageUrl(a.set_number) : 'https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=900&q=80'
+  // Build minimal SetImageSet for each side. If we don't have a set_number,
+  // fall back to placeholder (no Unsplash). SetImage handles the chain.
+  const oldSetImg = a.set_number_old
+    ? { set_number: a.set_number_old, hero_photo_url: oldSet?.hero_photo_url ?? null, brickset_img_url: oldSet?.brickset_img_url ?? null }
+    : null
+  const newSetImg = a.set_number
+    ? { set_number: a.set_number, hero_photo_url: newSet?.hero_photo_url ?? null, brickset_img_url: newSet?.brickset_img_url ?? null }
+    : null
 
   return (
     <>
@@ -70,7 +77,18 @@ export default async function GeneraceArticlePage({ params }: Props) {
       <section className="relative grid grid-cols-2" style={{ height: '80vh', minHeight: 500 }}>
         {/* Old set panel */}
         <div className="relative overflow-hidden">
-          <Image src={oldImg} alt={oldSet?.name ?? 'Old'} fill className="object-cover" style={{ filter: 'brightness(0.5) saturate(0.8)' }} sizes="50vw" />
+          {oldSetImg ? (
+            <SetImage
+              set={oldSetImg}
+              alt={oldSet?.name ?? `LEGO set ${a.set_number_old}`}
+              fill
+              className="object-cover"
+              style={{ filter: 'brightness(0.5) saturate(0.8)' }}
+              sizes="50vw"
+            />
+          ) : (
+            <Image src="/placeholder-set.svg" alt="placeholder" fill className="object-cover" sizes="50vw" />
+          )}
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,12,16,0.95) 0%, rgba(10,12,16,0.3) 50%, transparent)' }} />
           <div className="absolute bottom-10 left-8 z-[2]">
             <span className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-2 py-1 rounded-sm mb-2 inline-block" style={{ background: 'rgba(200,40,30,0.8)', color: 'white' }}>
@@ -87,7 +105,18 @@ export default async function GeneraceArticlePage({ params }: Props) {
 
         {/* New set panel */}
         <div className="relative overflow-hidden">
-          <Image src={newImg} alt={newSet?.name ?? 'New'} fill className="object-cover" style={{ filter: 'brightness(0.5) saturate(0.8)' }} sizes="50vw" />
+          {newSetImg ? (
+            <SetImage
+              set={newSetImg}
+              alt={newSet?.name ?? `LEGO set ${a.set_number}`}
+              fill
+              className="object-cover"
+              style={{ filter: 'brightness(0.5) saturate(0.8)' }}
+              sizes="50vw"
+            />
+          ) : (
+            <Image src="/placeholder-set.svg" alt="placeholder" fill className="object-cover" sizes="50vw" />
+          )}
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,12,16,0.95) 0%, rgba(10,12,16,0.3) 50%, transparent)' }} />
           <div className="absolute bottom-10 right-8 text-right z-[2]">
             <span className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-2 py-1 rounded-sm mb-2 inline-block" style={{ background: 'rgba(201,162,39,0.8)', color: '#000' }}>
