@@ -26,9 +26,9 @@ export default async function AdminClankyPage() {
               <span className="font-cond text-[10px] font-bold mr-2" style={{ color: 'var(--text3)' }}>#{a.number}</span>
               <span className="font-cond text-sm font-bold" style={{ color: 'var(--text)' }}>{a.title}</span>
             </div>
-            <span className="font-cond text-xs uppercase" style={{ color: 'var(--gold)' }}>{a.series}</span>
+            <span className="font-cond text-xs uppercase" style={{ color: 'var(--red)' }}>{a.series}</span>
             <span className="font-cond text-xs" style={{ color: 'var(--text2)' }}>{a.brand}</span>
-            <span className="font-cond text-xs font-bold" style={{ color: 'var(--gold)' }}>{a.rating_overall?.toFixed(1) ?? '—'}</span>
+            <span className="font-cond text-xs font-bold" style={{ color: 'var(--red)' }}>{a.rating_overall?.toFixed(1) ?? '—'}</span>
             <span className="font-cond text-[10px] font-bold tracking-[0.1em] uppercase" style={{ color: a.is_draft ? 'var(--orange)' : 'var(--green)' }}>
               {a.is_draft ? 'Draft' : 'Published'}
             </span>

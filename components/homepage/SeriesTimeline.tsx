@@ -34,7 +34,7 @@ export function SeriesTimeline() {
                   style={{
                     left: 44,
                     top: 24,
-                    background: item.key ? 'var(--gold)' : 'var(--bdr)',
+                    background: item.key ? 'var(--red)' : 'var(--bdr)',
                     border: item.key ? '2px solid var(--bg)' : '2px solid var(--sur2)',
                     boxShadow: item.key ? '0 0 0 3px rgba(201,162,39,0.25)' : 'none',
                   }}
@@ -43,7 +43,7 @@ export function SeriesTimeline() {
                 {/* Year */}
                 <div
                   className="font-cond text-[28px] font-black leading-none pl-[70px] pt-0.5"
-                  style={{ color: item.key ? 'var(--gold)' : 'rgba(255,255,255,0.12)' }}
+                  style={{ color: item.key ? 'var(--red)' : 'rgba(255,255,255,0.12)' }}
                 >
                   {item.year}
                 </div>
@@ -64,7 +64,7 @@ export function SeriesTimeline() {
                   <div className="text-[13px] leading-[1.55] mb-2 max-w-[580px]" style={{ color: 'var(--text2)' }}>
                     {item.desc}
                   </div>
-                  <div className="font-cond text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: 'var(--gold)' }}>
+                  <div className="font-cond text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: 'var(--red)' }}>
                     {item.stat}
                   </div>
                 </div>

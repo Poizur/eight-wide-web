@@ -38,13 +38,13 @@ export function HofPreview({ items }: { items: HofItem[] }) {
                   gridTemplateColumns: '56px 80px 1fr auto auto',
                   background: 'var(--sur)',
                   padding: '16px 22px',
-                  borderLeft: isGold ? '3px solid var(--gold)' : 'none',
+                  borderLeft: isGold ? '3px solid var(--red)' : 'none',
                 }}
               >
                 {/* Rank */}
                 <div
                   className="font-cond text-[28px] font-black leading-none"
-                  style={{ color: isGold ? 'var(--gold)' : 'rgba(255,255,255,0.12)' }}
+                  style={{ color: isGold ? 'var(--red)' : 'rgba(255,255,255,0.12)' }}
                 >
                   {String(rank).padStart(2, '0')}
                 </div>
@@ -78,7 +78,7 @@ export function HofPreview({ items }: { items: HofItem[] }) {
 
                 {/* Score */}
                 <div className="text-center px-4" style={{ borderLeft: '1px solid var(--bdr)' }}>
-                  <div className="font-cond text-[28px] font-black leading-none" style={{ color: 'var(--gold)' }}>
+                  <div className="font-cond text-[28px] font-black leading-none" style={{ color: 'var(--red)' }}>
                     {item.article.rating_overall?.toFixed(1) ?? '—'}
                   </div>
                   <div className="font-cond text-[9px] tracking-[0.15em] uppercase" style={{ color: 'var(--text3)' }}>
@@ -89,7 +89,7 @@ export function HofPreview({ items }: { items: HofItem[] }) {
                 {/* Tags */}
                 <div className="flex gap-1.5 flex-wrap">
                   {isGold && (
-                    <span className="font-cond text-[10px] font-bold tracking-[0.12em] uppercase px-2 py-[3px] rounded-sm" style={{ background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--gold)' }}>
+                    <span className="font-cond text-[10px] font-bold tracking-[0.12em] uppercase px-2 py-[3px] rounded-sm" style={{ background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--red)' }}>
                       #{rank} Overall
                     </span>
                   )}

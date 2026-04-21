@@ -81,7 +81,7 @@ export default async function SetyPage({ searchParams }: Props) {
       {/* Search hero */}
       <div className="pt-[100px]" style={{ background: 'linear-gradient(to bottom, rgba(201,162,39,0.03), transparent)' }}>
         <div className="max-w-content mx-auto px-8 pb-9" style={{ borderBottom: '1px solid var(--bdr)' }}>
-          <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--gold)' }}>
+          <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--red)' }}>
             Databaze setu
           </div>
           <h1 className="font-serif font-bold tracking-[-0.02em] leading-[0.95] mb-6" style={{ fontSize: 'clamp(40px,5vw,60px)', color: 'var(--text)' }}>
@@ -95,7 +95,7 @@ export default async function SetyPage({ searchParams }: Props) {
                 name="q"
                 defaultValue={q}
                 placeholder="Hledat auto, set cislo, znacku..."
-                className="flex-1 px-5 py-3.5 rounded-[9px] font-sans text-[15px] outline-none transition-colors duration-200 focus:border-[var(--gold)]"
+                className="flex-1 px-5 py-3.5 rounded-[9px] font-sans text-[15px] outline-none transition-colors duration-200 focus:border-[var(--red)]"
                 style={{ background: 'var(--sur)', border: '1px solid var(--bdr)', color: 'var(--text)' }}
               />
             </form>
@@ -110,7 +110,7 @@ export default async function SetyPage({ searchParams }: Props) {
               { n: String(brands.length), l: 'znacek' },
             ].map(s => (
               <div key={s.l}>
-                <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--gold)' }}>{s.n}</div>
+                <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--red)' }}>{s.n}</div>
                 <div className="font-cond text-[9px] tracking-[0.16em] uppercase mt-0.5" style={{ color: 'var(--text3)' }}>{s.l}</div>
               </div>
             ))}
@@ -135,7 +135,7 @@ export default async function SetyPage({ searchParams }: Props) {
                   href={buildUrl({ era: e.value })}
                   className="flex-1 text-center font-cond text-[11px] font-bold tracking-[0.1em] uppercase py-[7px] rounded-md no-underline transition-all duration-200"
                   style={{
-                    background: era === e.value || (!era && !e.value) ? 'var(--gold)' : 'transparent',
+                    background: era === e.value || (!era && !e.value) ? 'var(--red)' : 'transparent',
                     color: era === e.value || (!era && !e.value) ? '#000' : 'var(--text3)',
                   }}
                 >
@@ -208,7 +208,7 @@ export default async function SetyPage({ searchParams }: Props) {
           {/* Results header */}
           <div className="flex items-center justify-between mb-5">
             <div className="font-cond text-xs font-bold tracking-[0.14em] uppercase" style={{ color: 'var(--text3)' }}>
-              Zobrazeno <span style={{ color: 'var(--gold)' }}>{sets.length}</span> z <span style={{ color: 'var(--gold)' }}>{totalCount}</span> setu
+              Zobrazeno <span style={{ color: 'var(--red)' }}>{sets.length}</span> z <span style={{ color: 'var(--red)' }}>{totalCount}</span> setu
             </div>
             <div className="flex gap-1">
               {[
@@ -299,7 +299,7 @@ function FilterRow({ href, active, label, count }: { href: string; active: boole
           className="w-3.5 h-3.5 rounded-sm flex items-center justify-center"
           style={{
             border: active ? 'none' : '1px solid var(--bdr)',
-            background: active ? 'var(--gold)' : 'transparent',
+            background: active ? 'var(--red)' : 'transparent',
           }}
         >
           {active && <div className="w-1.5 h-1.5 rounded-[1px]" style={{ background: '#000' }} />}
@@ -358,14 +358,14 @@ function SetCard({ set }: { set: LegoSet }) {
         <div className="font-cond text-[9px] font-bold tracking-[0.18em] uppercase" style={{ color: 'var(--text3)' }}>
           {set.brand}
         </div>
-        <div className="font-cond text-sm font-black uppercase leading-[1.1] mb-1.5 group-hover:text-gold transition-colors duration-150" style={{ color: 'var(--text)' }}>
+        <div className="font-cond text-sm font-black uppercase leading-[1.1] mb-1.5 group-hover:text-red transition-colors duration-150" style={{ color: 'var(--text)' }}>
           {set.name}
         </div>
         <div className="flex justify-between items-center">
           <span className="font-cond text-[10px] tracking-[0.1em] uppercase" style={{ color: 'var(--text3)' }}>
             {set.pieces} dilku
           </span>
-          <span className="font-cond text-sm font-black" style={{ color: set.rrp_czk ? 'var(--gold)' : 'var(--text3)' }}>
+          <span className="font-cond text-sm font-black" style={{ color: set.rrp_czk ? 'var(--red)' : 'var(--text3)' }}>
             {set.rrp_czk ? formatCZK(set.rrp_czk) : 'BrickLink'}
           </span>
         </div>

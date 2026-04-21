@@ -29,9 +29,9 @@ export default async function HofPage() {
   return (
     <>
       {/* Hero */}
-      <div className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg), rgba(201,162,39,0.04))' }}>
+      <div className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, var(--white), var(--bg))' }}>
         <div className="max-w-content mx-auto px-8">
-          <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--gold)' }}>Hall of Fame</div>
+          <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--red)' }}>Hall of Fame</div>
           <h1 className="font-serif font-bold tracking-[-0.02em] leading-[0.95] mb-4" style={{ fontSize: 'clamp(44px,6vw,72px)', color: 'var(--text)' }}>
             Nejlepsi sety<br />vsech dob.
           </h1>
@@ -72,8 +72,8 @@ export default async function HofPage() {
                       )}
                       <div className="p-4">
                         <div className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: 'var(--text3)' }}>{a.brand}</div>
-                        <div className="font-cond text-sm font-black uppercase leading-[1.1] group-hover:text-gold transition-colors" style={{ color: 'var(--text)' }}>{set?.name ?? a.title}</div>
-                        {a.rating_overall && <div className="font-cond text-sm font-black mt-1" style={{ color: 'var(--gold)' }}>{a.rating_overall.toFixed(1)}/10</div>}
+                        <div className="font-cond text-sm font-black uppercase leading-[1.1] group-hover:text-red transition-colors" style={{ color: 'var(--text)' }}>{set?.name ?? a.title}</div>
+                        {a.rating_overall && <div className="font-cond text-sm font-black mt-1" style={{ color: 'var(--red)' }}>{a.rating_overall.toFixed(1)}/10</div>}
                       </div>
                     </Link>
                   )
@@ -97,7 +97,7 @@ export default async function HofPage() {
             ].map(m => (
               <div key={m.label} className="flex justify-between py-1.5" style={{ borderBottom: '1px solid var(--bdr)' }}>
                 <span className="font-cond text-xs font-bold" style={{ color: 'var(--text2)' }}>{m.label}</span>
-                <span className="font-cond text-xs font-black" style={{ color: 'var(--gold)' }}>{m.w}</span>
+                <span className="font-cond text-xs font-black" style={{ color: 'var(--red)' }}>{m.w}</span>
               </div>
             ))}
           </div>
@@ -118,11 +118,11 @@ function HofHero({ article, set }: { article: Article; set: LegoSet | null }) {
   ]
 
   return (
-    <Link href={`/dna/${article.slug}`} className="group block no-underline rounded-xl overflow-hidden" style={{ background: 'var(--sur)', border: '1px solid var(--bdr)', borderLeft: '3px solid var(--gold)' }}>
+    <Link href={`/dna/${article.slug}`} className="group block no-underline rounded-xl overflow-hidden" style={{ background: 'var(--sur)', border: '1px solid var(--bdr)', borderLeft: '3px solid var(--red)' }}>
       <div className="grid items-center" style={{ gridTemplateColumns: '120px 1fr 110px' }}>
         {/* Rank */}
         <div className="flex items-center justify-center">
-          <span className="font-cond text-[72px] font-black leading-none" style={{ color: 'var(--gold)' }}>01</span>
+          <span className="font-cond text-[72px] font-black leading-none" style={{ color: 'var(--red)' }}>01</span>
         </div>
 
         {/* Info + photo */}
@@ -142,7 +142,7 @@ function HofHero({ article, set }: { article: Article; set: LegoSet | null }) {
                 <div key={c.label} className="flex items-center gap-2">
                   <span className="font-cond text-[9px] font-bold tracking-[0.08em] uppercase w-12" style={{ color: 'var(--text3)' }}>{c.label}</span>
                   <div className="flex-1 h-[3px] rounded-sm overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                    <div className="h-full rounded-sm" style={{ width: `${(c.val ?? 0) * 10}%`, background: 'var(--gold)' }} />
+                    <div className="h-full rounded-sm" style={{ width: `${(c.val ?? 0) * 10}%`, background: 'var(--red)' }} />
                   </div>
                   <span className="font-cond text-[10px] font-black w-6 text-right" style={{ color: 'var(--text)' }}>{c.val?.toFixed(1)}</span>
                 </div>
@@ -153,7 +153,7 @@ function HofHero({ article, set }: { article: Article; set: LegoSet | null }) {
 
         {/* Score */}
         <div className="text-center px-4" style={{ borderLeft: '1px solid var(--bdr)' }}>
-          <div className="font-cond text-[56px] font-black leading-none" style={{ color: 'var(--gold)' }}>
+          <div className="font-cond text-[56px] font-black leading-none" style={{ color: 'var(--red)' }}>
             {article.rating_overall?.toFixed(1)}
           </div>
           <div className="font-cond text-[9px] tracking-[0.15em] uppercase" style={{ color: 'var(--text3)' }}>skore</div>
@@ -172,7 +172,7 @@ function HofRow({ rank, article, set }: { rank: number; article: Article; set: L
       className="group grid items-center gap-5 no-underline transition-colors hover:bg-sur2"
       style={{ gridTemplateColumns: '72px 90px 1fr auto 80px', background: 'var(--sur)', padding: '14px 22px' }}
     >
-      <div className="font-cond text-[24px] font-black leading-none" style={{ color: rank <= 3 ? 'var(--gold)' : 'rgba(255,255,255,0.12)' }}>
+      <div className="font-cond text-[24px] font-black leading-none" style={{ color: rank <= 3 ? 'var(--red)' : 'rgba(255,255,255,0.12)' }}>
         {String(rank).padStart(2, '0')}
       </div>
       <div className="w-[90px] h-14 overflow-hidden rounded" style={{ background: 'var(--sur2)' }}>
@@ -185,13 +185,13 @@ function HofRow({ rank, article, set }: { rank: number; article: Article; set: L
       </div>
       <div className="flex gap-1.5">
         {rank <= 3 && (
-          <span className="font-cond text-[10px] font-bold tracking-[0.12em] uppercase px-2 py-[3px] rounded-sm" style={{ background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--gold)' }}>
+          <span className="font-cond text-[10px] font-bold tracking-[0.12em] uppercase px-2 py-[3px] rounded-sm" style={{ background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--red)' }}>
             Top {rank}
           </span>
         )}
       </div>
       <div className="text-center" style={{ borderLeft: '1px solid var(--bdr)', paddingLeft: 16 }}>
-        <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--gold)' }}>
+        <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--red)' }}>
           {article.rating_overall?.toFixed(1) ?? '—'}
         </div>
         <div className="font-cond text-[9px] tracking-[0.15em] uppercase" style={{ color: 'var(--text3)' }}>skore</div>

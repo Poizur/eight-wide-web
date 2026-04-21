@@ -30,7 +30,7 @@ export function BrandsStrip({ brands }: { brands: BrandStat[] }) {
               <div className="font-cond text-[15px] font-black tracking-[0.04em] uppercase mb-2" style={{ color: 'var(--text)' }}>
                 {b.brand}
               </div>
-              <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--gold)' }}>
+              <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--red)' }}>
                 {b.count} setu
               </div>
               <div className="font-cond text-[10px] tracking-[0.14em] uppercase mt-1" style={{ color: 'var(--text3)' }}>
@@ -44,7 +44,7 @@ export function BrandsStrip({ brands }: { brands: BrandStat[] }) {
               className="block text-center no-underline py-[22px] px-4 transition-colors duration-200 hover:bg-sur2"
               style={{ background: 'var(--sur)' }}
             >
-              <div className="font-cond text-[28px] font-black mb-2" style={{ color: 'var(--gold)' }}>
+              <div className="font-cond text-[28px] font-black mb-2" style={{ color: 'var(--red)' }}>
                 +{remaining}
               </div>
               <div className="font-cond text-xs" style={{ color: 'var(--text2)' }}>

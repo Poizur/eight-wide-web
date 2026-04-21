@@ -12,7 +12,7 @@ export function RelatedArticles({ articles }: { articles: Article[] }) {
         <div className="font-cond text-[13px] font-bold tracking-[0.15em] uppercase" style={{ color: 'var(--text)' }}>
           Dalsi clanky
         </div>
-        <Link href="/dna" className="font-cond text-[11px] font-bold tracking-[0.14em] uppercase no-underline" style={{ color: 'var(--gold)' }}>
+        <Link href="/dna" className="font-cond text-[11px] font-bold tracking-[0.14em] uppercase no-underline" style={{ color: 'var(--red)' }}>
           Vsechny →
         </Link>
       </div>
@@ -31,13 +31,13 @@ export function RelatedArticles({ articles }: { articles: Article[] }) {
                 <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
                   <Image src={imgSrc} alt={a.title} fill className="object-cover photo-dark" sizes="33vw" />
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(17,22,32,0.95) 0%, transparent 60%)' }} />
-                  <span className="absolute bottom-3 left-3 font-cond text-[9px] font-bold tracking-[0.14em] uppercase px-2 py-0.5 rounded-sm z-[2]" style={{ background: 'rgba(10,12,16,0.7)', color: 'var(--gold)' }}>
+                  <span className="absolute bottom-3 left-3 font-cond text-[9px] font-bold tracking-[0.14em] uppercase px-2 py-0.5 rounded-sm z-[2]" style={{ background: 'rgba(10,12,16,0.7)', color: 'var(--red)' }}>
                     {a.series}
                   </span>
                 </div>
               )}
               <div className="p-4">
-                <div className="font-cond text-base font-black uppercase leading-[1.1] group-hover:text-gold transition-colors duration-200" style={{ color: 'var(--text)' }}>
+                <div className="font-cond text-base font-black uppercase leading-[1.1] group-hover:text-red transition-colors duration-200" style={{ color: 'var(--text)' }}>
                   {a.title}
                 </div>
                 <div className="mt-2 font-cond text-[10px] uppercase tracking-[0.1em]" style={{ color: 'var(--text3)' }}>

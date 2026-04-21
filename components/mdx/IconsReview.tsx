@@ -34,7 +34,7 @@ export function IconsReview({
       {/* Gold top bar */}
       <div
         className="px-5 py-2.5 font-cond text-[10px] font-bold tracking-[0.2em] uppercase"
-        style={{ background: 'var(--gold)', color: '#000' }}
+        style={{ background: 'var(--red)', color: '#000' }}
       >
         {legoLine.toUpperCase()} · Set {setNumber}
       </div>

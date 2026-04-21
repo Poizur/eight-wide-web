@@ -21,7 +21,7 @@ export function ReadProgress() {
     >
       <div
         className="h-full transition-[width] duration-100 ease-out"
-        style={{ width: `${progress}%`, background: 'var(--gold)' }}
+        style={{ width: `${progress}%`, background: 'var(--red)' }}
       />
     </div>
   )

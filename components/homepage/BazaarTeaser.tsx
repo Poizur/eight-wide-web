@@ -20,8 +20,8 @@ export function BazaarTeaser() {
         >
           {/* Left */}
           <div>
-            <div className="font-cond text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2" style={{ color: 'var(--gold)' }}>
-              <span className="block w-6 h-px" style={{ background: 'var(--gold)' }} />
+            <div className="font-cond text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2" style={{ color: 'var(--red)' }}>
+              <span className="block w-6 h-px" style={{ background: 'var(--red)' }} />
               Pripravujeme
             </div>
             <div className="font-serif font-bold tracking-[-0.02em] leading-[1.1] mb-4" style={{ fontSize: 'clamp(28px,3vw,42px)', color: 'var(--text)' }}>
@@ -37,7 +37,7 @@ export function BazaarTeaser() {
                 { n: 'zdarma', l: 'pro cleny' },
               ].map((s) => (
                 <div key={s.l}>
-                  <div className="font-cond text-2xl font-black leading-none" style={{ color: 'var(--gold)' }}>{s.n}</div>
+                  <div className="font-cond text-2xl font-black leading-none" style={{ color: 'var(--red)' }}>{s.n}</div>
                   <div className="font-cond text-[10px] tracking-[0.15em] uppercase mt-[3px]" style={{ color: 'var(--text3)' }}>{s.l}</div>
                 </div>
               ))}
@@ -55,7 +55,7 @@ export function BazaarTeaser() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Notifikovat me pri spusteni"
-                className="font-sans text-[13px] px-4 py-2.5 rounded-md flex-1 outline-none transition-colors duration-150 focus:border-[var(--gold)]"
+                className="font-sans text-[13px] px-4 py-2.5 rounded-md flex-1 outline-none transition-colors duration-150 focus:border-[var(--red)]"
                 style={{
                   background: 'var(--bg)',
                   border: '1px solid rgba(255,255,255,0.1)',
@@ -65,7 +65,7 @@ export function BazaarTeaser() {
               <button
                 type="submit"
                 className="font-cond text-xs font-bold tracking-[0.14em] uppercase px-5 py-2.5 rounded-md border-none cursor-pointer whitespace-nowrap transition-colors duration-150 hover:bg-gold2"
-                style={{ background: 'var(--gold)', color: '#000' }}
+                style={{ background: 'var(--red)', color: '#000' }}
               >
                 Chci vedet →
               </button>
@@ -77,13 +77,13 @@ export function BazaarTeaser() {
             {features.map((f) => (
               <div
                 key={f.icon}
-                className="flex gap-4 items-start px-5 py-[18px] transition-colors duration-200 hover:border-l-[var(--gold)]"
+                className="flex gap-4 items-start px-5 py-[18px] transition-colors duration-200 hover:border-l-[var(--red)]"
                 style={{
                   background: 'var(--sur)',
                   borderLeft: '2px solid var(--bdr)',
                 }}
               >
-                <div className="font-cond text-[13px] font-black shrink-0 mt-0.5" style={{ color: 'var(--gold)', opacity: 0.5 }}>
+                <div className="font-cond text-[13px] font-black shrink-0 mt-0.5" style={{ color: 'var(--red)', opacity: 0.5 }}>
                   {f.icon}
                 </div>
                 <div>

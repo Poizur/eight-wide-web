@@ -9,20 +9,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg:     '#0A0C10',
-        sur:    '#111620',
-        sur2:   '#181F2E',
-        gold:   '#C9A227',
-        gold2:  '#E8C547',
-        red:    '#C8281E',
-        green:  '#27AE60',
+        // V2 tokens
+        bg:        '#F7F6F2',
+        white:     '#FFFFFF',
+        ink:       '#111111',
+        ink2:      '#3D3D3D',
+        muted:     '#888880',
+        subtle:    '#BDBDB5',
+        border:    '#E4E3DC',
+        red:       '#C8281E',
+        'red-bg':  '#FDF1F0',
+        gold:      '#A8831A',
+        'gold-bg': '#FBF6EA',
+        green:     '#1A7A42',
+        'green-bg':'#EEF7F2',
+        blue:      '#1565C0',
+        purple:    '#7B3FA0',
+
+        // Legacy aliases (mapped to V2)
+        sur:    '#FFFFFF',
+        sur2:   '#F7F6F2',
+        gold2:  '#C8281E',
         orange: '#E67E22',
-        blue:   '#3498DB',
+      },
+      boxShadow: {
+        card:      '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+        'card-hv': '0 8px 24px rgba(0,0,0,0.10)',
       },
       fontFamily: {
-        cond:  ['Barlow Condensed', 'Arial', 'sans-serif'],
-        serif: ['Barlow Condensed', 'Arial', 'sans-serif'],
-        sans:  ['DM Sans', '-apple-system', 'sans-serif'],
+        cond:  ['Plus Jakarta Sans', '-apple-system', 'sans-serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        sans:  ['Plus Jakarta Sans', '-apple-system', 'sans-serif'],
       },
       maxWidth: {
         content: '1280px',

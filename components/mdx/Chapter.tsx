@@ -12,9 +12,9 @@ export function Chapter({ title, children }: ChapterProps) {
     <section className="mb-14" id={id}>
       <div
         className="font-cond text-[11px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3"
-        style={{ color: 'var(--gold)' }}
+        style={{ color: 'var(--red)' }}
       >
-        <span className="block w-6 h-px" style={{ background: 'var(--gold)' }} />
+        <span className="block w-6 h-px" style={{ background: 'var(--red)' }} />
         {title}
       </div>
       <h2

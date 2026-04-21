@@ -193,7 +193,7 @@ export default async function DnaArticlePage({ params }: Props) {
           {/* Meta */}
           <div className="flex items-center gap-5 flex-wrap">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center font-cond text-xs font-black" style={{ background: 'var(--gold)', color: '#000' }}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center font-cond text-xs font-black" style={{ background: 'var(--red)', color: '#000' }}>
                 EW
               </div>
               <span className="text-[13px]" style={{ color: 'var(--text2)' }}>Eight Wide</span>
@@ -288,7 +288,7 @@ export default async function DnaArticlePage({ params }: Props) {
                     </div>
                   ) : null}
                   <div className="p-5">
-                    <div className="font-cond text-[10px] font-bold tracking-[0.15em] uppercase mb-1" style={{ color: 'var(--gold)' }}>
+                    <div className="font-cond text-[10px] font-bold tracking-[0.15em] uppercase mb-1" style={{ color: 'var(--red)' }}>
                       DNA #{r.number}
                     </div>
                     <div className="font-cond text-lg font-black uppercase leading-[1.1]" style={{ color: 'var(--text)' }}>

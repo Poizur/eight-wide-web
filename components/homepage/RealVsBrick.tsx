@@ -115,7 +115,7 @@ function RvbMiniSplit({ set }: { set: LegoSet }) {
 
       {/* Info strip */}
       <div className="px-4 py-3">
-        <div className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-[400ms] group-hover:text-gold" style={{ color: 'var(--text3)' }}>
+        <div className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase transition-colors duration-[400ms] group-hover:text-red" style={{ color: 'var(--text3)' }}>
           {set.brand} · {set.year_released}
         </div>
         <div className="font-serif font-bold tracking-[-0.02em] text-lg leading-[1.1]" style={{ color: 'var(--text)' }}>

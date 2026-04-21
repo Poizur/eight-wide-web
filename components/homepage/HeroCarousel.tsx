@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { Article, LegoSet } from '@/lib/supabase/types'
 import Link from 'next/link'
+import Image from 'next/image'
 import { formatCZK } from '@/lib/utils'
 import { getArticleHero } from '@/lib/images'
 
@@ -49,83 +50,83 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
   const heroPhoto = getArticleHero(a, set).src
 
   return (
-    <section className="relative flex items-center overflow-hidden" style={{ height: '85vh', minHeight: 560, maxHeight: 820 }}>
-      {/* Background photo */}
+    <section
+      className="grid grid-cols-1 md:grid-cols-2 overflow-hidden"
+      style={{ background: 'var(--ink)', color: 'white', minHeight: 480 }}
+    >
+      {/* Left side — text */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-        style={{
-          backgroundImage: `url('${heroPhoto}')`,
-          backgroundPosition: 'center 40%',
-          filter: 'brightness(0.5) saturate(1)',
-        }}
-      />
-      {/* Gradient overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(10,12,16,0.98) 0%, rgba(10,12,16,0.7) 30%, rgba(10,12,16,0.2) 65%, transparent 100%)',
-        }}
-      />
-      {/* Gold bar */}
-      <div
-        className="absolute left-0 top-0 bottom-0"
-        style={{
-          width: 3,
-          background: 'linear-gradient(to bottom, var(--gold) 0%, transparent 80%)',
-        }}
-      />
-
-      {/* Content */}
-      <div
-        className={`relative z-[2] px-14 max-w-[860px] transition-all duration-[650ms] ${
-          fade === 'out'
-            ? 'opacity-0 translate-y-3'
-            : fade === 'in'
-              ? 'opacity-0 translate-y-4 animate-[heroIn_0.65s_ease_forwards]'
-              : ''
+        className={`flex flex-col justify-end px-12 py-14 transition-all duration-[650ms] ${
+          fade === 'out' ? 'opacity-0 translate-y-3' : 'opacity-100 translate-y-0'
         }`}
       >
-        {/* Tag */}
-        <div className="inline-flex items-center gap-[7px] font-cond text-[11px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--gold)' }}>
-          <div className="w-[5px] h-[5px] rounded-full" style={{ background: 'var(--gold)' }} />
-          {a.series.toUpperCase()} Series · #{String(a.number ?? '').padStart(3, '0')} · {a.brand}
+        {/* Series chip */}
+        <div
+          className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase rounded px-2.5 py-1 w-fit mb-5"
+          style={{
+            color: 'var(--red)',
+            background: 'rgba(200,40,30,0.15)',
+            border: '1px solid rgba(200,40,30,0.25)',
+            letterSpacing: '0.12em',
+          }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--red)' }} />
+          {a.series.toUpperCase()} Series · #{String(a.number ?? '').padStart(3, '0')}
         </div>
 
-        {/* Title */}
         <h1
-          className="font-serif font-bold tracking-[-0.02em] leading-[1.08] mb-4"
-          style={{ fontSize: 'clamp(32px,3.8vw,52px)', color: 'var(--text)' }}
+          className="font-serif font-normal mb-4"
+          style={{
+            fontSize: 'clamp(44px,6vw,72px)',
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
+            color: 'white',
+          }}
         >
-          {a.title}
+          {a.title.split('—')[0]}
+          {a.title.includes('—') && (
+            <>
+              —<br />
+              <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.6)' }}>
+                {a.title.split('—').slice(1).join('—').trim()}
+              </em>
+            </>
+          )}
         </h1>
 
-        {/* Deck */}
-        <p className="text-[15px] leading-[1.7] mb-7 max-w-[580px]" style={{ color: 'rgba(234,232,224,0.65)' }}>
-          {a.excerpt}
-        </p>
+        {a.excerpt && (
+          <p
+            className="text-[15px] leading-[1.65] mb-7 max-w-[420px]"
+            style={{ color: 'rgba(255,255,255,0.65)' }}
+          >
+            {a.excerpt}
+          </p>
+        )}
 
         {/* Specs bar */}
         {set && (
           <div
-            className="flex w-fit rounded-lg overflow-hidden mb-7"
-            style={{
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: 'rgba(10,12,16,0.6)',
-              backdropFilter: 'blur(8px)',
-            }}
+            className="flex w-fit rounded-lg overflow-hidden mb-8"
+            style={{ border: '1px solid rgba(255,255,255,0.1)' }}
           >
             {[
-              { num: String(set.pieces ?? '—'), lbl: 'Dilku' },
-              { num: String(set.year_released ?? '—'), lbl: 'Rok' },
-              { num: set.rrp_czk ? formatCZK(set.rrp_czk) : '—', lbl: 'Cena' },
-              { num: set.status === 'available' ? 'Dostupny' : set.status, lbl: 'Status' },
+              { val: String(set.pieces ?? '—'), lbl: 'Dílků' },
+              { val: String(set.year_released ?? '—'), lbl: 'Rok' },
+              { val: set.rrp_czk ? formatCZK(set.rrp_czk) : '—', lbl: 'Cena' },
+              { val: set.status === 'available' ? 'Dostupný' : set.status, lbl: 'Status' },
             ].map((spec, i) => (
-              <div key={i} className="px-5 py-[11px]" style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
-                <div className="font-cond text-[22px] font-black leading-none" style={{ color: 'var(--text)' }}>
-                  {spec.num}
+              <div
+                key={i}
+                className="px-[18px] py-2.5"
+                style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.1)' : 'none' }}
+              >
+                <div className="text-lg font-bold leading-none mb-0.5" style={{ color: 'white' }}>
+                  {spec.val}
                 </div>
-                <div className="font-cond text-[9px] font-bold tracking-[0.18em] uppercase mt-0.5" style={{ color: 'var(--text3)' }}>
+                <div
+                  className="text-[10px] uppercase font-medium"
+                  style={{ letterSpacing: '0.1em', color: 'rgba(255,255,255,0.4)' }}
+                >
                   {spec.lbl}
                 </div>
               </div>
@@ -133,63 +134,90 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
           </div>
         )}
 
-        {/* Buttons */}
+        {/* Actions */}
         <div className="flex gap-3 items-center">
           <Link
             href={`/dna/${a.slug}`}
-            className="font-cond text-[13px] font-bold tracking-[0.14em] uppercase px-6 py-3 rounded-md flex items-center gap-2 no-underline transition-all duration-200"
-            style={{ background: 'var(--gold)', color: '#000' }}
+            className="inline-flex items-center gap-2 text-[13px] font-semibold px-[22px] py-[11px] rounded-[7px] no-underline transition-all hover:gap-2.5"
+            style={{ background: 'white', color: 'var(--ink)', letterSpacing: '0.01em' }}
           >
-            Cist DNA clanek →
+            Číst DNA článek →
           </Link>
           <Link
             href="/generace"
-            className="font-cond text-[13px] font-bold tracking-[0.12em] uppercase px-5 py-3 rounded-md no-underline transition-all duration-150"
-            style={{ border: '1px solid rgba(255,255,255,0.15)', color: 'var(--text2)' }}
+            className="text-[13px] font-medium px-1 py-[11px] no-underline transition-colors"
+            style={{ color: 'rgba(255,255,255,0.5)' }}
           >
             Srovnat generace
           </Link>
         </div>
       </div>
 
-      {/* Dots */}
-      {slides.length > 1 && (
-        <div className="absolute bottom-8 left-14 flex gap-2 z-10">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className="h-[3px] rounded-sm border-none p-0 cursor-pointer transition-all duration-[350ms]"
-              style={{
-                width: i === current ? 44 : 28,
-                background: i === current ? 'var(--gold)' : 'rgba(255,255,255,0.25)',
-              }}
-            />
-          ))}
+      {/* Right side — image */}
+      <div
+        className="relative flex items-center justify-center overflow-hidden"
+        style={{ background: '#0A0A0A', minHeight: 320 }}
+      >
+        {/* Subtle red glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse at 60% 50%, rgba(200,40,30,0.08) 0%, transparent 65%), radial-gradient(ellipse at 40% 80%, rgba(200,40,30,0.05) 0%, transparent 50%)',
+          }}
+        />
+
+        {/* Set badge top-right */}
+        {set && (
+          <div
+            className="absolute top-7 right-7 text-right rounded-lg px-3.5 py-2.5 z-[2]"
+            style={{
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.1)',
+            }}
+          >
+            <div className="text-xl font-bold leading-none" style={{ color: 'white' }}>
+              {set.set_number}
+            </div>
+            <div
+              className="text-[10px] uppercase mt-0.5 font-medium"
+              style={{ letterSpacing: '0.1em', color: 'rgba(255,255,255,0.4)' }}
+            >
+              Set number
+            </div>
+          </div>
+        )}
+
+        {/* Photo */}
+        <div className="relative w-full h-full">
+          <Image
+            src={heroPhoto}
+            alt={a.title}
+            fill
+            className="object-contain p-8"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
         </div>
-      )}
 
-      {/* Counter */}
-      <div className="absolute bottom-8 right-14 font-cond text-[11px] font-bold tracking-[0.2em] z-10" style={{ color: 'rgba(255,255,255,0.3)' }}>
-        <span style={{ color: 'rgba(255,255,255,0.7)' }}>{String(current + 1).padStart(2, '0')}</span> / {String(slides.length).padStart(2, '0')}
+        {/* Slide dots */}
+        {slides.length > 1 && (
+          <div className="absolute bottom-6 left-6 flex gap-2 z-[3]">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="rounded-full border-none p-0 cursor-pointer transition-all duration-200"
+                style={{
+                  width: i === current ? 24 : 8,
+                  height: 8,
+                  background: i === current ? 'var(--red)' : 'rgba(255,255,255,0.25)',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* Scroll hint */}
-      <div className="absolute bottom-8 right-48 z-[2] flex flex-col items-center gap-1.5">
-        <span className="font-cond text-[10px] tracking-[0.2em] uppercase" style={{ color: 'var(--text3)' }}>Scroll</span>
-        <div className="w-px h-9" style={{ background: 'linear-gradient(to bottom, var(--text3), transparent)', animation: 'scrollLine 1.5s ease-in-out infinite' }} />
-      </div>
-
-      <style jsx>{`
-        @keyframes heroIn {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scrollLine {
-          0%,100% { transform: scaleY(1); opacity: 0.5; }
-          50%     { transform: scaleY(0.3); opacity: 1; }
-        }
-      `}</style>
     </section>
   )
 }

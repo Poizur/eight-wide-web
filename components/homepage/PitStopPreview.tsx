@@ -38,7 +38,7 @@ export function PitStopPreview({ sets }: { sets: LegoSet[] }) {
       <div className="grid grid-cols-5">
         {display.map((set, i) => {
           const badge = statusBadge(set)
-          const accent = accentColors[set.status] ?? 'var(--gold)'
+          const accent = accentColors[set.status] ?? 'var(--red)'
           return (
             <Link
               key={set.id}

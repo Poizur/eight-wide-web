@@ -29,7 +29,7 @@ export default async function AdminSetyPage() {
             className="grid items-center px-4 py-2.5 no-underline transition-colors hover:bg-sur2"
             style={{ gridTemplateColumns: '80px 1fr 100px 80px 80px 80px 80px', borderBottom: '1px solid var(--bdr)' }}
           >
-            <span className="font-cond text-xs font-bold" style={{ color: 'var(--gold)' }}>{s.set_number}</span>
+            <span className="font-cond text-xs font-bold" style={{ color: 'var(--red)' }}>{s.set_number}</span>
             <span className="font-cond text-sm font-bold uppercase" style={{ color: 'var(--text)' }}>{s.name}</span>
             <span className="font-cond text-xs" style={{ color: 'var(--text2)' }}>{s.brand}</span>
             <span className="font-cond text-xs" style={{ color: 'var(--text3)' }}>{s.year_released}</span>

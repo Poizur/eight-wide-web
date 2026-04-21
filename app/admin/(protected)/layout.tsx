@@ -26,8 +26,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
       >
         <div className="flex items-center gap-6">
           <Link href="/admin" className="font-sans text-base font-semibold no-underline" style={{ color: 'var(--text)' }}>
-            Eight <span style={{ color: 'var(--gold)' }}>Wide</span>
-            <span className="ml-2 font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-2 py-0.5 rounded" style={{ background: 'rgba(201,162,39,0.1)', color: 'var(--gold)' }}>
+            Eight <span style={{ color: 'var(--red)' }}>Wide</span>
+            <span className="ml-2 font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-2 py-0.5 rounded" style={{ background: 'rgba(201,162,39,0.1)', color: 'var(--red)' }}>
               Admin
             </span>
           </Link>

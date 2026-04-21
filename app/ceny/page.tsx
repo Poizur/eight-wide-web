@@ -115,7 +115,7 @@ export default async function CenyPage({ searchParams }: Props) {
               { n: String(saleCount), l: 'Aktivnich slev', c: 'var(--green)' },
               { n: String(retiringCount), l: 'Retiring brzy', c: 'var(--orange)' },
               { n: String(upcomingCount), l: 'Novych setu', c: '#5DADE2' },
-              { n: String(allStats.length), l: 'Setu celkem', c: 'var(--gold)' },
+              { n: String(allStats.length), l: 'Setu celkem', c: 'var(--red)' },
             ].map(s => (
               <div key={s.l} className="text-center rounded-[10px] px-5 py-4" style={{ background: 'var(--sur)', border: '1px solid var(--bdr)' }}>
                 <div className="font-cond text-[28px] font-black leading-none mb-1" style={{ color: s.c }}>{s.n}</div>
@@ -127,7 +127,7 @@ export default async function CenyPage({ searchParams }: Props) {
       </div>
 
       {/* Sticky tabs */}
-      <div className="sticky top-[86px] z-[100]" style={{ background: 'rgba(10,12,16,0.96)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--bdr)' }}>
+      <div className="sticky top-[86px] z-[100]" style={{ background: 'rgba(255,255,255,0.96)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--bdr)' }}>
         <div className="max-w-content mx-auto px-8 flex items-center">
           {tabs.map(t => (
             <Link
@@ -135,8 +135,8 @@ export default async function CenyPage({ searchParams }: Props) {
               href={buildUrl({ tab: t.key })}
               className="font-cond text-[13px] font-bold tracking-[0.1em] uppercase px-5 py-4 no-underline transition-all duration-200"
               style={{
-                color: tab === t.key ? 'var(--gold)' : 'var(--text3)',
-                borderBottom: tab === t.key ? '2px solid var(--gold)' : '2px solid transparent',
+                color: tab === t.key ? 'var(--red)' : 'var(--text3)',
+                borderBottom: tab === t.key ? '2px solid var(--red)' : '2px solid transparent',
               }}
             >
               {t.label}
@@ -150,7 +150,7 @@ export default async function CenyPage({ searchParams }: Props) {
                 name="q"
                 defaultValue={searchParams.q}
                 placeholder="Hledat set nebo model..."
-                className="px-3.5 py-[7px] rounded-md font-sans text-[13px] w-[220px] outline-none transition-colors focus:border-[var(--gold)]"
+                className="px-3.5 py-[7px] rounded-md font-sans text-[13px] w-[220px] outline-none transition-colors focus:border-[var(--red)]"
                 style={{ background: 'var(--sur)', border: '1px solid var(--bdr)', color: 'var(--text)' }}
               />
             </form>
@@ -255,7 +255,7 @@ export default async function CenyPage({ searchParams }: Props) {
                 </div>
 
                 {/* Alert */}
-                <button className="font-cond text-[10px] font-bold tracking-[0.1em] uppercase px-2 py-1 rounded border-none cursor-pointer transition-all duration-150 hover:border-[var(--gold)] hover:text-gold" style={{ background: 'none', border: '1px solid var(--bdr)', color: 'var(--text3)' }}>
+                <button className="font-cond text-[10px] font-bold tracking-[0.1em] uppercase px-2 py-1 rounded border-none cursor-pointer transition-all duration-150 hover:border-[var(--red)] hover:text-red" style={{ background: 'none', border: '1px solid var(--bdr)', color: 'var(--text3)' }}>
                   + Alert
                 </button>
               </div>
@@ -302,7 +302,7 @@ function PriceAlertSection() {
           <div className="font-serif font-bold tracking-[-0.02em] text-[28px] mb-1.5" style={{ color: 'var(--text)' }}>Price Alert</div>
           <div className="text-sm" style={{ color: 'var(--text2)' }}>Nastav cilovou cenu — upozornime te emailem kdyz set zlevni.</div>
         </div>
-        <div className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-3.5 py-1.5 rounded-md" style={{ border: '1px solid rgba(201,162,39,0.3)', color: 'var(--gold)' }}>
+        <div className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase px-3.5 py-1.5 rounded-md" style={{ border: '1px solid rgba(201,162,39,0.3)', color: 'var(--red)' }}>
           Zdarma
         </div>
       </div>
@@ -314,15 +314,15 @@ function PriceAlertSection() {
       >
         <div className="flex flex-col gap-1.5">
           <label className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase" style={{ color: 'var(--text3)' }}>Tvuj email</label>
-          <input name="email" type="email" required placeholder="tvuj@email.cz" className="px-3.5 py-2.5 rounded-[7px] font-sans text-sm outline-none transition-colors focus:border-[var(--gold)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)' }} />
+          <input name="email" type="email" required placeholder="tvuj@email.cz" className="px-3.5 py-2.5 rounded-[7px] font-sans text-sm outline-none transition-colors focus:border-[var(--red)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)' }} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase" style={{ color: 'var(--text3)' }}>Set cislo</label>
-          <input name="set_number" type="text" required placeholder="napr. 76934" className="px-3.5 py-2.5 rounded-[7px] font-sans text-sm outline-none transition-colors focus:border-[var(--gold)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)' }} />
+          <input name="set_number" type="text" required placeholder="napr. 76934" className="px-3.5 py-2.5 rounded-[7px] font-sans text-sm outline-none transition-colors focus:border-[var(--red)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)' }} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase" style={{ color: 'var(--text3)' }}>Cilova cena</label>
-          <input name="target_price_czk" type="number" required placeholder="500" className="px-3.5 py-2.5 rounded-[7px] font-sans text-sm outline-none transition-colors focus:border-[var(--gold)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)' }} />
+          <input name="target_price_czk" type="number" required placeholder="500" className="px-3.5 py-2.5 rounded-[7px] font-sans text-sm outline-none transition-colors focus:border-[var(--red)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)' }} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase" style={{ color: 'var(--text3)' }}>Obchod</label>
@@ -333,7 +333,7 @@ function PriceAlertSection() {
             <option value="lego">LEGO.com</option>
           </select>
         </div>
-        <button type="submit" className="px-5 py-2.5 rounded-[7px] border-none cursor-pointer font-cond text-xs font-bold tracking-[0.12em] uppercase whitespace-nowrap" style={{ background: 'var(--gold)', color: '#000' }}>
+        <button type="submit" className="px-5 py-2.5 rounded-[7px] border-none cursor-pointer font-cond text-xs font-bold tracking-[0.12em] uppercase whitespace-nowrap" style={{ background: 'var(--red)', color: '#000' }}>
           Nastavit alert →
         </button>
       </form>

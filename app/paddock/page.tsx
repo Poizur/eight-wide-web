@@ -120,7 +120,7 @@ export default async function PaddockPage() {
                     <span className="font-cond text-sm font-black uppercase" style={{ color: 'var(--text)' }}>{r.car_name}</span>
                     <span className="font-cond text-xs ml-2" style={{ color: 'var(--text3)' }}>{r.brand}</span>
                   </div>
-                  {r.set_number && <span className="font-cond text-xs font-bold" style={{ color: 'var(--gold)' }}>Set {r.set_number}</span>}
+                  {r.set_number && <span className="font-cond text-xs font-bold" style={{ color: 'var(--red)' }}>Set {r.set_number}</span>}
                 </div>
               ))}
             </div>

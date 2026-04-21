@@ -21,12 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="cs">
-      <body>
+      <body style={{ paddingTop: 34 }}>
         <Ticker />
         <Nav />
-        <main style={{ paddingTop: 'calc(var(--nav-h) + 28px)' }}>
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
         <CookieBanner />
       </body>

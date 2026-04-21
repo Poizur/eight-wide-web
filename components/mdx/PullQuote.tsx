@@ -10,7 +10,7 @@ export function PullQuote({ author, children }: PullQuoteProps) {
     <blockquote
       className="my-8 py-5 px-5 rounded"
       style={{
-        borderLeft: '2px solid var(--gold)',
+        borderLeft: '2px solid var(--red)',
         background: 'rgba(201,162,39,0.04)',
       }}
     >

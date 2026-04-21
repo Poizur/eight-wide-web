@@ -54,7 +54,7 @@ export default function SetEditorPage() {
         </h1>
         <div className="flex gap-2">
           {msg && <span className="font-cond text-xs py-2 px-3 rounded" style={{ background: msg === 'Ulozeno' ? 'rgba(39,174,96,0.12)' : 'rgba(200,40,30,0.12)', color: msg === 'Ulozeno' ? 'var(--green)' : '#E8715B' }}>{msg}</span>}
-          <button onClick={handleSave} disabled={saving} className="font-cond text-xs font-bold tracking-[0.12em] uppercase px-5 py-2.5 rounded-lg border-none cursor-pointer" style={{ background: 'var(--gold)', color: '#000' }}>
+          <button onClick={handleSave} disabled={saving} className="font-cond text-xs font-bold tracking-[0.12em] uppercase px-5 py-2.5 rounded-lg border-none cursor-pointer" style={{ background: 'var(--red)', color: '#000' }}>
             {saving ? 'Ukladam...' : 'Ulozit zmeny'}
           </button>
         </div>
@@ -102,7 +102,7 @@ export default function SetEditorPage() {
             <div className="p-4">
               <div className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: 'var(--text3)' }}>{set.brand} · {set.year_released}</div>
               <div className="font-cond text-lg font-black uppercase" style={{ color: 'var(--text)' }}>{set.name}</div>
-              <div className="font-cond text-sm font-bold mt-1" style={{ color: 'var(--gold)' }}>Set {setNumber}</div>
+              <div className="font-cond text-sm font-bold mt-1" style={{ color: 'var(--red)' }}>Set {setNumber}</div>
             </div>
           </div>
           <a href={`/sety?q=${setNumber}`} target="_blank" className="block text-center font-cond text-[10px] font-bold tracking-[0.12em] uppercase py-2 rounded no-underline" style={{ border: '1px solid var(--bdr)', color: 'var(--text3)' }}>
@@ -127,7 +127,7 @@ function Field({ label, value, onChange }: { label: string; value: string; onCha
   return (
     <div className="flex flex-col gap-1">
       <label className="font-cond text-[9px] font-bold tracking-[0.14em] uppercase" style={{ color: 'var(--text3)' }}>{label}</label>
-      <input value={value} onChange={e => onChange(e.target.value)} className="px-3 py-2 rounded text-sm outline-none transition-colors focus:border-[var(--gold)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)', fontFamily: 'var(--sans)' }} />
+      <input value={value} onChange={e => onChange(e.target.value)} className="px-3 py-2 rounded text-sm outline-none transition-colors focus:border-[var(--red)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)', fontFamily: 'var(--sans)' }} />
     </div>
   )
 }

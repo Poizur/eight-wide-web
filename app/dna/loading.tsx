@@ -2,7 +2,7 @@ export default function DnaLoading() {
   return (
     <div>
       {/* Header skeleton */}
-      <div className="py-20" style={{ background: 'linear-gradient(135deg, var(--bg), rgba(201,162,39,0.04))' }}>
+      <div className="py-20" style={{ background: 'linear-gradient(to bottom, var(--white), var(--bg))' }}>
         <div className="max-w-content mx-auto px-8">
           <div className="h-3 w-20 rounded bg-sur2 animate-pulse mb-4" />
           <div className="h-16 w-96 rounded bg-sur2 animate-pulse mb-6" />

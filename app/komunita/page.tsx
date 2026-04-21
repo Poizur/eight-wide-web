@@ -63,8 +63,8 @@ export default function KomunitaPage() {
         <div className="max-w-content mx-auto px-8 w-full relative z-[2] grid items-center gap-12" style={{ gridTemplateColumns: '1fr 420px' }}>
           {/* Left */}
           <div>
-            <div className="font-cond text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2" style={{ color: 'var(--gold)' }}>
-              <span className="block w-6 h-px" style={{ background: 'var(--gold)' }} />
+            <div className="font-cond text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2" style={{ color: 'var(--red)' }}>
+              <span className="block w-6 h-px" style={{ background: 'var(--red)' }} />
               Pripravujeme · Q3 2026
             </div>
             <h1 className="font-serif font-bold tracking-[-0.02em] leading-[1.05] mb-4" style={{ fontSize: 'clamp(44px,5.5vw,72px)', color: 'var(--text)' }}>
@@ -84,7 +84,7 @@ export default function KomunitaPage() {
               ].map((c, i) => (
                 <div key={c.label} className="flex items-center gap-4">
                   <div className="text-center">
-                    <div className="font-cond text-[40px] font-black leading-none" style={{ color: 'var(--gold)' }}>
+                    <div className="font-cond text-[40px] font-black leading-none" style={{ color: 'var(--red)' }}>
                       {String(c.val).padStart(2, '0')}
                     </div>
                     <div className="font-cond text-[9px] tracking-[0.16em] uppercase mt-1" style={{ color: 'var(--text3)' }}>
@@ -98,7 +98,7 @@ export default function KomunitaPage() {
 
             {/* Waitlist count */}
             <div className="flex items-center gap-3 mb-4">
-              <span className="font-cond text-2xl font-black" style={{ color: 'var(--gold)' }}>{waitlistCount.toLocaleString('cs-CZ')}</span>
+              <span className="font-cond text-2xl font-black" style={{ color: 'var(--red)' }}>{waitlistCount.toLocaleString('cs-CZ')}</span>
               <span className="font-cond text-[10px] tracking-[0.15em] uppercase" style={{ color: 'var(--text3)' }}>ctenaru ceka</span>
             </div>
 
@@ -116,10 +116,10 @@ export default function KomunitaPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Notifikovat me pri spusteni"
-                className="flex-1 px-4 py-2.5 rounded-md font-sans text-[13px] outline-none transition-colors focus:border-[var(--gold)]"
+                className="flex-1 px-4 py-2.5 rounded-md font-sans text-[13px] outline-none transition-colors focus:border-[var(--red)]"
                 style={{ background: 'var(--bg)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text)' }}
               />
-              <button type="submit" className="font-cond text-xs font-bold tracking-[0.14em] uppercase px-5 py-2.5 rounded-md border-none cursor-pointer whitespace-nowrap" style={{ background: 'var(--gold)', color: '#000' }}>
+              <button type="submit" className="font-cond text-xs font-bold tracking-[0.14em] uppercase px-5 py-2.5 rounded-md border-none cursor-pointer whitespace-nowrap" style={{ background: 'var(--red)', color: '#000' }}>
                 Chci vedet →
               </button>
             </form>
@@ -129,7 +129,7 @@ export default function KomunitaPage() {
           <div className="rounded-xl overflow-hidden" style={{ background: 'var(--sur)', border: '1px solid var(--bdr)' }}>
             <div className="px-4 py-3 flex items-center justify-between" style={{ borderBottom: '1px solid var(--bdr)' }}>
               <span className="font-cond text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: 'var(--text3)' }}>Marketplace preview</span>
-              <span className="font-cond text-[9px] font-bold tracking-[0.14em] uppercase px-2 py-0.5 rounded" style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.3)', color: 'var(--gold)' }}>Coming soon</span>
+              <span className="font-cond text-[9px] font-bold tracking-[0.14em] uppercase px-2 py-0.5 rounded" style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.3)', color: 'var(--red)' }}>Coming soon</span>
             </div>
             {mockListings.map((item, i) => (
               <div
@@ -145,7 +145,7 @@ export default function KomunitaPage() {
                   <div className="font-cond text-xs font-bold uppercase" style={{ color: 'var(--text)' }}>{item.name}</div>
                   <div className="font-cond text-[10px]" style={{ color: 'var(--text3)' }}>@{item.seller} · {item.status}</div>
                 </div>
-                <div className="font-cond text-sm font-black" style={{ color: 'var(--gold)' }}>{item.price}</div>
+                <div className="font-cond text-sm font-black" style={{ color: 'var(--red)' }}>{item.price}</div>
               </div>
             ))}
           </div>
@@ -158,7 +158,7 @@ export default function KomunitaPage() {
           {features.map(f => (
             <div key={f.n} className="p-5 relative" style={{ background: 'var(--sur)' }}>
               <div className="absolute top-3 right-4 font-cond text-[40px] font-black leading-none pointer-events-none" style={{ color: 'rgba(255,255,255,0.03)' }}>{f.n}</div>
-              <div className="font-cond text-[13px] font-black opacity-50 mb-2" style={{ color: 'var(--gold)' }}>{f.n}</div>
+              <div className="font-cond text-[13px] font-black opacity-50 mb-2" style={{ color: 'var(--red)' }}>{f.n}</div>
               <div className="font-cond text-[13px] font-bold tracking-[0.1em] uppercase mb-1" style={{ color: 'var(--text)' }}>{f.title}</div>
               <div className="text-xs leading-[1.5]" style={{ color: 'var(--text3)' }}>{f.desc}</div>
             </div>

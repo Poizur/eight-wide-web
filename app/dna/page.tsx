@@ -57,7 +57,7 @@ export default async function DnaArchivePage({ searchParams }: Props) {
   return (
     <>
       {/* Page header */}
-      <div className="relative py-20 overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--bg), rgba(201,162,39,0.04))' }}>
+      <div className="relative py-20 overflow-hidden" style={{ background: 'linear-gradient(to bottom, var(--white), var(--bg))' }}>
         <div className="max-w-content mx-auto px-8">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--red)' }} />
@@ -85,7 +85,7 @@ export default async function DnaArchivePage({ searchParams }: Props) {
           style={{
             top: 'calc(28px + var(--nav-h))',
             height: 56,
-            background: 'rgba(10,12,16,0.92)',
+            background: 'rgba(255,255,255,0.94)',
             backdropFilter: 'blur(12px)',
             borderBottom: '1px solid var(--bdr)',
           }}
@@ -131,7 +131,7 @@ export default async function DnaArchivePage({ searchParams }: Props) {
 function Stat({ num, label }: { num: string; label: string }) {
   return (
     <div>
-      <div className="font-cond text-[28px] font-black leading-none" style={{ color: 'var(--gold)' }}>{num}</div>
+      <div className="font-cond text-[28px] font-black leading-none" style={{ color: 'var(--red)' }}>{num}</div>
       <div className="font-cond text-[10px] font-bold tracking-[0.16em] uppercase mt-0.5" style={{ color: 'var(--text3)' }}>{label}</div>
     </div>
   )
@@ -143,7 +143,7 @@ function FilterBtn({ href, active, label }: { href: string; active: boolean; lab
       href={href}
       className="shrink-0 font-cond text-xs font-bold tracking-[0.1em] uppercase px-3.5 py-1.5 rounded-md no-underline transition-all duration-150"
       style={{
-        background: active ? 'var(--gold)' : 'transparent',
+        background: active ? 'var(--red)' : 'transparent',
         color: active ? '#000' : 'var(--text3)',
         border: active ? 'none' : '1px solid var(--bdr)',
       }}
@@ -163,7 +163,7 @@ function FeaturedCard({ article }: { article: Article }) {
       style={{ background: 'var(--sur)', border: '1px solid var(--bdr)' }}
     >
       <div className="relative" style={{ position: 'relative' }}>
-        <div className="absolute left-0 top-0 bottom-0 w-[2px] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 z-10" style={{ background: 'var(--gold)' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-[2px] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 z-10" style={{ background: 'var(--red)' }} />
         {imgSrc && (
           <div className="relative overflow-hidden" style={{ aspectRatio: '21/9' }}>
             <Image src={imgSrc} alt={article.title} fill className="object-cover photo-dark" sizes="100vw" />
@@ -188,7 +188,7 @@ function FeaturedCard({ article }: { article: Article }) {
             <span>{article.brand} · {article.published_at ? new Date(article.published_at).getFullYear() : ''}</span>
             <div className="flex items-center gap-2">
               {article.rating_overall && (
-                <span className="font-cond text-lg font-black" style={{ color: 'var(--gold)' }}>
+                <span className="font-cond text-lg font-black" style={{ color: 'var(--red)' }}>
                   {article.rating_overall.toFixed(1)}<span className="text-xs" style={{ color: 'var(--text3)' }}>/10</span>
                 </span>
               )}
@@ -234,7 +234,7 @@ function ArticleCard({ article }: { article: Article }) {
           <div className="flex justify-between items-center font-cond text-[11px] tracking-[0.1em] uppercase pt-3" style={{ color: 'var(--text3)', borderTop: '1px solid var(--bdr)' }}>
             <span>{article.read_time_min ? `${article.read_time_min} min` : ''}</span>
             {article.rating_overall && (
-              <span className="font-cond text-lg font-black" style={{ color: 'var(--gold)' }}>
+              <span className="font-cond text-lg font-black" style={{ color: 'var(--red)' }}>
                 {article.rating_overall.toFixed(1)}<span className="text-xs" style={{ color: 'var(--text3)' }}>/10</span>
               </span>
             )}

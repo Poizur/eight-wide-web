@@ -1,7 +1,7 @@
 export default function HofLoading() {
   return (
     <div>
-      <div className="py-24" style={{ background: 'linear-gradient(135deg, var(--bg), rgba(201,162,39,0.04))' }}>
+      <div className="py-24" style={{ background: 'linear-gradient(to bottom, var(--white), var(--bg))' }}>
         <div className="max-w-content mx-auto px-8">
           <div className="h-3 w-24 rounded bg-sur2 animate-pulse mb-3" />
           <div className="h-16 w-72 rounded bg-sur2 animate-pulse mb-4" />

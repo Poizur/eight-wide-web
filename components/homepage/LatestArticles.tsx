@@ -6,7 +6,7 @@ import { SectionHead } from './SectionHead'
 
 const seriesConfig: Record<string, { label: string; cls: string }> = {
   dna:        { label: 'DNA Series', cls: 'text-red bg-[rgba(200,40,30,0.12)]' },
-  generace:   { label: 'Generace', cls: 'text-gold bg-[rgba(201,162,39,0.1)]' },
+  generace:   { label: 'Generace', cls: 'text-red bg-[rgba(201,162,39,0.1)]' },
   paddock:    { label: 'Paddock Rumors', cls: 'text-[#A97ED0] bg-[rgba(169,126,208,0.1)]' },
   investment: { label: 'The Investment', cls: 'text-green bg-[rgba(30,158,90,0.1)]' },
 }
@@ -19,7 +19,7 @@ function ArticleCard({ article, featured }: { article: Article; featured?: boole
     <Link href={`/${article.series}/${article.slug}`} className="group block no-underline" style={{ background: 'var(--sur)', transition: 'background 0.15s', cursor: 'pointer' }}>
       <div className="relative" style={{ position: 'relative' }}>
         {/* Gold left bar on hover */}
-        <div className="absolute left-0 top-0 bottom-0 w-[2px] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 z-10" style={{ background: 'var(--gold)' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-[2px] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 z-10" style={{ background: 'var(--red)' }} />
 
         {/* Photo */}
         {imgSrc && featured && (
@@ -45,11 +45,11 @@ function ArticleCard({ article, featured }: { article: Article; featured?: boole
             {series.label}
           </div>
           {featured ? (
-            <div className="font-serif font-bold tracking-[-0.02em] text-[21px] leading-[1.2] mb-2 group-hover:text-gold transition-colors duration-200" style={{ color: 'var(--text)' }}>
+            <div className="font-serif font-bold tracking-[-0.02em] text-[21px] leading-[1.2] mb-2 group-hover:text-red transition-colors duration-200" style={{ color: 'var(--text)' }}>
               {article.title}
             </div>
           ) : (
-            <div className="font-cond text-base font-bold tracking-[0.02em] uppercase leading-[1.2] mb-1.5 group-hover:text-gold transition-colors duration-200" style={{ color: 'var(--text)' }}>
+            <div className="font-cond text-base font-bold tracking-[0.02em] uppercase leading-[1.2] mb-1.5 group-hover:text-red transition-colors duration-200" style={{ color: 'var(--text)' }}>
               {article.title}
             </div>
           )}

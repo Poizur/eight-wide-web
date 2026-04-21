@@ -21,7 +21,7 @@ export default async function AdminDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-4 gap-3 mb-8">
         {[
-          { n: String(drafts.length), l: 'Ke schvaleni', c: 'var(--gold)' },
+          { n: String(drafts.length), l: 'Ke schvaleni', c: 'var(--red)' },
           { n: String(noPhoto.length), l: 'Bez fotek', c: 'var(--orange)' },
           { n: '0', l: 'Chyby', c: 'var(--green)' },
           { n: String(totalSets), l: 'Setu celkem', c: 'var(--text)' },
@@ -47,7 +47,7 @@ export default async function AdminDashboard() {
                 <span className="font-cond text-sm font-bold" style={{ color: 'var(--text)' }}>{a.title}</span>
               </div>
               <div className="flex gap-2">
-                <Link href={`/admin/clanky/${a.slug}`} className="font-cond text-[10px] font-bold tracking-[0.1em] uppercase px-3 py-1.5 rounded no-underline" style={{ background: 'var(--gold)', color: '#000' }}>
+                <Link href={`/admin/clanky/${a.slug}`} className="font-cond text-[10px] font-bold tracking-[0.1em] uppercase px-3 py-1.5 rounded no-underline" style={{ background: 'var(--red)', color: '#000' }}>
                   Upravit
                 </Link>
               </div>

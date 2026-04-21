@@ -32,8 +32,8 @@ export function DnaStrip({ article, set }: DnaStripProps) {
 
       {/* Content side */}
       <div className="p-8 flex flex-col justify-center relative z-[2]">
-        <div className="font-cond text-[10px] font-bold tracking-[0.22em] uppercase mb-2 flex items-center gap-[7px]" style={{ color: 'var(--gold)' }}>
-          <span className="block w-5 h-px" style={{ background: 'var(--gold)' }} />
+        <div className="font-cond text-[10px] font-bold tracking-[0.22em] uppercase mb-2 flex items-center gap-[7px]" style={{ color: 'var(--red)' }}>
+          <span className="block w-5 h-px" style={{ background: 'var(--red)' }} />
           DNA Series · #{String(article.number ?? '').padStart(3, '0')} — {article.brand}
         </div>
         <div className="font-serif font-bold tracking-[-0.02em] text-[30px] leading-[1.15] mb-3" style={{ color: 'var(--text)' }}>
@@ -61,7 +61,7 @@ export function DnaStrip({ article, set }: DnaStripProps) {
 
         <span
           className="font-cond text-[13px] font-bold tracking-[0.14em] uppercase px-6 py-3 rounded-md w-fit flex items-center gap-2"
-          style={{ background: 'var(--gold)', color: '#000' }}
+          style={{ background: 'var(--red)', color: '#000' }}
         >
           Cist DNA #{String(article.number ?? '').padStart(3, '0')} →
         </span>

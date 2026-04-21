@@ -33,7 +33,7 @@ export default function Error({
           <button
             onClick={reset}
             className="font-cond text-xs font-bold tracking-[0.14em] uppercase px-7 py-3 rounded-lg border-none cursor-pointer transition-opacity duration-200 hover:opacity-85"
-            style={{ background: 'var(--gold)', color: '#000' }}
+            style={{ background: 'var(--red)', color: '#000' }}
           >
             Zkusit znovu
           </button>

@@ -26,14 +26,14 @@ export function BuyButton({ store, baseUrl, price, label }: BuyButtonProps) {
       rel="noopener noreferrer"
       className="inline-flex items-center gap-2 font-cond text-xs font-bold tracking-[0.08em] uppercase no-underline rounded-md px-4 py-2.5 transition-all duration-200"
       style={{
-        background: 'var(--gold)',
+        background: 'var(--red)',
         color: 'var(--bg)',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = 'var(--gold2)'
+        e.currentTarget.style.background = 'var(--red)'
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background = 'var(--gold)'
+        e.currentTarget.style.background = 'var(--red)'
       }}
     >
       <span>{label ?? storeLabels[store]}</span>

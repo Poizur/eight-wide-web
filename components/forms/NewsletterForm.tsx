@@ -28,39 +28,59 @@ export function NewsletterForm() {
 
   return (
     <div
-      className="relative overflow-hidden rounded-xl flex items-center justify-between gap-7 px-10 py-9 mb-12"
-      style={{ background: 'var(--sur)', border: '1px solid var(--bdr)' }}
+      className="relative overflow-hidden flex items-center justify-between gap-8 px-12 py-10 mb-12 flex-wrap rounded-2xl"
+      style={{ background: 'var(--ink)' }}
     >
-      {/* Gold glow */}
-      <div className="absolute -right-[60px] -bottom-[60px] w-[280px] h-[280px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%)' }} />
+      {/* Subtle red orb */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          right: -60,
+          top: -60,
+          width: 280,
+          height: 280,
+          borderRadius: '50%',
+          background: 'rgba(200,40,30,0.08)',
+        }}
+      />
 
-      <div>
-        <div className="font-serif font-bold tracking-[-0.02em] text-[26px] mb-1.5" style={{ color: 'var(--text)' }}>
-          Kazde pondeli do inboxu —<br />
-          <span style={{ color: 'var(--gold)' }}>ceny, DNA, novinky.</span>
+      <div className="relative z-[1]">
+        <div
+          className="font-serif mb-2"
+          style={{ fontSize: 28, color: 'white', lineHeight: 1.2 }}
+        >
+          Pondělní digest <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.5)' }}>do inboxu.</em>
         </div>
-        <p className="text-[13px] leading-[1.55]" style={{ color: 'var(--text2)' }}>
-          Zadny spam. Jen to co Speed Champions fanousek skutecne potrebuje vedet.
+        <p className="text-[13px] leading-[1.55]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+          Ceny, DNA, novinky. Žádný spam. Jen to co Speed Champions fanoušek potřebuje.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex gap-2.5 shrink-0 relative z-[1]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex gap-2.5 shrink-0 relative z-[1]"
+      >
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="tvuj@email.cz"
+          placeholder="tvůj@email.cz"
           required
-          className="font-sans text-[13px] px-4 py-2.5 rounded-md w-[220px] outline-none transition-colors duration-150 focus:border-[var(--gold)]"
-          style={{ background: 'var(--bg)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text)' }}
+          className="text-[13px] px-4 py-[11px] rounded-lg w-[240px] outline-none transition-colors"
+          style={{
+            background: 'rgba(255,255,255,0.07)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            color: 'white',
+            fontFamily: 'var(--sans)',
+          }}
         />
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="font-cond text-xs font-bold tracking-[0.14em] uppercase px-5 py-2.5 rounded-md border-none cursor-pointer whitespace-nowrap transition-colors duration-150 hover:bg-gold2"
-          style={{ background: 'var(--gold)', color: '#000' }}
+          className="text-[13px] font-semibold px-5 py-[11px] rounded-lg border-none cursor-pointer whitespace-nowrap transition-colors hover:bg-[#eee]"
+          style={{ background: 'white', color: 'var(--ink)', fontFamily: 'var(--sans)' }}
         >
-          {status === 'loading' ? '...' : status === 'success' ? 'Hotovo!' : 'Prihlasit se →'}
+          {status === 'loading' ? '...' : status === 'success' ? 'Hotovo!' : 'Přihlásit se →'}
         </button>
       </form>
     </div>

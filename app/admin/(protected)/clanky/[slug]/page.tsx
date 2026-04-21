@@ -62,7 +62,7 @@ export default function ArticleEditorPage() {
               Schvalit & publikovat
             </button>
           )}
-          <button onClick={handleSave} disabled={saving} className="font-cond text-xs font-bold tracking-[0.12em] uppercase px-5 py-2.5 rounded-lg border-none cursor-pointer" style={{ background: 'var(--gold)', color: '#000' }}>
+          <button onClick={handleSave} disabled={saving} className="font-cond text-xs font-bold tracking-[0.12em] uppercase px-5 py-2.5 rounded-lg border-none cursor-pointer" style={{ background: 'var(--red)', color: '#000' }}>
             {saving ? '...' : 'Ulozit'}
           </button>
         </div>
@@ -99,7 +99,7 @@ export default function ArticleEditorPage() {
               <div>Serie: <strong>{article.series}</strong></div>
               <div>Cislo: <strong>#{article.number}</strong></div>
               <div>Set: <strong>{article.set_number ?? '—'}</strong></div>
-              <div>Rating: <strong style={{ color: 'var(--gold)' }}>{article.rating_overall?.toFixed(1) ?? '—'}</strong></div>
+              <div>Rating: <strong style={{ color: 'var(--red)' }}>{article.rating_overall?.toFixed(1) ?? '—'}</strong></div>
             </div>
           </div>
           {!article.is_draft && article.slug && (
@@ -126,7 +126,7 @@ function Field({ label, value, onChange }: { label: string; value: string; onCha
   return (
     <div className="flex flex-col gap-1">
       <label className="font-cond text-[9px] font-bold tracking-[0.14em] uppercase" style={{ color: 'var(--text3)' }}>{label}</label>
-      <input value={value} onChange={e => onChange(e.target.value)} className="px-3 py-2 rounded text-sm outline-none transition-colors focus:border-[var(--gold)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)', fontFamily: 'var(--sans)' }} />
+      <input value={value} onChange={e => onChange(e.target.value)} className="px-3 py-2 rounded text-sm outline-none transition-colors focus:border-[var(--red)]" style={{ background: 'var(--sur2)', border: '1px solid var(--bdr)', color: 'var(--text)', fontFamily: 'var(--sans)' }} />
     </div>
   )
 }

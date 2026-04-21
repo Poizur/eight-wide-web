@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function ONasPage() {
   return (
     <div className="max-w-[680px] mx-auto px-8 py-16">
-      <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--gold)' }}>
+      <div className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--red)' }}>
         O nas
       </div>
       <h1 className="font-serif font-bold tracking-[-0.02em] leading-[1.05] mb-8" style={{ fontSize: 'clamp(36px,5vw,52px)', color: 'var(--text)' }}>
@@ -43,7 +43,7 @@ export default function ONasPage() {
           Kontakt
         </h2>
         <p>
-          Email: <a href="mailto:info@speedchampions.cz" style={{ color: 'var(--gold)' }}>info@speedchampions.cz</a>
+          Email: <a href="mailto:info@speedchampions.cz" style={{ color: 'var(--red)' }}>info@speedchampions.cz</a>
         </p>
         <p className="text-sm" style={{ color: 'var(--text3)' }}>
           Eight Wide neni afiliovan s LEGO Group. LEGO a Speed Champions jsou registrovane ochranné znamky LEGO Group.

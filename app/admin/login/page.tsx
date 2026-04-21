@@ -49,9 +49,9 @@ function LoginForm() {
       <div className="w-full max-w-[380px] px-6">
         {/* Logo */}
         <div className="text-center mb-10">
-          <div className="w-6 h-[2px] mx-auto mb-2" style={{ background: 'var(--gold)' }} />
+          <div className="w-6 h-[2px] mx-auto mb-2" style={{ background: 'var(--red)' }} />
           <div className="font-sans text-xl font-semibold" style={{ color: 'var(--text)' }}>
-            Eight <span style={{ color: 'var(--gold)' }}>Wide</span>
+            Eight <span style={{ color: 'var(--red)' }}>Wide</span>
           </div>
           <div className="font-cond text-[9px] tracking-[0.22em] uppercase mt-1" style={{ color: 'var(--text3)' }}>
             Admin Panel
@@ -66,7 +66,7 @@ function LoginForm() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="px-4 py-3 rounded-lg font-sans text-sm outline-none transition-colors focus:border-[var(--gold)]"
+              className="px-4 py-3 rounded-lg font-sans text-sm outline-none transition-colors focus:border-[var(--red)]"
               style={{ background: 'var(--sur)', border: '1px solid var(--bdr)', color: 'var(--text)' }}
             />
           </div>
@@ -77,7 +77,7 @@ function LoginForm() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="px-4 py-3 rounded-lg font-sans text-sm outline-none transition-colors focus:border-[var(--gold)]"
+              className="px-4 py-3 rounded-lg font-sans text-sm outline-none transition-colors focus:border-[var(--red)]"
               style={{ background: 'var(--sur)', border: '1px solid var(--bdr)', color: 'var(--text)' }}
             />
           </div>
@@ -92,7 +92,7 @@ function LoginForm() {
             type="submit"
             disabled={loading}
             className="font-cond text-xs font-bold tracking-[0.14em] uppercase py-3 rounded-lg border-none cursor-pointer transition-opacity hover:opacity-85 disabled:opacity-50"
-            style={{ background: 'var(--gold)', color: '#000' }}
+            style={{ background: 'var(--red)', color: '#000' }}
           >
             {loading ? 'Prihlasovani...' : 'Prihlasit se'}
           </button>

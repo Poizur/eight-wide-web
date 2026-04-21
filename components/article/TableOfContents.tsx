@@ -45,7 +45,7 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
             className="flex items-center gap-2 py-[7px] no-underline transition-colors duration-150"
             style={{
               borderBottom: i < items.length - 1 ? '1px solid var(--bdr)' : 'none',
-              color: activeId === item.id ? 'var(--gold)' : 'var(--text2)',
+              color: activeId === item.id ? 'var(--red)' : 'var(--text2)',
             }}
           >
             <span className="font-cond text-[10px] font-black w-[18px] shrink-0" style={{ color: 'var(--text3)' }}>

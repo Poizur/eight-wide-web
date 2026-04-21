@@ -33,9 +33,9 @@ export function BuyDecision({
     <div className="my-10">
       <div
         className="font-cond text-[11px] font-bold tracking-[0.22em] uppercase mb-4 flex items-center gap-3"
-        style={{ color: 'var(--gold)' }}
+        style={{ color: 'var(--red)' }}
       >
-        <span className="block w-6 h-px" style={{ background: 'var(--gold)' }} />
+        <span className="block w-6 h-px" style={{ background: 'var(--red)' }} />
         Ktere koupit?
       </div>
 
@@ -93,7 +93,7 @@ function Card({
       <div className="flex flex-col gap-2 mb-5 flex-1">
         {reasons.map((r, i) => (
           <div key={i} className="flex items-start gap-2 text-[13px]" style={{ color: 'var(--text2)' }}>
-            <span style={{ color: 'var(--gold)' }}>&#10003;</span>
+            <span style={{ color: 'var(--red)' }}>&#10003;</span>
             {r}
           </div>
         ))}
@@ -104,7 +104,7 @@ function Card({
         target="_blank"
         rel="noopener noreferrer"
         className="block text-center font-cond text-xs font-bold tracking-[0.12em] uppercase py-2.5 rounded-md no-underline transition-colors duration-150"
-        style={{ background: 'var(--gold)', color: '#000' }}
+        style={{ background: 'var(--red)', color: '#000' }}
       >
         Koupit →
       </a>

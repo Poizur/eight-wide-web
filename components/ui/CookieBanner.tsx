@@ -24,30 +24,29 @@ export function CookieBanner() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[250] flex items-center justify-between gap-4 px-8 py-4"
+      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-[480px] z-[250] flex items-center justify-between gap-4 px-5 py-4 rounded-xl shadow-card-hv"
       style={{
-        background: 'rgba(17,22,32,0.96)',
-        backdropFilter: 'blur(12px)',
-        borderTop: '1px solid var(--bdr)',
+        background: 'var(--white)',
+        border: '1px solid var(--border)',
       }}
     >
-      <p className="text-[13px] leading-[1.5]" style={{ color: 'var(--text2)' }}>
-        Pouzivame cookies pro analytiku a zlepseni webu. Zadne osobni udaje nesdilime s tretimi stranami.
+      <p className="text-[13px] leading-[1.5]" style={{ color: 'var(--ink2)' }}>
+        Používáme cookies pro analytiku. Žádné osobní údaje nesdílíme.
       </p>
       <div className="flex gap-2 shrink-0">
         <button
           onClick={decline}
-          className="font-cond text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-md border-none cursor-pointer transition-colors"
-          style={{ background: 'transparent', border: '1px solid var(--bdr)', color: 'var(--text3)' }}
+          className="text-[11px] font-semibold px-3 py-1.5 rounded-md border-none cursor-pointer transition-colors"
+          style={{ background: 'transparent', border: '1px solid var(--border)', color: 'var(--muted)' }}
         >
-          Odmitnout
+          Odmítnout
         </button>
         <button
           onClick={accept}
-          className="font-cond text-[11px] font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-md border-none cursor-pointer"
-          style={{ background: 'var(--gold)', color: '#000' }}
+          className="text-[11px] font-semibold px-3 py-1.5 rounded-md border-none cursor-pointer"
+          style={{ background: 'var(--ink)', color: 'white' }}
         >
-          Prijmout
+          Přijmout
         </button>
       </div>
     </div>

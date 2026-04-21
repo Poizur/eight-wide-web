@@ -72,7 +72,7 @@ export default function NotFound() {
           className="font-cond font-black leading-none tracking-[-0.04em] mb-1"
           style={{ fontSize: 'clamp(80px,12vw,120px)', color: 'var(--text)' }}
         >
-          4<span style={{ color: 'var(--gold)' }}>0</span>4
+          4<span style={{ color: 'var(--red)' }}>0</span>4
         </div>
 
         {/* Title */}
@@ -93,7 +93,7 @@ export default function NotFound() {
           <Link
             href="/"
             className="font-cond text-xs font-bold tracking-[0.14em] uppercase px-7 py-3 rounded-lg no-underline transition-opacity duration-200 hover:opacity-85"
-            style={{ background: 'var(--gold)', color: '#000' }}
+            style={{ background: 'var(--red)', color: '#000' }}
           >
             ← Zpet na hlavni
           </Link>
@@ -129,13 +129,13 @@ export default function NotFound() {
                   border: '1px solid var(--bdr)',
                 }}
               >
-                <div className="font-cond text-[9px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: 'var(--gold)' }}>
+                <div className="font-cond text-[9px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: 'var(--red)' }}>
                   {s.series}
                 </div>
                 <div className="font-cond text-[13px] font-black uppercase leading-[1.2]" style={{ color: 'var(--text)' }}>
                   {s.name}
                 </div>
-                <span className="block text-sm mt-2 transition-colors duration-150 group-hover:text-gold" style={{ color: 'var(--text3)' }}>
+                <span className="block text-sm mt-2 transition-colors duration-150 group-hover:text-red" style={{ color: 'var(--text3)' }}>
                   →
                 </span>
               </Link>
