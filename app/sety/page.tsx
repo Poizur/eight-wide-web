@@ -9,7 +9,7 @@ import { formatCZK } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Databaze setu',
-  description: 'Vsechna LEGO Speed Champions auta na jednom miste. Filtry, hodnoceni, ceny.',
+  description: 'Všechna Speed Champions auta na jednom místě. Filtruj podle značky, éry, stavu a ceny.',
 }
 
 interface Props {

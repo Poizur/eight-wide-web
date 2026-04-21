@@ -7,7 +7,7 @@ import { setImageUrl } from '@/lib/affiliate'
 
 export const metadata: Metadata = {
   title: 'Generace — 6-wide vs 8-wide',
-  description: 'Srovnani generaci LEGO Speed Champions setu. Stare vs nove — kdo vyhraje?',
+  description: 'Stará 6-wide vs nová 8-wide. Side by side, se skóre a verdiktem. Vyplatilo se čekat?',
 }
 
 export default async function GeneraceArchivePage() {

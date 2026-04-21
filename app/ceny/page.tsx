@@ -9,7 +9,7 @@ import { formatCZK } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Pit Stop — Ceny dnes',
-  description: 'Aktualni ceny LEGO Speed Champions setu. Mall.cz, Alza, LEGO.com, BrickLink. Price alerts zdarma.',
+  description: 'Ceny Speed Champions setů. Mall.cz, Alza, LEGO.com, BrickLink. Nastav si alert na cílovou cenu.',
 }
 
 interface Props {

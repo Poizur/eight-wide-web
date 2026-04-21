@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Paddock Rumors — co prijde priste',
-  description: 'Spekulace, leaky a potvrzene informace o budoucich LEGO Speed Champions setech.',
+  description: 'Co postaví LEGO příště. Patenty, licence, retailer listingy — se skóre spolehlivosti.',
 }
 
 const confidenceConfig: Record<string, { label: string; color: string; bg: string; pct: number }> = {

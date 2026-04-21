@@ -6,7 +6,7 @@ const footerLinks = [
   { href: '/ceny', label: 'Ceny' },
   { href: '/komunita', label: 'Komunita' },
   { href: '/hof', label: 'Hall of Fame' },
-  { href: '/o-nas', label: 'O nás' },
+  { href: '/o-nas', label: 'O webu' },
 ]
 
 export function Footer() {

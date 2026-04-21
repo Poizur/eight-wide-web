@@ -49,10 +49,10 @@ export function NewsletterForm() {
           className="font-serif mb-2"
           style={{ fontSize: 28, color: 'white', lineHeight: 1.2 }}
         >
-          Pondělní digest <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.5)' }}>do inboxu.</em>
+          Co stojí za to, <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.5)' }}>rovnou do mailu.</em>
         </div>
         <p className="text-[13px] leading-[1.55]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-          Ceny, DNA, novinky. Žádný spam. Jen to co Speed Champions fanoušek potřebuje.
+          Nový DNA článek, sleva nad 20 %, retiring warning. Bez spamu. Každé pondělí.
         </p>
       </div>
 
@@ -80,7 +80,7 @@ export function NewsletterForm() {
           className="text-[13px] font-semibold px-5 py-[11px] rounded-lg border-none cursor-pointer whitespace-nowrap transition-colors hover:bg-[#eee]"
           style={{ background: 'white', color: 'var(--ink)', fontFamily: 'var(--sans)' }}
         >
-          {status === 'loading' ? '...' : status === 'success' ? 'Hotovo!' : 'Přihlásit se →'}
+          {status === 'loading' ? '...' : status === 'success' ? 'Hotovo!' : 'Chci to →'}
         </button>
       </form>
     </div>

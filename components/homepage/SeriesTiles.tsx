@@ -17,8 +17,8 @@ const tiles: Tile[] = [
     href: '/dna',
     icon: 'DNA',
     name: 'DNA Series',
-    desc: 'Příběh reálného auta, závodní kariéra a kulturní dopad. Pak: zachytilo to LEGO?',
-    count: 'Vychází při každém novém setu',
+    desc: 'Pro každé auto: proč je ikonické a jak věrně to LEGO zachytilo. Skóre 0-10 v pěti kategoriích.',
+    count: 'Nový článek ke každému setu',
     color: 'var(--red)',
     bg: 'var(--red-bg)',
     accent: 'var(--red)',
@@ -27,8 +27,8 @@ const tiles: Tile[] = [
     href: '/generace',
     icon: 'GEN',
     name: 'Generace',
-    desc: 'Pokaždé když LEGO vydá novou verzi — srovnáme ji s předchůdcem. Data, fotky, verdikt.',
-    count: 'Při novém releasu',
+    desc: 'Stará 6-wide vs nová 8-wide. Side by side, se skóre a verdiktem. Vyplatilo se čekat?',
+    count: 'Při každé nové generaci',
     color: 'var(--gold)',
     bg: 'var(--gold-bg)',
     accent: 'var(--gold)',
@@ -37,8 +37,8 @@ const tiles: Tile[] = [
     href: '/hof',
     icon: 'INV',
     name: 'Hall of Fame',
-    desc: 'Definitivní ranking — která auta zestárla nejlíp. Data, skóre, metodika.',
-    count: 'Aktualizace každý měsíc',
+    desc: 'Top 10 Speed Champions všech dob. Skóre, metodika, žádné "top 5 nejbarevnějších".',
+    count: 'Ranking se přepočítává každý měsíc',
     color: 'var(--green)',
     bg: 'var(--green-bg)',
     accent: 'var(--green)',
@@ -47,8 +47,8 @@ const tiles: Tile[] = [
     href: '/paddock',
     icon: 'RMR',
     name: 'Paddock Rumors',
-    desc: 'Leaky, patent databáze, retailer listingy. Která auta přijdou příště?',
-    count: 'Každý týden',
+    desc: 'Co postaví LEGO příště? Patenty, licence, retailer listingy. Rumors se skóre spolehlivosti.',
+    count: 'Nové leaky každý týden',
     color: 'var(--purple)',
     bg: '#F5EEF8',
     accent: 'var(--purple)',
@@ -58,7 +58,7 @@ const tiles: Tile[] = [
 export function SeriesTiles() {
   return (
     <div>
-      <SectionHead title="Naše série" />
+      <SectionHead title="Co tu najdeš" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
         {tiles.map((t) => (
           <Link

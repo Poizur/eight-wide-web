@@ -8,7 +8,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'DNA — Pribeh kazdeho auta',
-  description: 'Kazdy Speed Champions set ma pribeh. DNA serie ho vypravuje — od realneho auta az po LEGO verzi.',
+  description: 'Pro každé auto: proč je ikonické a jak věrně to LEGO zachytilo. Skóre v pěti kategoriích.',
 }
 
 interface Props {

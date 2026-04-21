@@ -7,7 +7,7 @@ import { setImageUrl } from '@/lib/affiliate'
 
 export const metadata: Metadata = {
   title: 'Hall of Fame — nejlepsi sety vsech dob',
-  description: 'Definitivni ranking LEGO Speed Champions setu. Hodnoceni tvaru, detailu, stavby, hodnoty a display efektu.',
+  description: 'Top 10 Speed Champions všech dob. Skóre, metodika, žádné top 5 nejbarevnějších.',
 }
 
 export default async function HofPage() {

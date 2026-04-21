@@ -39,7 +39,7 @@ export default async function HomePage() {
     article: articles[0] ?? ({
       id: '0', slug: '', title: 'Eight Wide', series: 'dna' as const,
       number: 1, brand: 'LEGO',
-      excerpt: 'Automotive magazín o LEGO Speed Champions',
+      excerpt: 'Stavíš Speed Champions a chceš vědět, jestli ten set stojí za to.',
       is_draft: false,
     } as unknown as Article),
     set: null,

@@ -11,7 +11,7 @@ export function LatestArticles({ articles }: { articles: Article[] }) {
     <div>
       <SectionHead
         title="Právě vyšlo"
-        sub={`${articles.length} nových článků tento týden`}
+        sub={articles.length === 1 ? 'Čerstvý článek' : `${articles.length} nových tento týden`}
         linkHref="/dna"
         linkLabel="Archiv"
       />

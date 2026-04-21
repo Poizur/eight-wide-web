@@ -8,11 +8,11 @@ import { CookieBanner } from '@/components/ui/CookieBanner'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Eight Wide — LEGO Speed Champions magazin',
+    default: 'Eight Wide — LEGO Speed Champions',
     template: '%s — Eight Wide',
   },
   description:
-    'Automotive magazin o LEGO Speed Champions. Pribeh kazdeho auta, hodnoceni kazdeho setu.',
+    'Příběh každého auta. Hodnocení každého setu. LEGO Speed Champions, Icons a Technic — bez marketingu, jen fakta a skóre.',
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL ?? 'https://speedchampions.cz'
   ),
