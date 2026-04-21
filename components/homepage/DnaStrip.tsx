@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Article, LegoSet } from '@/lib/supabase/types'
 import { formatCZK } from '@/lib/utils'
+import { getArticleHero } from '@/lib/images'
 
 interface DnaStripProps {
   article: Article
@@ -9,9 +10,7 @@ interface DnaStripProps {
 }
 
 export function DnaStrip({ article, set }: DnaStripProps) {
-  const imgSrc =
-    article.hero_photo_url ??
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80'
+  const imgSrc = getArticleHero(article, set).src
 
   return (
     <Link
