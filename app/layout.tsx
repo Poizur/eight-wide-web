@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="cs">
-      <body style={{ paddingTop: 34 }}>
+      <body>
         <Ticker />
         <Nav />
         <main>{children}</main>

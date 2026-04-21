@@ -24,7 +24,7 @@ export function Nav() {
   return (
     <>
       <nav
-        className="sticky top-[34px] z-[100] flex items-center"
+        className="sticky top-0 z-[100] flex items-center"
         style={{
           background: 'var(--white)',
           borderBottom: '1px solid var(--border)',

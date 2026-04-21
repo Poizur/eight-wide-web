@@ -1,22 +1,12 @@
 'use client'
 
-const items = [
-  { label: 'Live', text: 'Lamborghini Countach −35 % na Alze — platí dnes do půlnoci' },
-  { label: 'Live', text: 'Porsche 911 RSR · 75912 — Retiring soon' },
-  { label: 'Live', text: 'Hall of Fame #1: Lotus Evija 9.8/10' },
-]
-
 export function Ticker() {
-  // V2 design: top bar is static (not scrolling). Show first item; rotate via CSS later if needed.
-  const item = items[0]
-
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[201] flex items-center justify-between"
+      className="flex items-center justify-between"
       style={{
         background: 'var(--ink)',
-        height: 34,
-        padding: '0 var(--px)',
+        padding: '7px var(--px)',
       }}
     >
       <div
@@ -31,20 +21,19 @@ export function Ticker() {
           }}
         />
         <span>
-          <strong style={{ color: 'white', fontWeight: 600 }}>{item.label}:</strong>{' '}
-          {item.text}
+          Live: <strong style={{ color: 'white', fontWeight: 600 }}>Lamborghini Countach −35 % na Alze</strong> — platí dnes do půlnoci
         </span>
       </div>
       <div className="hidden md:flex gap-5">
         <a
-          href="#"
+          href="https://speedchampions.cz"
           className="text-[11px] no-underline transition-colors hover:text-white"
           style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em' }}
         >
           speedchampions.cz
         </a>
         <a
-          href="#"
+          href="https://speedchampions.eu"
           className="text-[11px] no-underline transition-colors hover:text-white"
           style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em' }}
         >
