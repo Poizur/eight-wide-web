@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import type { Article, LegoSet } from '@/lib/supabase/types'
 import Link from 'next/link'
 import { formatCZK } from '@/lib/utils'
+import { getArticleHero } from '@/lib/images'
 
 interface Slide {
   article: Article
@@ -45,9 +46,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
   const s = slides[current]
   const a = s.article
   const set = s.set
-  const heroPhoto =
-    a.hero_photo_url ??
-    'https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1800&q=85'
+  const heroPhoto = getArticleHero(a, set).src
 
   return (
     <section className="relative flex items-center overflow-hidden" style={{ height: '85vh', minHeight: 560, maxHeight: 820 }}>
