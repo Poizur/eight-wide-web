@@ -5,6 +5,8 @@ import type { Metadata } from 'next'
 import { createServerClient } from '@/lib/supabase/server'
 import type { Article, LegoSet, PriceSnapshot } from '@/lib/supabase/types'
 import { setImageUrl } from '@/lib/affiliate'
+import { getArticleHero } from '@/lib/images'
+import { SetImage } from '@/components/ui/SetImage'
 import { formatCZK } from '@/lib/utils'
 import { allDnaArticles } from '.contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer2/hooks'
@@ -123,11 +125,7 @@ export default async function DnaArticlePage({ params }: Props) {
       })
     : []
 
-  const heroPhoto =
-    article.hero_photo_url ??
-    (set?.brickset_img_url
-      ? set.brickset_img_url
-      : 'https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1800&q=85')
+  const heroPhoto = getArticleHero(article, set).src
 
   return (
     <>
@@ -267,7 +265,6 @@ export default async function DnaArticlePage({ params }: Props) {
 
             {/* Related sidebar cards */}
             {related.slice(0, 2).map((r) => {
-              const img = r.hero_photo_url ?? (r.set_number ? setImageUrl(r.set_number) : null)
               return (
                 <Link
                   key={r.id}
@@ -275,11 +272,21 @@ export default async function DnaArticlePage({ params }: Props) {
                   className="group block no-underline rounded-xl overflow-hidden mb-3"
                   style={{ background: 'var(--sur)', border: '1px solid var(--bdr)' }}
                 >
-                  {img && (
+                  {r.hero_photo_url ? (
                     <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
-                      <Image src={img} alt={r.title} fill className="object-cover photo-dark" sizes="320px" />
+                      <Image src={r.hero_photo_url} alt={r.title} fill className="object-cover photo-dark" sizes="320px" />
                     </div>
-                  )}
+                  ) : r.set_number ? (
+                    <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                      <SetImage
+                        set={{ set_number: r.set_number, hero_photo_url: null, brickset_img_url: null }}
+                        alt={r.title}
+                        fill
+                        className="object-cover photo-dark"
+                        sizes="320px"
+                      />
+                    </div>
+                  ) : null}
                   <div className="p-5">
                     <div className="font-cond text-[10px] font-bold tracking-[0.15em] uppercase mb-1" style={{ color: 'var(--gold)' }}>
                       DNA #{r.number}
